@@ -6,7 +6,7 @@ export default function AskNitinAIPage() {
   return (
     <div className="section-padding fade-in-page container mx-auto px-4 bg-gradient-to-br from-background via-sky-50 to-indigo-100 min-h-[calc(100vh-10rem)]">
       <header className="text-center mb-12 sm:mb-16">
-        <h1 className="text-3xl sm:text-4xl md:text-5xl font-headline font-bold mb-3 text-gray-800">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-headline font-bold mb-3 text-gray-800 animate-slideInUp">
           Ask <span className="text-primary">NitinAI</span>
         </h1>
         <p className="text-md text-gray-600 max-w-xl mx-auto animate-slideInUp delay-200 leading-relaxed">
@@ -15,11 +15,11 @@ export default function AskNitinAIPage() {
         </p>
       </header>
       
-      <div className="animate-slideInUp delay-300 max-w-2xl mx-auto" style={{opacity: 0}}>
+      <div className="animate-slideInUp delay-300 max-w-2xl mx-auto">
         <AskNitinAIForm />
       </div>
 
-      <section className="mt-12 sm:mt-16 p-6 sm:p-8 bg-card/80 backdrop-blur-sm shadow-xl rounded-xl animate-slideInUp delay-500 max-w-3xl mx-auto" style={{opacity: 0}}>
+      <section className="mt-12 sm:mt-16 p-6 sm:p-8 bg-card/80 backdrop-blur-sm shadow-xl rounded-xl animate-slideInUp delay-500 max-w-3xl mx-auto">
         <h2 className="text-xl sm:text-2xl font-headline font-semibold text-primary mb-5 flex items-center">
           <Brain className="mr-2.5 h-6 w-6 text-secondary" /> How NitinAI Works
         </h2>

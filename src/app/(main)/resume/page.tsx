@@ -43,7 +43,7 @@ export default function ResumePage() {
   return (
     <div className="section-padding fade-in-page container mx-auto px-4 bg-gradient-to-br from-background via-sky-50 to-indigo-100 min-h-[calc(100vh-10rem)]">
       <header className="text-center mb-12 sm:mb-16">
-        <h1 className="text-3xl sm:text-4xl md:text-5xl font-headline font-bold mb-3 text-gray-800">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-headline font-bold mb-3 text-gray-800 animate-slideInUp">
           My <span className="text-primary">Professional Journey</span>
         </h1>
         <p className="text-md text-gray-600 max-w-xl mx-auto animate-slideInUp delay-200 leading-relaxed">
@@ -66,7 +66,7 @@ export default function ResumePage() {
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-6 p-5 sm:p-6">
-            <div className="animate-slideInUp delay-400" style={{opacity:0}}>
+            <div className="animate-slideInUp delay-400">
               <h3 className="text-lg sm:text-xl font-semibold text-foreground/90">GET in R&D</h3>
               <p className="text-sm text-muted-foreground mb-1">YKK India Pvt. Ltd. | Bawal, Haryana | March 2024 - Oct 2024</p>
               <ul className="list-disc list-inside mt-1.5 space-y-1 text-sm text-foreground/80 pl-1">
@@ -86,7 +86,7 @@ export default function ResumePage() {
           </CardHeader>
           <CardContent className="p-5 sm:p-6 space-y-5">
             {Object.entries(skillsData).map(([category, skillsList], index) => (
-              <div key={category} className="animate-slideInUp" style={{ animationDelay: `${0.5 + index * 0.05}s`, opacity:0 }}>
+              <div key={category} className="animate-slideInUp" style={{ animationDelay: `${0.5 + index * 0.05}s`}}>
                 <h4 className="text-md font-semibold mb-2 text-foreground/90 flex items-center">
                   {category === "Programming Languages" && <Code className="mr-2 h-5 w-5 text-accent" />}
                   {category === "Web Technologies" && <Zap className="mr-2 h-5 w-5 text-accent" />}
@@ -118,7 +118,7 @@ export default function ResumePage() {
           </CardHeader>
           <CardContent className="space-y-6 p-5 sm:p-6">
             {projectsOnResume.map((project, index) => (
-              <div key={project.title} className="animate-slideInUp" style={{ animationDelay: `${0.4 + index * 0.1}s`, opacity:0 }}>
+              <div key={project.title} className="animate-slideInUp" style={{ animationDelay: `${0.4 + index * 0.1}s`}}>
                 <div className="flex justify-between items-center mb-0.5">
                   <h3 className="text-lg sm:text-xl font-semibold text-foreground/90">{project.title}</h3>
                   {project.liveDemoUrl && project.liveDemoUrl !== "#" && (
@@ -155,12 +155,12 @@ export default function ResumePage() {
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-5 p-5 sm:p-6">
-            <div className="animate-slideInUp delay-500" style={{opacity:0}}>
+            <div className="animate-slideInUp delay-500">
               <h3 className="text-lg sm:text-xl font-semibold text-foreground/90">B.Tech. in Mechanical Engineering</h3>
               <p className="text-sm text-muted-foreground mb-0.5">Maharshi Dayanand University | Sept 2019 - May 2023</p>
               <p className="text-sm text-foreground/80">Percentage: 70%</p>
             </div>
-            <div className="animate-slideInUp delay-600" style={{opacity:0}}>
+            <div className="animate-slideInUp delay-600">
               <h3 className="text-lg sm:text-xl font-semibold text-foreground/90">Software Development</h3>
               <p className="text-sm text-muted-foreground mb-0.5">Scaler Academy | Sept 2024 - Oct 2025</p>
               <p className="text-sm text-foreground/80">Relevant Coursework: Computer Architecture, DSA, Full Stack Development, RDBMS, Java, Projects, Low Level Design, High Level Design.</p>

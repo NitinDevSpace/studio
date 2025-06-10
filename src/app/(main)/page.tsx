@@ -4,7 +4,7 @@
 import React, { useState, useEffect } from 'react';
 import type { Project } from '@/lib/types';
 import { projectsData } from '@/lib/data';
-import { ArrowDown, Briefcase, User, Mail, Sparkles, Layers, Code as CodeIcon, Github, ExternalLink } from 'lucide-react';
+import { ArrowDown, Briefcase, User, Mail, Sparkles, Layers, Code as CodeIcon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import Link from 'next/link';
@@ -117,7 +117,7 @@ export default function HomePage() {
               { icon: Layers, title: "Backend Architecture", description: "Building secure, scalable server-side applications and APIs using Node.js, Python, and Firebase." },
               { icon: Sparkles, title: "AI Integration", description: "Exploring AI with Genkit, integrating intelligent features to create smarter applications." },
             ].map((item, index) => (
-              <Card key={item.title} className="bg-card text-center p-6 animate-slideInUp shadow-lg hover:shadow-xl transition-shadow duration-300" style={{ animationDelay: `${0.2 + index * 0.1}s`, opacity: 0 }}>
+              <Card key={item.title} className="bg-card text-center p-6 animate-slideInUp shadow-lg hover:shadow-xl transition-shadow duration-300" style={{ animationDelay: `${0.2 + index * 0.1}s`}}>
                 <CardContent className="p-0">
                   <div className="p-3 inline-block bg-primary/10 rounded-full mb-3">
                      <item.icon className="h-8 w-8 text-primary mx-auto" />
