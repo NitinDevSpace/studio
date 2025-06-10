@@ -19,13 +19,16 @@ const ProjectCarousel: React.FC<ProjectCarouselProps> = ({ projects, onProjectCl
   const [isHovering, setIsHovering] = useState(false);
   const scrollSpeed = 0.4;
 
+  // Duplicate projects for a smoother infinite scroll illusion, ensure at least a few items if projects list is short
   const baseProjects = projects.length < 5 ? [...projects, ...projects, ...projects] : projects;
-  const duplicatedProjects = [...baseProjects, ...baseProjects];
+  const duplicatedProjects = [...baseProjects, ...baseProjects]; // Further duplication for very long scroll
 
   const scrollContent = useCallback(() => {
     if (carouselRef.current && !isHovering) {
       carouselRef.current.scrollLeft += scrollSpeed;
+      // Check if scrolled past the first set of original projects
       if (carouselRef.current.scrollLeft >= carouselRef.current.scrollWidth / 2) {
+        // Silently jump back to the start of the identical second set
         carouselRef.current.scrollLeft = carouselRef.current.scrollLeft - (carouselRef.current.scrollWidth / 2);
       }
     }
@@ -45,8 +48,12 @@ const ProjectCarousel: React.FC<ProjectCarouselProps> = ({ projects, onProjectCl
 
   const handleManualScroll = (direction: 'left' | 'right') => {
     if (carouselRef.current) {
-      const cardWidth = carouselRef.current.querySelector('.project-card-item')?.clientWidth || 300;
-      const scrollAmount = cardWidth * 1.5; // Scroll by roughly 1.5 card widths
+      // Estimate card width (can be made more precise if cards have fixed width)
+      const cardElement = carouselRef.current.querySelector('.project-card-item');
+      const cardWidth = cardElement ? cardElement.clientWidth : 300; // Default to 300px if not found
+      const gapWidth = 16; // Corresponds to gap-4, adjust if gap changes
+      const scrollAmount = cardWidth + gapWidth; // Scroll by one card width + gap
+      
       carouselRef.current.scrollBy({
         left: direction === 'left' ? -scrollAmount : scrollAmount,
         behavior: 'smooth'
@@ -60,7 +67,7 @@ const ProjectCarousel: React.FC<ProjectCarouselProps> = ({ projects, onProjectCl
 
   return (
     <div
-      className="relative w-full group p-4 md:p-6 border border-border/50 rounded-xl overflow-hidden"
+      className="relative w-full group p-4 md:p-6 border border-border/50 rounded-xl overflow-hidden bg-card/50"
       onMouseEnter={() => setIsHovering(true)}
       onMouseLeave={() => setIsHovering(false)}
     >
@@ -69,45 +76,44 @@ const ProjectCarousel: React.FC<ProjectCarouselProps> = ({ projects, onProjectCl
         size="icon"
         onClick={() => handleManualScroll('left')}
         className={cn(
-          "absolute left-0 top-1/2 -translate-y-1/2 z-30",
-          "h-16 w-16", // Increased size
-          "text-foreground/60 hover:text-primary hover:bg-transparent",
-          "opacity-0 group-hover:opacity-100 transition-all duration-300 ease-in-out rounded-full"
+          "absolute left-1 sm:left-2 top-1/2 -translate-y-1/2 z-30",
+          "h-12 w-12 sm:h-16 sm:w-16", // Larger buttons
+          "bg-background/30 hover:bg-background/60 backdrop-blur-sm text-foreground/70 hover:text-primary rounded-full shadow-md transition-all duration-300 ease-in-out",
+          "opacity-50 group-hover:opacity-100" // More visible on group hover
         )}
         aria-label="Scroll left"
       >
-        <ChevronLeft className="h-10 w-10" /> 
+        <ChevronLeft className="h-6 w-6 sm:h-8 sm:w-8" /> {/* Larger icons */}
       </Button>
       <Button
         variant="ghost"
         size="icon"
         onClick={() => handleManualScroll('right')}
         className={cn(
-          "absolute right-0 top-1/2 -translate-y-1/2 z-30",
-          "h-16 w-16", // Increased size
-          "text-foreground/60 hover:text-primary hover:bg-transparent",
-          "opacity-0 group-hover:opacity-100 transition-all duration-300 ease-in-out rounded-full"
+          "absolute right-1 sm:right-2 top-1/2 -translate-y-1/2 z-30",
+          "h-12 w-12 sm:h-16 sm:w-16", // Larger buttons
+          "bg-background/30 hover:bg-background/60 backdrop-blur-sm text-foreground/70 hover:text-primary rounded-full shadow-md transition-all duration-300 ease-in-out",
+           "opacity-50 group-hover:opacity-100" // More visible on group hover
         )}
         aria-label="Scroll right"
       >
-        <ChevronRight className="h-10 w-10" />
+        <ChevronRight className="h-6 w-6 sm:h-8 sm:w-8" /> {/* Larger icons */}
       </Button>
 
       <div
         ref={carouselRef}
-        className="flex overflow-x-auto py-4 scrollbar-hide gap-0" // Removed mx from items, gap-0
+        className="flex overflow-x-auto py-4 scrollbar-hide gap-4 md:gap-6" // Added gap here
         style={{ WebkitOverflowScrolling: 'touch' }}
       >
         {duplicatedProjects.map((project, index) => (
           <div
             key={`${project.id}-${index}`}
-            // Removed mx-2 md:mx-3 for flush cards
-            className="project-card-item flex-shrink-0 transition-transform duration-300 ease-out group-hover:[&>div]:scale-[0.97] hover:!scale-105 z-10" 
+            className="project-card-item flex-shrink-0 transition-transform duration-300 ease-out group-hover:[&>div]:scale-[0.97] hover:!scale-105 z-10"
           >
             <ProjectCard
               project={project}
               onClick={() => onProjectClick(project)}
-              className="transform" 
+              className="transform"
             />
           </div>
         ))}
