@@ -94,11 +94,13 @@ export default function HomePage() {
                   >
                     <defs>
                       <clipPath id="heroTriangleClip">
-                        <polygon points="0,0 100,0 50,100" />
+                        {/* Upright triangle: apex at top-center, base at bottom */}
+                        <polygon points="50,0 0,100 100,100" />
                       </clipPath>
                     </defs>
+                    {/* Border for upright triangle, inset to account for strokeWidth */}
                     <polygon
-                      points="4,4 96,4 50,96" 
+                      points="50,4 4,96 96,96" 
                       className="fill-none stroke-primary" 
                       strokeWidth="8" 
                       vectorEffect="non-scaling-stroke"
@@ -208,5 +210,3 @@ export default function HomePage() {
     </div>
   );
 }
-
-    
