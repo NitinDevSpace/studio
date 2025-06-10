@@ -8,8 +8,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Mail, Phone, Linkedin, Github, MapPin, Send, Loader2, UserCircle, Instagram, Code, ShieldCheck } from "lucide-react";
 import Link from "next/link";
-import { useFormStatus, useFormState } from 'react-dom';
-import { useEffect } from "react";
+import { useFormStatus } from 'react-dom';
+import { useEffect, useActionState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { submitContactFormAction, type ContactFormState } from '@/app/actions';
 
@@ -35,7 +35,7 @@ function SubmitButton() {
 
 
 export default function ContactPage() {
-  const [state, formAction] = useFormState(submitContactFormAction, initialState);
+  const [state, formAction] = useActionState(submitContactFormAction, initialState);
   const { toast } = useToast();
 
   useEffect(() => {

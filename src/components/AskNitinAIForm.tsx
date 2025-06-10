@@ -1,8 +1,8 @@
 
 'use client';
 
-import React, { useEffect, useRef } from 'react';
-import { useFormState, useFormStatus } from 'react-dom';
+import React, { useEffect, useRef, useActionState } from 'react';
+import { useFormStatus } from 'react-dom';
 import { askNitinAIAction, type AskNitinAIFormState } from '@/app/actions';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
@@ -11,6 +11,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Brain, AlertCircle, Loader2, Sparkles, MessageSquare } from 'lucide-react';
 import { useToast } from "@/hooks/use-toast";
+import { cn } from '@/lib/utils';
 
 const initialState: AskNitinAIFormState = {
   message: null,
@@ -36,26 +37,24 @@ function SubmitButton() {
   );
 }
 
-// For use inside chatbot overlay, we might want a version without the Card wrapper.
-// This prop allows conditional rendering of the Card.
 interface AskNitinAIFormProps {
   isEmbedded?: boolean; 
 }
 
 export default function AskNitinAIForm({ isEmbedded = false }: AskNitinAIFormProps) {
-  const [state, formAction] = useFormState(askNitinAIAction, initialState);
+  const [state, formAction] = useActionState(askNitinAIAction, initialState);
   const { toast } = useToast();
   const formRef = useRef<HTMLFormElement>(null);
 
   useEffect(() => {
-    if (state.message && !state.answer && !isEmbedded) { // Only toast errors if not embedded (embedded has its own error display)
+    if (state.message && !state.answer && !isEmbedded) { 
       toast({
         title: "Error",
         description: state.message,
         variant: "destructive",
       });
     }
-    if (state.message && state.answer) { // If answer is successful, clear the form
+    if (state.message && state.answer) { 
         formRef.current?.reset();
     }
   }, [state.message, state.answer, toast, isEmbedded]);
