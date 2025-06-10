@@ -25,7 +25,7 @@ interface AskNAIFormProps {
 }
 
 export default function AskNAIForm({ isEmbedded = false }: AskNAIFormProps) {
-  const [actionState, formAction, isPending] = useActionState(askNAIAction, initialActionState);
+  const [actionState, formAction, isActionPending] = useActionState(askNAIAction, initialActionState);
   const { toast } = useToast();
   const formRef = useRef<HTMLFormElement>(null);
   const [currentQuestion, setCurrentQuestion] = useState('');
@@ -64,7 +64,7 @@ export default function AskNAIForm({ isEmbedded = false }: AskNAIFormProps) {
 
   // Handle AI response or error
   useEffect(() => {
-    if (actionState.message && actionState.answer === null && !isPending) { // Error case
+    if (actionState.message && actionState.answer === null && !isActionPending) { // Error case
       setChatMessages(prev => [...prev, {
         id: crypto.randomUUID(),
         type: 'error',
@@ -76,7 +76,7 @@ export default function AskNAIForm({ isEmbedded = false }: AskNAIFormProps) {
         description: actionState.message,
         variant: "destructive",
       });
-    } else if (actionState.answer && !isPending) { // Success case
+    } else if (actionState.answer && !isActionPending) { // Success case
       setChatMessages(prev => {
         // Only add bot response if it's not already the last message to prevent duplicates on re-renders
         if (prev.length > 0 && prev[prev.length -1].type === 'user') {
@@ -90,12 +90,11 @@ export default function AskNAIForm({ isEmbedded = false }: AskNAIFormProps) {
         return prev;
       });
     }
-  }, [actionState, toast, isPending]);
+  }, [actionState, toast, isActionPending]);
 
 
-  const handleSubmit = (e?: React.FormEvent<HTMLFormElement>) => {
-    e?.preventDefault();
-    if (!currentQuestion.trim() || isPending) return;
+  const handleSubmit = useCallback(() => {
+    if (!currentQuestion.trim() || isActionPending) return;
 
     setChatMessages(prev => [...prev, {
       id: crypto.randomUUID(),
@@ -108,20 +107,34 @@ export default function AskNAIForm({ isEmbedded = false }: AskNAIFormProps) {
     formData.append('question', currentQuestion.trim());
     formAction(formData);
     setCurrentQuestion('');
-    formRef.current?.reset(); // Reset the actual form to clear native state if any
-  };
+    // formRef.current?.reset(); // Resetting here can cause issues if isActionPending becomes true fast
+  }, [currentQuestion, isActionPending, formAction]);
+
+  useEffect(() => {
+    // Reset form only after action is complete and successful
+    if (!isActionPending && actionState.answer) {
+        formRef.current?.reset();
+    }
+  }, [isActionPending, actionState.answer]);
+
 
   const handleNewChat = () => {
     setChatMessages([]);
     setCurrentQuestion('');
     sessionStorage.removeItem(SESSION_STORAGE_KEY);
-    // Reset action state if needed, though usually not required for new chat UX
+  };
+
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (event.key === 'Enter' && !event.shiftKey) {
+      event.preventDefault();
+      handleSubmit();
+    }
   };
   
   const ChatHeader = () => (
     <div className={cn(
         "flex items-center justify-between p-3 border-b",
-        isEmbedded ? "bg-card rounded-t-lg" : "bg-transparent" // CardHeader in page mode handles this
+        isEmbedded ? "bg-card rounded-t-lg" : "bg-transparent" 
     )}>
       <div className="flex items-center gap-2">
         <Bot className={cn("h-5 w-5", isEmbedded ? "text-primary": "text-secondary")} />
@@ -167,7 +180,7 @@ export default function AskNAIForm({ isEmbedded = false }: AskNAIFormProps) {
             </div>
           </div>
         ))}
-        {isPending && chatMessages.length > 0 && chatMessages[chatMessages.length -1].type === 'user' && (
+        {isActionPending && chatMessages.length > 0 && chatMessages[chatMessages.length -1].type === 'user' && (
            <div className="flex items-end gap-2 max-w-[75%] mr-auto mb-3">
              <div className="flex-shrink-0 h-8 w-8 rounded-full bg-secondary text-secondary-foreground flex items-center justify-center">
                 <Bot className="h-5 w-5" />
@@ -179,23 +192,25 @@ export default function AskNAIForm({ isEmbedded = false }: AskNAIFormProps) {
         )}
         <div ref={messagesEndRef} />
       </ScrollArea>
-      <form onSubmit={handleSubmit} ref={formRef} className="flex items-center gap-2 p-2 sm:p-3 border-t bg-background">
+      <form
+        onSubmit={(e) => {
+            e.preventDefault();
+            handleSubmit();
+        }}
+        ref={formRef}
+        className="flex items-center gap-2 p-2 sm:p-3 border-t bg-background"
+      >
         <Textarea
           value={currentQuestion}
           onChange={(e) => setCurrentQuestion(e.target.value)}
           placeholder="Ask NAI anything..."
           rows={1}
           className="flex-grow resize-none border-border/70 focus:ring-1 focus:ring-primary focus:border-primary placeholder:text-muted-foreground/60 rounded-md text-sm shadow-sm py-2 px-3 min-h-[40px] max-h-[100px] sm:max-h-[120px]"
-          onKeyDown={(e) => {
-            if (e.key === 'Enter' && !e.shiftKey) {
-              e.preventDefault();
-              handleSubmit();
-            }
-          }}
-          disabled={isPending}
+          onKeyDown={handleKeyDown}
+          disabled={isActionPending}
         />
-        <Button type="submit" disabled={isPending || !currentQuestion.trim()} size="icon" className="bg-primary hover:bg-primary/90 text-primary-foreground h-9 w-9 sm:h-10 sm:w-10 shrink-0">
-          {isPending ? (
+        <Button type="submit" disabled={isActionPending || !currentQuestion.trim()} size="icon" className="bg-primary hover:bg-primary/90 text-primary-foreground h-9 w-9 sm:h-10 sm:w-10 shrink-0">
+          {isActionPending ? (
             <Loader2 className="h-4 w-4 sm:h-5 sm:w-5 animate-spin" />
           ) : (
             <Send className="h-4 w-4 sm:h-5 sm:w-5" />

@@ -97,7 +97,7 @@ export default function HomePage() {
             </div>
           </div>
         </div>
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-slideInUp delay-500">
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2">
           <ArrowDown className="h-7 w-7 text-primary animate-bounce" />
         </div>
       </section>
@@ -115,9 +115,9 @@ export default function HomePage() {
           </div>
           <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
             {[
-              { icon: CodeIcon, title: "Frontend Development", description: "Crafting responsive user interfaces with React, Next.js, and modern CSS that delight users." },
-              { icon: Layers, title: "Backend Architecture", description: "Building secure, scalable server-side applications and APIs using Node.js, Python, and Firebase." },
-              { icon: Sparkles, title: "AI Integration", description: "Exploring AI with Genkit, integrating intelligent features to create smarter applications." },
+              { icon: CodeIcon, title: "Frontend Development", description: "Crafting responsive user interfaces with key technologies like React, Next.js, and TypeScript, focusing on performance and modern CSS solutions to delight users." },
+              { icon: Layers, title: "Backend Architecture", description: "Building secure, scalable server-side applications and APIs using Node.js, Python (Django/Flask), and Firebase, with expertise in databases like PostgreSQL & MongoDB." },
+              { icon: Sparkles, title: "AI Integration", description: "Exploring the exciting world of AI using Genkit and Python, integrating intelligent features and LLMs to create smarter, more intuitive applications." },
             ].map((item, index) => (
               <Card key={item.title} className="bg-card text-center p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 animate-slideInUp" style={{ animationDelay: `${0.2 + (index * 0.1) + 0.4}s`}}>
                 <CardContent className="p-0">
