@@ -1,7 +1,8 @@
+
 import type {Config} from 'tailwindcss';
 
 export default {
-  darkMode: ['class'],
+  darkMode: ['class'], // Kept in case of future toggle, but app is light by default
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
@@ -10,19 +11,19 @@ export default {
   theme: {
     container: {
       center: true,
-      padding: "1rem", // Slightly reduced padding for a tighter feel
+      padding: "1.5rem", // Adjusted padding
       screens: {
         "sm": "640px",
         "md": "768px",
         "lg": "1024px",
         "xl": "1280px",
-        "2xl": "1440px", // Max width based on Dribbble style
+        "2xl": "1440px", 
       },
     },
     extend: {
       fontFamily: {
-        body: ['Poppins', 'Inter', 'sans-serif'], // Added Poppins
-        headline: ['Space Grotesk', 'sans-serif'],
+        body: ['Inter', 'sans-serif'], // Inter for body
+        headline: ['Space Grotesk', 'sans-serif'], // Space Grotesk for headlines
         code: ['monospace'],
       },
       colors: {
@@ -66,26 +67,20 @@ export default {
           '4': 'hsl(var(--chart-4))',
           '5': 'hsl(var(--chart-5))',
         },
-        sidebar: {
-          DEFAULT: 'hsl(var(--sidebar-background))',
-          foreground: 'hsl(var(--sidebar-foreground))',
-          primary: 'hsl(var(--sidebar-primary))',
-          'primary-foreground': 'hsl(var(--sidebar-primary-foreground))',
-          accent: 'hsl(var(--sidebar-accent))',
-          'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
-          border: 'hsl(var(--sidebar-border))',
-          ring: 'hsl(var(--sidebar-ring))',
-        },
       },
-      borderRadius: {
-        xl: 'calc(var(--radius) + 4px)', // Larger radius
-        lg: 'var(--radius)',
+      borderRadius: { // Consistent border radius
+        xl: 'calc(var(--radius) + 6px)', 
+        lg: 'var(--radius)', // 0.5rem
         md: 'calc(var(--radius) - 2px)',
         sm: 'calc(var(--radius) - 4px)',
       },
-      boxShadow: {
-        'neon-primary': '0 0 15px hsl(var(--primary)/0.5), 0 0 30px hsl(var(--primary)/0.3)',
-        'neon-secondary': '0 0 15px hsl(var(--secondary)/0.5), 0 0 30px hsl(var(--secondary)/0.3)',
+      boxShadow: { // Updated shadows for light theme
+        'DEFAULT': '0 4px 6px -1px rgb(0 0 0 / 0.07), 0 2px 4px -2px rgb(0 0 0 / 0.07)',
+        'md': '0 6px 10px -1px rgb(0 0 0 / 0.08), 0 4px 6px -4px rgb(0 0 0 / 0.08)',
+        'lg': '0 10px 15px -3px rgb(0 0 0 / 0.08), 0 4px 6px -4px rgb(0 0 0 / 0.08)',
+        'xl': '0 20px 25px -5px rgb(0 0 0 / 0.08), 0 8px 10px -6px rgb(0 0 0 / 0.08)',
+        '2xl': '0 25px 50px -12px rgb(0 0 0 / 0.15)',
+        'inner-lg': 'inset 0 2px 4px 0 rgb(0 0 0 / 0.05)',
       },
       keyframes: {
         'accordion-down': {
@@ -104,21 +99,26 @@ export default {
             height: '0',
           },
         },
-        'border-pulse': {
-          '0%, 100%': { borderColor: 'hsl(var(--primary)/0.5)' },
-          '50%': { borderColor: 'hsl(var(--secondary)/0.5)' },
-        },
-        'text-gradient': {
+        'text-gradient': { // Kept if used, but less common in light themes
           'to': {
             'background-position': '200% center',
           },
         },
+        marquee: {
+          '0%': { transform: 'translateX(0%)' },
+          '100%': { transform: 'translateX(-100%)' },
+        },
+        'marquee-reverse': {
+          '0%': { transform: 'translateX(-100%)' },
+          '100%': { transform: 'translateX(0%)' },
+        }
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
-        'border-pulse': 'border-pulse 4s infinite ease-in-out',
         'text-gradient': 'text-gradient 2s linear infinite',
+        'marquee-normal': 'marquee 60s linear infinite', // Slower marquee
+        'marquee-fast': 'marquee 30s linear infinite',
       },
     },
   },

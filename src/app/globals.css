@@ -1,98 +1,74 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   :root {
-    /* Inspired by Dribbble shot: Carlos - Personal Portfolio Website */
-    /* Very dark background with vibrant accents */
-    --background: 240 10% 4%; /* #0A0A0B - Very Dark, almost black */
-    --foreground: 210 40% 95%; /* #F0F4F8 - Light Gray for text */
+    /* New Theme: Light, Professional Blue, Violet Accent */
+    --background: 205 87% 94%; /* #E3F2FD - Light desaturated blue */
+    --foreground: 210 15% 20%; /* #2D3339 - Dark Gray for text */
 
-    --card: 240 8% 8%; /* #121214 - Slightly lighter dark for cards */
-    --card-foreground: 210 40% 95%; /* #F0F4F8 */
+    --card: 0 0% 100%; /* #FFFFFF - White */
+    --card-foreground: 210 15% 20%; /* #2D3339 */
 
-    --popover: 240 8% 7%; /* #0F0F11 */
-    --popover-foreground: 210 40% 95%; /* #F0F4F8 */
+    --popover: 0 0% 100%; /* #FFFFFF */
+    --popover-foreground: 210 15% 20%; /* #2D3339 */
 
-    /* Primary Accent - Vibrant Pink/Magenta */
-    --primary: 320 100% 55%; /* #FF19D4 */
-    --primary-foreground: 0 0% 100%; /* White for text on primary */
+    /* Primary color: Professional Blue (#2979FF) */
+    --primary: 217 100% 58%; /* hsl(217, 100%, 58%) */
+    --primary-foreground: 0 0% 100%; /* White */
 
-    /* Secondary Accent - Vibrant Purple */
-    --secondary: 270 90% 60%; /* #8C19FF */
-    --secondary-foreground: 0 0% 100%; /* White for text on secondary */
+    /* Secondary/Accent color: Vibrant Violet (#7C4DFF) */
+    --secondary: 256 100% 65%; /* hsl(256, 100%, 65%) */
+    --secondary-foreground: 0 0% 100%; /* White */
     
-    /* Muted tones for less emphasis */
-    --muted: 240 5% 15%; /* #232326 - Dark Gray */
-    --muted-foreground: 210 20% 65%; /* #98A2B3 - Lighter Gray for muted text */
+    --muted: 210 30% 88%; /* #D9E1E8 - Light gray for muted elements */
+    --muted-foreground: 210 10% 45%; /* #656E77 - Medium gray for muted text */
 
-    /* Accent (can be another vibrant color or a utility accent) - Bright Cyan/Blue */
-    --accent: 200 100% 50%; /* #00A3FF */
-    --accent-foreground: 240 10% 4%; /* Dark for text on this accent */
+    /* Accent can reuse Secondary or be different if needed */
+    --accent: 256 100% 65%; /* Using Violet as general accent */
+    --accent-foreground: 0 0% 100%; /* White */
 
-    --destructive: 0 75% 55%; /* #F22B2B */
+    --destructive: 0 75% 55%; /* #F22B2B - Consistent Red */
     --destructive-foreground: 0 0% 100%; /* White */
 
-    --border: 240 5% 20%; /* #2D2D30 - Subtle border for dark theme */
-    --input: 240 5% 12%; /* #1B1B1D - Dark input background */
-    --ring: 320 100% 55%; /* Primary accent for focus rings */
+    --border: 210 20% 80%; /* #BEC8D1 - Softer border for light theme */
+    --input: 0 0% 100%; /* White background for inputs */
+    --ring: 217 100% 58%; /* Primary blue for focus rings */
 
-    --radius: 0.75rem;
+    --radius: 0.5rem; /* Standardized radius */
 
-    /* Sidebar specific colors (dark theme) - can be removed if sidebar not used */
-    --sidebar-background: 240 10% 3%; 
-    --sidebar-foreground: 210 40% 90%;
-    --sidebar-primary: 320 100% 55%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 5% 15%;
-    --sidebar-accent-foreground: 320 100% 55%;
-    --sidebar-border: 240 5% 18%;
-    --sidebar-ring: 320 100% 55%;
-
-    --chart-1: 320 100% 55%; /* Pink */
-    --chart-2: 270 90% 60%; /* Purple */
-    --chart-3: 200 100% 50%; /* Blue */
-    --chart-4: 30 100% 60%; /* Orange */
-    --chart-5: 130 70% 50%; /* Green */
+    /* Chart colors - can be adjusted if charts are used extensively */
+    --chart-1: 217 100% 58%; /* Primary Blue */
+    --chart-2: 256 100% 65%; /* Accent Violet */
+    --chart-3: 170 80% 45%;  /* A Teal/Green for variety */
+    --chart-4: 30 100% 60%;  /* Orange */
+    --chart-5: 320 70% 55%;  /* Pink */
   }
 
   .dark {
-    /* Values are same as :root for a consistent dark theme by default */
-    --background: 240 10% 4%;
-    --foreground: 210 40% 95%;
-    --card: 240 8% 8%;
-    --card-foreground: 210 40% 95%;
-    --popover: 240 8% 7%;
-    --popover-foreground: 210 40% 95%;
-    --primary: 320 100% 55%;
+    /* For consistency, if a dark mode toggle were added later, it would go here.
+       For now, the root styles define the light theme as default. */
+    --background: 205 87% 94%;
+    --foreground: 210 15% 20%;
+    --card: 0 0% 100%;
+    --card-foreground: 210 15% 20%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 210 15% 20%;
+    --primary: 217 100% 58%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 270 90% 60%;
+    --secondary: 256 100% 65%;
     --secondary-foreground: 0 0% 100%;
-    --muted: 240 5% 15%;
-    --muted-foreground: 210 20% 65%;
-    --accent: 200 100% 50%;
-    --accent-foreground: 240 10% 4%;
+    --muted: 210 30% 88%;
+    --muted-foreground: 210 10% 45%;
+    --accent: 256 100% 65%;
+    --accent-foreground: 0 0% 100%;
     --destructive: 0 75% 55%;
     --destructive-foreground: 0 0% 100%;
-    --border: 240 5% 20%;
-    --input: 240 5% 12%;
-    --ring: 320 100% 55%;
-
-    --sidebar-background: 240 10% 3%;
-    --sidebar-foreground: 210 40% 90%;
-    --sidebar-primary: 320 100% 55%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 5% 15%;
-    --sidebar-accent-foreground: 320 100% 55%;
-    --sidebar-border: 240 5% 18%;
-    --sidebar-ring: 320 100% 55%;
-
-    --chart-1: 320 100% 55%;
-    --chart-2: 270 90% 60%;
-    --chart-3: 200 100% 50%;
-    --chart-4: 30 100% 60%;
-    --chart-5: 130 70% 50%;
+    --border: 210 20% 80%;
+    --input: 0 0% 100%;
+    --ring: 217 100% 58%;
   }
 }
 
@@ -102,47 +78,48 @@
   }
   body {
     @apply bg-background text-foreground;
-    background-image: linear-gradient(180deg, hsl(var(--background)) 0%, hsl(var(--background) / 0.9) 70%, hsl(var(--primary) / 0.05) 100%);
+    /* Optional: Subtle gradient or texture for background if desired */
+    /* background-image: linear-gradient(180deg, hsl(var(--background)) 0%, hsl(var(--background) / 0.95) 100%); */
     background-attachment: fixed;
   }
   ::selection {
     @apply bg-primary text-primary-foreground;
   }
   ::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
+    width: 10px;
+    height: 10px;
   }
   ::-webkit-scrollbar-track {
-    @apply bg-muted/30;
+    @apply bg-muted/50;
   }
   ::-webkit-scrollbar-thumb {
-    @apply bg-primary/70 rounded-full;
+    @apply bg-primary/70 rounded-md;
   }
   ::-webkit-scrollbar-thumb:hover {
     @apply bg-primary;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-headline;
+    @apply font-headline text-foreground;
   }
   p, span, div, li, label, input, textarea, button, a {
-    @apply font-body;
+    @apply font-body text-foreground; /* Ensures body font is applied widely */
   }
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
+  from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
 .fade-in-page {
-  animation: fadeIn 0.7s ease-out forwards;
+  animation: fadeIn 0.6s ease-out forwards;
 }
 
 @keyframes slideInUp {
   from {
     opacity: 0;
-    transform: translateY(40px);
+    transform: translateY(20px);
   }
   to {
     opacity: 1;
@@ -151,7 +128,7 @@
 }
 
 .animate-slideInUp {
-  animation: slideInUp 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  animation: slideInUp 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
   opacity: 0; 
 }
 
@@ -161,61 +138,51 @@
 .delay-300 { animation-delay: 0.3s !important; }
 .delay-400 { animation-delay: 0.4s !important; }
 .delay-500 { animation-delay: 0.5s !important; }
-.delay-700 { animation-delay: 0.7s !important; }
-.delay-1000 { animation-delay: 1s !important; }
-
 
 .section-padding {
-  @apply py-16 sm:py-24;
+  @apply py-12 sm:py-20; /* Adjusted padding for new theme */
 }
 
-.glow-effect {
-  position: relative;
-}
-
-.glow-effect::before {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 200%; 
-  height: 200%;
-  background-image: radial-gradient(circle, hsl(var(--primary) / 0.15) 0%, transparent 50%);
-  transform: translate(-50%, -50%);
-  filter: blur(60px); /* Increased blur */
-  opacity: 0.6; /* Increased opacity */
-  z-index: -1;
-  animation: pulseGlow 8s infinite alternate ease-in-out;
-  pointer-events: none;
-}
-
-@keyframes pulseGlow {
-  from {
-    opacity: 0.4;
-    transform: translate(-50%, -50%) scale(0.9);
-  }
-  to {
-    opacity: 0.7;
-    transform: translate(-50%, -50%) scale(1.1);
-  }
-}
-
-/* Custom class for neon-like text */
+/* Text glow for primary color - more subtle for light theme */
 .text-glow-primary {
   color: hsl(var(--primary));
-  text-shadow:
-    0 0 5px hsl(var(--primary) / 0.8),
-    0 0 10px hsl(var(--primary) / 0.6),
-    0 0 15px hsl(var(--primary) / 0.4);
+  /* text-shadow: 0 0 8px hsl(var(--primary) / 0.5); Removed for cleaner light theme */
 }
 .text-glow-secondary {
   color: hsl(var(--secondary));
-  text-shadow:
-    0 0 5px hsl(var(--secondary) / 0.8),
-    0 0 10px hsl(var(--secondary) / 0.6),
-    0 0 15px hsl(var(--secondary) / 0.4);
+ /* text-shadow: 0 0 8px hsl(var(--secondary) / 0.5); Removed for cleaner light theme */
 }
 
+/* Glassmorphism card for light theme - more subtle */
 .glassmorphism-card {
-  @apply bg-card/60 backdrop-blur-lg border border-border/30 shadow-2xl rounded-2xl;
+  @apply bg-card/80 backdrop-blur-sm border border-border/50 shadow-lg rounded-xl;
+  /* shadow-2xl might be too heavy for light theme, using shadow-lg */
 }
+
+/* Marquee animation for project carousel */
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-100%); }
+}
+
+.animate-marquee {
+  animation: marquee 30s linear infinite; /* Adjust duration as needed */
+}
+
+/* For project carousel track lines */
+.carousel-track-lines::before,
+.carousel-track-lines::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background-color: hsl(var(--border) / 0.5);
+}
+.carousel-track-lines::before {
+  top: 0;
+}
+.carousel-track-lines::after {
+  bottom: 0;
+}
+

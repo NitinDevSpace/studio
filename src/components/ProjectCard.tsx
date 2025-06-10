@@ -1,77 +1,72 @@
+
 import Image from 'next/image';
-import Link from 'next/link';
-import { Project } from '@/lib/types';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import type { Project } from '@/lib/types';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { ExternalLink, Github, Layers } from 'lucide-react'; // Replaced Code with Layers for Tech Stack
+import { Eye, Layers } from 'lucide-react';
 
 interface ProjectCardProps {
   project: Project;
+  onClick: () => void; // To open the modal
+  className?: string;
 }
 
-export default function ProjectCard({ project }: ProjectCardProps) {
+export default function ProjectCard({ project, onClick, className }: ProjectCardProps) {
   return (
-    <Card className="flex flex-col h-full overflow-hidden glassmorphism-card group transition-all duration-500 ease-in-out hover:shadow-neon-primary hover:border-primary/50 transform hover:-translate-y-2">
-      <div className="relative w-full aspect-[16/10] overflow-hidden rounded-t-xl"> {/* Aspect ratio for consistency */}
+    <Card 
+      className={`group w-[300px] sm:w-[360px] md:w-[420px] h-auto flex-shrink-0 bg-card rounded-lg shadow-lg hover:shadow-xl overflow-hidden transition-all duration-300 ease-in-out cursor-pointer mx-3 ${className}`}
+      onClick={onClick}
+    >
+      <div className="relative w-full aspect-[16/10] overflow-hidden">
         <Image
           src={project.imageUrl}
           alt={project.name}
           layout="fill"
           objectFit="cover"
-          className="transform transition-all duration-700 ease-in-out group-hover:scale-110 "
-          data-ai-hint={project.imageHint || 'project image'}
-          priority={project.id === '1' || project.id === '2'} 
+          className="transform transition-all duration-500 ease-in-out group-hover:scale-110"
+          data-ai-hint={project.imageHint || 'project screenshot'}
+          sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
+          priority={project.id === '1'} 
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-100 group-hover:opacity-60 transition-opacity duration-300"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-100 group-hover:opacity-50 transition-opacity duration-300"></div>
+        <div className="absolute bottom-3 left-3 right-3 p-2 ">
+            <h3 className="font-headline text-lg font-semibold text-white truncate group-hover:text-primary transition-colors">
+              {project.name}
+            </h3>
+        </div>
       </div>
-      <CardHeader className="p-5 sm:p-6">
-        <CardTitle className="font-headline text-xl sm:text-2xl text-foreground group-hover:text-glow-primary transition-colors duration-300">{project.name}</CardTitle>
-        <CardDescription className="text-sm text-muted-foreground h-16 sm:h-20 overflow-y-auto mt-1 scrollbar-thin scrollbar-thumb-muted-foreground/30 scrollbar-track-transparent">
+      
+      <div className="p-4 space-y-3">
+        <p className="text-xs text-muted-foreground line-clamp-2 h-8">
           {project.description}
-        </CardDescription>
-      </CardHeader>
-      <CardContent className="flex-grow p-5 sm:p-6 pt-0">
-        <div className="mb-4">
-          <h4 className="text-xs font-semibold mb-2 text-muted-foreground uppercase tracking-wider flex items-center">
-            <Layers className="w-4 h-4 mr-1.5 text-secondary" /> Tech Stack
+        </p>
+        
+        <div>
+          <h4 className="text-xs font-semibold mb-1.5 text-foreground/70 flex items-center">
+            <Layers className="w-3.5 h-3.5 mr-1 text-secondary" /> Tech Stack
           </h4>
-          <div className="flex flex-wrap gap-1.5">
-            {project.techStack.slice(0, 5).map((tech) => ( // Show limited initially
-              <Badge key={tech} variant="secondary" className="text-xs bg-muted/70 text-muted-foreground hover:bg-secondary hover:text-secondary-foreground transition-colors duration-200 py-1 px-2.5 rounded-md">
+          <div className="flex flex-wrap gap-1">
+            {project.techStack.slice(0, 4).map((tech) => (
+              <Badge key={tech} variant="outline" className="text-xs bg-muted/50 border-border/60 text-muted-foreground py-0.5 px-1.5 rounded">
                 {tech}
               </Badge>
             ))}
-            {project.techStack.length > 5 && (
-                 <Badge variant="outline" className="text-xs border-primary/50 text-primary py-1 px-2.5 rounded-md">+{project.techStack.length - 5} more</Badge>
+            {project.techStack.length > 4 && (
+                 <Badge variant="outline" className="text-xs border-primary/70 text-primary py-0.5 px-1.5 rounded">+{project.techStack.length - 4}</Badge>
             )}
           </div>
         </div>
-        <div>
-          <h4 className="text-xs font-semibold mb-1 text-muted-foreground uppercase tracking-wider">Category</h4>
-          <Badge variant="outline" className="text-xs border-secondary/50 text-secondary hover:bg-secondary/10 transition-colors duration-200 py-1 px-2.5 rounded-md">{project.category}</Badge>
-        </div>
-      </CardContent>
-      <CardFooter className="mt-auto p-5 sm:p-6 border-t border-border/20 bg-card/30">
-        <div className="flex justify-start space-x-3 w-full">
-          {project.liveUrl && (
-            <Button variant="default" size="sm" asChild className="bg-primary text-primary-foreground hover:bg-primary/90 transition-all duration-300 shadow-md hover:shadow-neon-primary transform hover:scale-105 flex-grow sm:flex-grow-0">
-              <Link href={project.liveUrl} target="_blank" rel="noopener noreferrer">
-                <ExternalLink className="mr-2 h-4 w-4" />
-                View Live
-              </Link>
-            </Button>
-          )}
-          {project.repoUrl && (
-            <Button variant="outline" size="sm" asChild className="border-secondary/60 text-secondary hover:bg-secondary hover:text-secondary-foreground transition-all duration-300 shadow-sm hover:shadow-neon-secondary transform hover:scale-105 flex-grow sm:flex-grow-0">
-              <Link href={project.repoUrl} target="_blank" rel="noopener noreferrer">
-                <Github className="mr-2 h-4 w-4" />
-                Repository
-              </Link>
-            </Button>
-          )}
-        </div>
-      </CardFooter>
+        
+        <Button 
+            variant="ghost" 
+            size="sm" 
+            className="w-full mt-2 text-primary hover:bg-primary/10 hover:text-primary text-xs"
+            onClick={(e) => { e.stopPropagation(); onClick(); }} // Prevent card click if button is separate
+        >
+            <Eye className="mr-1.5 h-3.5 w-3.5" /> View Details
+        </Button>
+      </div>
     </Card>
   );
 }

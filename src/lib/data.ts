@@ -1,13 +1,14 @@
+
 import type { Project } from './types';
 
 export const projectsData: Project[] = [
   {
     id: '1',
     name: 'E-commerce Platform Pro',
-    description: 'A full-featured e-commerce platform with Next.js, Stripe, and Firebase, focusing on a seamless user experience, advanced analytics, and robust backend.',
-    imageUrl: 'https://placehold.co/600x400.png',
-    imageHint: 'modern e-commerce dashboard analytics',
-    techStack: ['Next.js', 'React', 'TypeScript', 'Firebase', 'Stripe', 'TailwindCSS'],
+    description: 'A full-featured e-commerce platform with Next.js, Stripe, and Firebase, focusing on a seamless user experience, advanced analytics, and robust backend. Built for scalability and performance.',
+    imageUrl: 'https://placehold.co/800x500.png', // Landscape
+    imageHint: 'e-commerce dashboard analytics chart',
+    techStack: ['Next.js', 'React', 'TypeScript', 'Firebase', 'Stripe', 'TailwindCSS', 'Redux'],
     category: 'E-commerce',
     liveUrl: '#',
     repoUrl: '#',
@@ -15,30 +16,30 @@ export const projectsData: Project[] = [
   {
     id: '2',
     name: 'IntelliTask AI Manager',
-    description: 'A smart task manager that leverages AI (Genkit) to prioritize tasks, suggest deadlines, and optimize your workflow for peak productivity with a sleek UI.',
-    imageUrl: 'https://placehold.co/600x400.png',
-    imageHint: 'AI task manager interface',
-    techStack: ['React', 'Node.js', 'Python', 'AI/ML', 'Genkit', 'ShadCN UI'],
+    description: 'A smart task manager that leverages AI (Genkit) to prioritize tasks, suggest deadlines, and optimize your workflow for peak productivity with a sleek UI. Features natural language task input.',
+    imageUrl: 'https://placehold.co/800x500.png', // Landscape
+    imageHint: 'AI task manager gantt chart',
+    techStack: ['React', 'Node.js', 'Python', 'Genkit', 'ShadCN UI', 'PostgreSQL'],
     category: 'Web App',
     liveUrl: '#',
   },
   {
     id: '3',
     name: 'FitLife Mobile Tracker',
-    description: 'A cross-platform mobile app for tracking fitness activities, setting goals, and visualizing progress with an intuitive and motivating interface.',
-    imageUrl: 'https://placehold.co/600x400.png',
-    imageHint: 'mobile fitness app charts',
-    techStack: ['React Native', 'Firebase', 'TypeScript', 'Charts.js'],
+    description: 'A cross-platform mobile app for tracking fitness activities, setting goals, and visualizing progress with an intuitive and motivating interface. Includes social sharing features.',
+    imageUrl: 'https://placehold.co/800x500.png', // Landscape
+    imageHint: 'mobile fitness app dashboard progress',
+    techStack: ['React Native', 'Firebase', 'TypeScript', 'Charts.js', 'Expo'],
     category: 'Mobile App',
     repoUrl: '#',
   },
   {
     id: '4',
     name: 'NitinDevSpace Portfolio',
-    description: 'This very portfolio site, built with Next.js and Tailwind CSS, designed to elegantly showcase my skills, projects, and journey as a developer.',
-    imageUrl: 'https://placehold.co/600x400.png',
-    imageHint: 'developer portfolio homepage',
-    techStack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'ShadCN UI', 'Framer Motion'],
+    description: 'This very portfolio site, built with Next.js and Tailwind CSS, designed to elegantly showcase my skills, projects, and journey as a developer. Features AI-powered Q&A.',
+    imageUrl: 'https://placehold.co/800x500.png', // Landscape
+    imageHint: 'developer portfolio project page',
+    techStack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'ShadCN UI', 'Genkit', 'Framer Motion'],
     category: 'Portfolio',
     liveUrl: '#',
     repoUrl: '#',
@@ -46,19 +47,19 @@ export const projectsData: Project[] = [
   {
     id: '5',
     name: 'InsightDash Visualization',
-    description: 'An interactive dashboard for visualizing complex datasets, featuring dynamic charts, filters, and real-time data updates, built with React and D3.js.',
-    imageUrl: 'https://placehold.co/600x400.png',
-    imageHint: 'data visualization dashboard graph',
-    techStack: ['React', 'D3.js', 'Node.js', 'Express', 'Socket.IO'],
+    description: 'An interactive dashboard for visualizing complex datasets, featuring dynamic charts, filters, and real-time data updates, built with React and D3.js. Supports custom data source integration.',
+    imageUrl: 'https://placehold.co/800x500.png', // Landscape
+    imageHint: 'data analytics dashboard charts map',
+    techStack: ['React', 'D3.js', 'Node.js', 'Express', 'Socket.IO', 'MongoDB'],
     category: 'Web App',
   },
   {
     id: '6',
     name: 'ConnectSphere Chat App',
-    description: 'A scalable real-time chat application using WebSockets and Firebase, offering instant messaging, group chats, media sharing, and rich notifications.',
-    imageUrl: 'https://placehold.co/600x400.png',
-    imageHint: 'chat application user interface',
-    techStack: ['React', 'Node.js', 'Firebase', 'WebSockets', 'Redux'],
+    description: 'A scalable real-time chat application using WebSockets and Firebase, offering instant messaging, group chats, media sharing, and rich notifications. End-to-end encrypted.',
+    imageUrl: 'https://placehold.co/800x500.png', // Landscape
+    imageHint: 'modern chat app interface group',
+    techStack: ['React', 'Node.js', 'Firebase', 'WebSockets', 'Redux', 'Material UI'],
     category: 'Web App',
     liveUrl: '#',
     repoUrl: '#',

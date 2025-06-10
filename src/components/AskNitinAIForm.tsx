@@ -1,3 +1,4 @@
+
 'use client';
 
 import React, { useEffect } from 'react';
@@ -8,7 +9,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { Brain, AlertCircle, CheckCircle, Loader2, Sparkles, MessageSquare } from 'lucide-react'; // Added Sparkles
+import { Brain, AlertCircle, Loader2, Sparkles, MessageSquare } from 'lucide-react';
 import { useToast } from "@/hooks/use-toast";
 
 const initialState: AskNitinAIFormState = {
@@ -19,7 +20,7 @@ const initialState: AskNitinAIFormState = {
 function SubmitButton() {
   const { pending } = useFormStatus();
   return (
-    <Button type="submit" disabled={pending} className="w-full sm:w-auto bg-gradient-to-r from-primary to-secondary hover:from-secondary hover:to-primary text-primary-foreground shadow-lg hover:shadow-primary/40 transition-all duration-300 transform hover:scale-105 py-3 text-base">
+    <Button type="submit" disabled={pending} className="w-full sm:w-auto bg-primary hover:bg-primary/90 text-primary-foreground shadow-md hover:shadow-primary/30 transition-all duration-300 transform hover:scale-105 py-2.5 text-sm">
       {pending ? (
         <>
           <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -27,7 +28,7 @@ function SubmitButton() {
         </>
       ) : (
         <>
-          <Sparkles className="mr-2 h-4 w-4" /> {/* Changed Icon */}
+          <Sparkles className="mr-2 h-4 w-4" />
           Ask NitinAI
         </>
       )}
@@ -40,57 +41,55 @@ export default function AskNitinAIForm() {
   const { toast } = useToast();
 
   useEffect(() => {
-    if (state.message && !state.answer) { // Error
+    if (state.message && !state.answer) { 
       toast({
         title: "Error",
         description: state.message,
         variant: "destructive",
       });
     }
-    // Success toast is handled implicitly by displaying the answer
   }, [state.message, state.answer, toast]);
 
   return (
-    <Card className="w-full max-w-2xl mx-auto glassmorphism-card transform hover:-translate-y-1 transition-all duration-300">
-      <CardHeader className="p-6 sm:p-8">
-        <CardTitle className="font-headline text-2xl text-primary flex items-center">
-          <MessageSquare className="mr-2.5 h-7 w-7 text-secondary" /> {/* Changed Icon */}
+    <Card className="w-full bg-card/90 backdrop-blur-sm shadow-xl hover:shadow-2xl transition-shadow duration-300 rounded-xl">
+      <CardHeader className="p-6">
+        <CardTitle className="font-headline text-xl text-primary flex items-center">
+          <MessageSquare className="mr-2 h-5 w-5 text-secondary" /> 
           Your Question
         </CardTitle>
-        <CardDescription className="text-muted-foreground pt-1">
+        <CardDescription className="text-muted-foreground pt-1 text-sm">
           Ask anything about Nitin Kumar, his projects, or this portfolio.
-          The AI will try its best to answer.
         </CardDescription>
       </CardHeader>
       <form action={formAction}>
-        <CardContent className="space-y-4 p-6 sm:p-8 pt-0">
+        <CardContent className="space-y-3 p-6 pt-0">
           <div>
-            <Label htmlFor="question" className="font-semibold text-foreground/90">Your Question</Label>
+            <Label htmlFor="question" className="font-medium text-foreground/80 text-sm">Your Question</Label>
             <Textarea
               id="question"
               name="question"
-              placeholder="e.g., What technologies was the E-commerce Platform Pro built with?"
-              rows={5} 
-              className="mt-1.5 bg-input border-border/70 focus:ring-1 focus:ring-primary focus:border-primary placeholder:text-muted-foreground/70 rounded-lg text-base"
+              placeholder="e.g., What are Nitin's key skills?"
+              rows={4} 
+              className="mt-1 bg-input border-border/70 focus:ring-1 focus:ring-primary focus:border-primary placeholder:text-muted-foreground/60 rounded-md text-sm shadow-sm"
               defaultValue={state.formData?.question || ""}
               aria-describedby="questionError"
               required
             />
             {state.fieldErrors?.question && (
-              <p id="questionError" className="text-sm text-destructive mt-1.5">
+              <p id="questionError" className="text-xs text-destructive mt-1">
                 {state.fieldErrors.question.join(', ')}
               </p>
             )}
           </div>
         </CardContent>
-        <CardFooter className="flex flex-col sm:flex-row justify-end border-t border-border/30 pt-6 p-6 sm:p-8">
+        <CardFooter className="flex justify-end border-t border-border/50 p-4">
           <SubmitButton />
         </CardFooter>
       </form>
 
       {state.message && !state.answer && ( 
-        <div className="p-6 sm:p-8 border-t border-border/30">
-           <Alert variant="destructive" className="mt-0">
+        <div className="p-6 border-t border-border/50">
+           <Alert variant="destructive" className="mt-0 text-sm">
             <AlertCircle className="h-4 w-4" />
             <AlertTitle>Request Failed</AlertTitle>
             <AlertDescription>{state.message}</AlertDescription>
@@ -99,11 +98,11 @@ export default function AskNitinAIForm() {
       )}
 
       {state.answer && (
-        <div className="p-6 sm:p-8 border-t border-border/30">
-          <Alert variant="default" className="mt-0 bg-primary/5 border-primary/30 text-primary-foreground">
-             <Brain className="h-5 w-5 text-primary shrink-0" /> {/* Changed Icon */}
-            <AlertTitle className="text-primary font-semibold text-lg">NitinAI Says:</AlertTitle>
-            <AlertDescription className="text-foreground/90 whitespace-pre-wrap py-2 text-base leading-relaxed">
+        <div className="p-6 border-t border-border/50">
+          <Alert variant="default" className="mt-0 bg-primary/5 border-primary/20 text-sm">
+             <Brain className="h-5 w-5 text-primary shrink-0" />
+            <AlertTitle className="text-primary font-semibold text-md">NitinAI Says:</AlertTitle>
+            <AlertDescription className="text-foreground/80 whitespace-pre-wrap py-1.5 leading-relaxed">
               {state.answer}
             </AlertDescription>
           </Alert>
