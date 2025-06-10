@@ -41,12 +41,12 @@ const projectsOnResume = [
 
 export default function ResumePage() {
   return (
-    <div className="section-padding fade-in-page container mx-auto px-4 bg-gradient-to-br from-background via-sky-50 to-indigo-100 min-h-[calc(100vh-10rem)]">
+    <div className="section-padding fade-in-page container mx-auto px-4 bg-gradient-to-br from-background via-sky-50/5 dark:via-sky-900/10 to-indigo-100/5 dark:to-indigo-900/10 min-h-[calc(100vh-10rem)]">
       <header className="text-center mb-12 sm:mb-16">
-        <h1 className="text-3xl sm:text-4xl md:text-5xl font-headline font-bold mb-3 text-gray-800 animate-slideInUp">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-headline font-bold mb-3 text-foreground animate-slideInUp">
           My <span className="text-primary">Professional Journey</span>
         </h1>
-        <p className="text-md text-gray-600 max-w-xl mx-auto animate-slideInUp delay-200 leading-relaxed">
+        <p className="text-md text-muted-foreground max-w-xl mx-auto animate-slideInUp delay-200 leading-relaxed">
           A detailed overview of my experience, skills, and educational background. Committed to building innovative software and continuously learning.
         </p>
         <Button asChild className="mt-6 bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg hover:shadow-primary/30 transition-all duration-300 transform hover:scale-105 px-7 py-3 text-base animate-slideInUp delay-400">
@@ -98,7 +98,10 @@ export default function ResumePage() {
                 </h4>
                 <div className="flex flex-wrap gap-1.5">
                   {skillsList.map((skill) => (
-                    <Badge key={skill} variant="outline" className="text-xs bg-muted/60 border-border/60 text-muted-foreground hover:bg-secondary/10 hover:text-secondary-foreground transition-colors duration-200 py-1 px-2 rounded-md shadow-sm">
+                    <Badge 
+                      key={skill} 
+                      variant="outline" 
+                      className="text-xs bg-muted/60 dark:bg-card dark:text-foreground dark:border-border/70 text-muted-foreground hover:bg-secondary/10 dark:hover:bg-muted hover:text-secondary-foreground transition-colors duration-200 py-1 px-2 rounded-md shadow-sm">
                       {skill}
                     </Badge>
                   ))}
@@ -137,7 +140,7 @@ export default function ResumePage() {
                 <div className="mt-2.5">
                   <span className="text-xs font-semibold text-muted-foreground mr-1.5">Tools:</span>
                   {project.tools.map((tool) => (
-                    <Badge key={tool} variant="outline" className="mr-1 mb-1 text-xs bg-muted/60 border-border/60 text-muted-foreground py-0.5 px-1.5 rounded-md shadow-sm">
+                    <Badge key={tool} variant="outline" className="mr-1 mb-1 text-xs bg-muted/60 dark:bg-card dark:text-foreground dark:border-border/70 text-muted-foreground py-0.5 px-1.5 rounded-md shadow-sm">
                       {tool}
                     </Badge>
                   ))}

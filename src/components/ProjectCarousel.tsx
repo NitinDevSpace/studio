@@ -6,6 +6,7 @@ import type { Project } from '@/lib/types';
 import ProjectCard from './ProjectCard';
 import { Button } from '@/components/ui/button';
 import { ChevronLeft, ChevronRight, Pause, Play } from 'lucide-react';
+import { cn } from '@/lib/utils';
 
 interface ProjectCarouselProps {
   projects: Project[];
@@ -17,19 +18,15 @@ const ProjectCarousel: React.FC<ProjectCarouselProps> = ({ projects, onProjectCl
   const animationFrameRef = useRef<number>();
   const [isHovering, setIsHovering] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
-  const scrollSpeed = 0.4; // Slightly slower for smoother feel
+  const scrollSpeed = 0.4;
 
-  // Ensure enough projects for a continuous loop, duplicate at least once
   const baseProjects = projects.length < 5 ? [...projects, ...projects, ...projects] : projects;
   const duplicatedProjects = [...baseProjects, ...baseProjects];
-
 
   const scrollContent = useCallback(() => {
     if (carouselRef.current && !isHovering && !isPaused) {
       carouselRef.current.scrollLeft += scrollSpeed;
-      // Check if we've scrolled past the first set of original projects
       if (carouselRef.current.scrollLeft >= carouselRef.current.scrollWidth / 2) {
-        // Silently jump back to the beginning of the first set
         carouselRef.current.scrollLeft = carouselRef.current.scrollLeft - (carouselRef.current.scrollWidth / 2);
       }
     }
@@ -37,8 +34,8 @@ const ProjectCarousel: React.FC<ProjectCarouselProps> = ({ projects, onProjectCl
   }, [isHovering, isPaused, scrollSpeed]);
 
   useEffect(() => {
-    if (projects.length > 0) { // Only start scrolling if there are projects
-        animationFrameRef.current = requestAnimationFrame(scrollContent);
+    if (projects.length > 0) {
+      animationFrameRef.current = requestAnimationFrame(scrollContent);
     }
     return () => {
       if (animationFrameRef.current) {
@@ -50,7 +47,7 @@ const ProjectCarousel: React.FC<ProjectCarouselProps> = ({ projects, onProjectCl
   const handleManualScroll = (direction: 'left' | 'right') => {
     if (carouselRef.current) {
       const cardWidth = carouselRef.current.querySelector('.project-card-item')?.clientWidth || 300;
-      const scrollAmount = cardWidth * 0.8; // Scroll by a portion of card width
+      const scrollAmount = cardWidth; 
       carouselRef.current.scrollBy({
         left: direction === 'left' ? -scrollAmount : scrollAmount,
         behavior: 'smooth'
@@ -68,54 +65,65 @@ const ProjectCarousel: React.FC<ProjectCarouselProps> = ({ projects, onProjectCl
 
   return (
     <div
-      className="relative w-full group"
+      className="relative w-full group py-6" // Added padding for buttons not to overlap content below
       onMouseEnter={() => setIsHovering(true)}
       onMouseLeave={() => setIsHovering(false)}
     >
-      <div className="absolute top-[-55px] right-0 flex space-x-2 z-20">
-        <Button
-            variant="outline"
-            size="icon"
-            onClick={() => handleManualScroll('left')}
-            className="bg-card/80 hover:bg-card border-border/70 shadow-md rounded-full text-primary hover:text-primary w-10 h-10"
-            aria-label="Scroll left"
-          >
-            <ChevronLeft className="h-5 w-5" />
-        </Button>
-         <Button
+      {/* Navigation Buttons */}
+      <Button
+        variant="ghost"
+        size="icon"
+        onClick={() => handleManualScroll('left')}
+        className={cn(
+          "absolute left-0 top-1/2 -translate-y-1/2 z-30",
+          "h-full w-16 bg-gradient-to-r from-background/70 via-background/40 to-transparent",
+          "text-foreground/70 hover:text-primary hover:from-background/80 hover:via-background/60",
+          "opacity-0 group-hover:opacity-100 transition-all duration-300 ease-in-out rounded-none"
+        )}
+        aria-label="Scroll left"
+      >
+        <ChevronLeft className="h-8 w-8" />
+      </Button>
+      <Button
+        variant="ghost"
+        size="icon"
+        onClick={() => handleManualScroll('right')}
+        className={cn(
+          "absolute right-0 top-1/2 -translate-y-1/2 z-30",
+          "h-full w-16 bg-gradient-to-l from-background/70 via-background/40 to-transparent",
+          "text-foreground/70 hover:text-primary hover:from-background/80 hover:via-background/60",
+          "opacity-0 group-hover:opacity-100 transition-all duration-300 ease-in-out rounded-none"
+        )}
+        aria-label="Scroll right"
+      >
+        <ChevronRight className="h-8 w-8" />
+      </Button>
+
+      {/* Pause/Play Button - Top Right of Carousel Container */}
+       <Button
             variant="outline"
             size="icon"
             onClick={togglePause}
-            className="bg-card/80 hover:bg-card border-border/70 shadow-md rounded-full text-primary hover:text-primary w-10 h-10"
+            className="absolute top-[-40px] right-0 z-20 bg-card/80 hover:bg-card border-border/70 shadow-md rounded-full text-primary hover:text-primary w-10 h-10"
             aria-label={isPaused ? "Play scroll" : "Pause scroll"}
           >
             {isPaused ? <Play className="h-5 w-5" /> : <Pause className="h-5 w-5" />}
         </Button>
-        <Button
-            variant="outline"
-            size="icon"
-            onClick={() => handleManualScroll('right')}
-            className="bg-card/80 hover:bg-card border-border/70 shadow-md rounded-full text-primary hover:text-primary w-10 h-10"
-            aria-label="Scroll right"
-          >
-            <ChevronRight className="h-5 w-5" />
-        </Button>
-      </div>
 
       <div
         ref={carouselRef}
-        className="flex overflow-x-auto py-4 scrollbar-hide"
-        style={{ WebkitOverflowScrolling: 'touch' }} // Removed scroll-snap for continuous effect
+        className="flex overflow-x-auto py-4 scrollbar-hide" // py-4 to give cards space from edges if needed
+        style={{ WebkitOverflowScrolling: 'touch' }}
       >
         {duplicatedProjects.map((project, index) => (
           <div
             key={`${project.id}-${index}`}
-            className="project-card-item flex-shrink-0 transition-transform duration-300 ease-out group-hover:[&>div]:scale-[0.97] hover:!scale-105 mx-2 md:mx-3 z-10" // Pop out effect on direct hover
+            className="project-card-item flex-shrink-0 transition-transform duration-300 ease-out group-hover:[&>div]:scale-[0.97] hover:!scale-105 mx-2 md:mx-3 z-10"
           >
             <ProjectCard
               project={project}
               onClick={() => onProjectClick(project)}
-              className="transform" // Ensure transform works
+              className="transform"
             />
           </div>
         ))}

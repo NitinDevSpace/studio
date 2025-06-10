@@ -50,12 +50,12 @@ export default function ContactPage() {
 
 
   return (
-    <div className="section-padding fade-in-page container mx-auto px-4 bg-gradient-to-br from-background via-sky-50 to-indigo-100 min-h-[calc(100vh-10rem)]">
+    <div className="section-padding fade-in-page container mx-auto px-4 bg-gradient-to-br from-background via-sky-50/5 dark:via-sky-900/10 to-indigo-100/5 dark:to-indigo-900/10 min-h-[calc(100vh-10rem)]">
       <header className="text-center mb-12 sm:mb-16">
-        <h1 className="text-3xl sm:text-4xl md:text-5xl font-headline font-bold mb-3 text-gray-800">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-headline font-bold mb-3 text-foreground animate-slideInUp">
           Get In <span className="text-primary">Touch</span>
         </h1>
-        <p className="text-md text-gray-600 max-w-xl mx-auto animate-slideInUp delay-200 leading-relaxed">
+        <p className="text-md text-muted-foreground max-w-xl mx-auto animate-slideInUp delay-200 leading-relaxed">
           Have a project in mind, a question, or just want to connect? I&apos;m here to listen. Drop me a line!
         </p>
       </header>

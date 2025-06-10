@@ -56,13 +56,13 @@ export default function HomePage() {
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-headline font-bold mb-5 text-foreground">
                 Hi, I&apos;m <span className="text-primary">Nitin Kumar</span>
               </h1>
-              <p className="text-xl sm:text-2xl font-medium mb-6 text-foreground/80">
+              <p className="text-xl sm:text-2xl font-medium mb-6 text-foreground/80 animate-slideInUp delay-100">
                 Full Stack Developer & AI Enthusiast
               </p>
-              <p className="text-base text-muted-foreground max-w-lg mx-auto md:mx-0 mb-10 leading-relaxed">
+              <p className="text-base text-muted-foreground max-w-lg mx-auto md:mx-0 mb-10 leading-relaxed animate-slideInUp delay-200">
                 I craft innovative and user-centric web applications, bringing ideas to life with clean code and elegant design. Currently exploring the exciting possibilities of AI integration.
               </p>
-              <div className="flex flex-col sm:flex-row gap-3 justify-center md:justify-start">
+              <div className="flex flex-col sm:flex-row gap-3 justify-center md:justify-start animate-slideInUp delay-300">
                 <Button
                   size="lg"
                   onClick={scrollToProjects}
@@ -82,20 +82,20 @@ export default function HomePage() {
                 </Button>
               </div>
             </div>
-            <div className="hidden md:flex justify-center items-center animate-slideInUp delay-200">
+            <div className="hidden md:flex justify-center items-center animate-slideInFromRight delay-200">
               <Image
                 src="https://placehold.co/500x500.png"
                 alt="Nitin Kumar - Developer"
                 width={450}
                 height={450}
                 className="rounded-full shadow-2xl object-cover border-4 border-primary/20"
-                data-ai-hint="professional developer portrait abstract dark"
+                data-ai-hint="professional developer portrait abstract purple dark"
                 priority
               />
             </div>
           </div>
         </div>
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce opacity-60 animate-slideInUp delay-500">
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce animate-slideInUp delay-500">
           <ArrowDown className="h-7 w-7 text-primary" />
         </div>
       </section>
