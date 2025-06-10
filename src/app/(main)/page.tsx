@@ -85,34 +85,38 @@ export default function HomePage() {
               </div>
             </div>
             <div className="hidden md:flex justify-center items-center animate-slideInFromRight delay-200">
-              <div className="relative w-[300px] h-[300px] md:w-[400px] md:h-[400px]">
-                <svg
-                  className="absolute inset-0 w-full h-full"
-                  viewBox="0 0 100 100"
-                  preserveAspectRatio="xMidYMid meet" 
-                >
-                  <defs>
-                    <clipPath id="heroTriangleClip">
-                      <polygon points="0,0 100,0 50,100" />
-                    </clipPath>
-                  </defs>
-                  <polygon
-                    points="0,0 100,0 50,100"
-                    className="fill-none stroke-secondary"
-                    strokeWidth="5" 
-                    vectorEffect="non-scaling-stroke"
+              <div className="w-[300px] h-[300px] md:w-[400px] md:h-[400px] flex justify-center items-center">
+                <div className="relative w-full h-full transform rotate-[35deg]">
+                  <svg
+                    className="absolute inset-0 w-full h-full"
+                    viewBox="0 0 100 100"
+                    preserveAspectRatio="xMidYMid meet" 
+                  >
+                    <defs>
+                      <clipPath id="heroTriangleClip">
+                        {/* Inverted triangle pointing down: base at top, apex at bottom-center */}
+                        <polygon points="0,0 100,0 50,100" />
+                      </clipPath>
+                    </defs>
+                    {/* Border polygon */}
+                    <polygon
+                      points="0,0 100,0 50,100"
+                      className="fill-none stroke-secondary" 
+                      strokeWidth="5" 
+                      vectorEffect="non-scaling-stroke"
+                    />
+                  </svg>
+                  <Image
+                    src="https://placehold.co/500x500.png"
+                    alt="Nitin Kumar - Developer"
+                    width={450}
+                    height={450}
+                    className="w-full h-full object-cover"
+                    style={{ clipPath: 'url(#heroTriangleClip)' }}
+                    data-ai-hint="professional developer portrait tilted triangle"
+                    priority
                   />
-                </svg>
-                <Image
-                  src="https://placehold.co/500x500.png"
-                  alt="Nitin Kumar - Developer"
-                  width={450}
-                  height={450}
-                  className="w-full h-full object-cover"
-                  style={{ clipPath: 'url(#heroTriangleClip)' }}
-                  data-ai-hint="professional developer portrait triangle"
-                  priority
-                />
+                </div>
               </div>
             </div>
           </div>
