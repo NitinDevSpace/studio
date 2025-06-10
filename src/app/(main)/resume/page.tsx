@@ -1,6 +1,6 @@
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Briefcase, GraduationCap, Star, Download, Zap, Settings, Code, Code2, ExternalLink, Lightbulb, Tool, Users } from "lucide-react";
+import { Briefcase, GraduationCap, Star, Download, Zap, Settings, Code, ExternalLink, Lightbulb, Users, Wrench } from "lucide-react"; // Replaced Tool with Wrench
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
@@ -91,7 +91,7 @@ export default function ResumePage() {
                 {category === "Web Technologies" && <Zap className="mr-2.5 h-5 w-5 text-accent" />}
                 {category === "Backend Frameworks" && <Settings className="mr-2.5 h-5 w-5 text-accent" />}
                 {category === "Databases" && <Briefcase className="mr-2.5 h-5 w-5 text-accent" />}
-                {category === "Development Tools" && <Tool className="mr-2.5 h-5 w-5 text-accent" />}
+                {category === "Development Tools" && <Wrench className="mr-2.5 h-5 w-5 text-accent" />}
                 {category === "Soft Skills" && <Users className="mr-2.5 h-5 w-5 text-accent" />}
                 {category}
               </h4>
