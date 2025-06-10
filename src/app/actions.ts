@@ -156,3 +156,60 @@ export async function submitContactFormAction(
     };
   }
 }
+
+
+// Admin Login Action
+const AdminLoginSchema = z.object({
+  username: z.string().min(1, "Username is required."),
+  password: z.string().min(1, "Password is required."),
+});
+
+export interface AdminLoginFormState {
+  success: boolean;
+  message: string | null;
+  fieldErrors?: {
+    username?: string[];
+    password?: string[];
+  };
+}
+
+// WARNING: Hardcoded credentials. NOT FOR PRODUCTION.
+const SUPERADMIN_USERNAME = "DevSpace";
+const SUPERADMIN_PASSWORD = "Nitin$Dev@5321";
+
+export async function adminLoginAction(
+  prevState: AdminLoginFormState,
+  formData: FormData
+): Promise<AdminLoginFormState> {
+  const rawFormData = {
+    username: formData.get('username'),
+    password: formData.get('password'),
+  };
+
+  const validatedFields = AdminLoginSchema.safeParse(rawFormData);
+
+  if (!validatedFields.success) {
+    return {
+      success: false,
+      message: "Invalid form data. Please check the errors.",
+      fieldErrors: validatedFields.error.flatten().fieldErrors,
+    };
+  }
+
+  const { username, password } = validatedFields.data;
+
+  // Basic hardcoded credential check (NOT SECURE FOR PRODUCTION)
+  if (username === SUPERADMIN_USERNAME && password === SUPERADMIN_PASSWORD) {
+    // In a real app, you would establish a session here (e.g., set a cookie with a JWT).
+    // For this prototype, we're just returning success. The client will redirect.
+    return {
+      success: true,
+      message: "Login successful!",
+    };
+  } else {
+    return {
+      success: false,
+      message: "Invalid username or password.",
+    };
+  }
+}
