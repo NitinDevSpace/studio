@@ -1,3 +1,4 @@
+
 'use client';
 
 import React from 'react';
@@ -22,6 +23,8 @@ interface ProjectFiltersProps {
   onCategoryChange: (category: string) => void;
   onClearFilters: () => void;
 }
+
+const ALL_CATEGORIES_OPTION_VALUE = "__ALL_CATEGORIES__"; // Sentinel value
 
 export default function ProjectFilters({
   techStacks,
@@ -62,14 +65,20 @@ export default function ProjectFilters({
         <div>
           <Label htmlFor="category-select" className="text-md font-semibold mb-2 block">Category</Label>
           <Select
-            value={selectedCategory}
-            onValueChange={onCategoryChange}
+            value={selectedCategory === '' ? ALL_CATEGORIES_OPTION_VALUE : selectedCategory}
+            onValueChange={(value) => {
+              if (value === ALL_CATEGORIES_OPTION_VALUE) {
+                onCategoryChange('');
+              } else {
+                onCategoryChange(value);
+              }
+            }}
           >
             <SelectTrigger id="category-select" className="w-full sm:w-[280px]">
               <SelectValue placeholder="Select a category" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="">All Categories</SelectItem>
+              <SelectItem value={ALL_CATEGORIES_OPTION_VALUE}>All Categories</SelectItem>
               {categories.map((category) => (
                 <SelectItem key={category} value={category}>
                   {category}
