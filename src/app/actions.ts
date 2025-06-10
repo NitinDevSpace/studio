@@ -11,11 +11,11 @@ import { db } from '@/lib/firebase';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 
 // Schema for the new "Ask NAI" feature
-const AskNAISchema = z.object({ // Renamed
-  question: z.string().min(5, "Question must be at least 5 characters long.").max(500, "Question is too long (max 500 characters)."),
+const AskNAISchema = z.object({ 
+  question: z.string().min(1, "Question must be at least 1 character long.").max(500, "Question is too long (max 500 characters)."),
 });
 
-export interface AskNAIFormState { // Renamed
+export interface AskNAIFormState { 
   message: string | null;
   answer: string | null;
   issues?: string[];
@@ -27,15 +27,15 @@ export interface AskNAIFormState { // Renamed
   }
 }
 
-export async function askNAIAction( // Renamed
-  prevState: AskNAIFormState, // Renamed
+export async function askNAIAction( 
+  prevState: AskNAIFormState, 
   formData: FormData
-): Promise<AskNAIFormState> { // Renamed
+): Promise<AskNAIFormState> { 
   const rawFormData = {
     question: formData.get('question'),
   };
 
-  const validatedFields = AskNAISchema.safeParse(rawFormData); // Renamed
+  const validatedFields = AskNAISchema.safeParse(rawFormData); 
 
   if (!validatedFields.success) {
     return {
@@ -49,10 +49,10 @@ export async function askNAIAction( // Renamed
   }
 
   try {
-    const input: AskNAIInput = { // Renamed
+    const input: AskNAIInput = { 
       question: validatedFields.data.question,
     };
-    const result = await askNAI(input); // Call the new flow - Renamed
+    const result = await askNAI(input); 
     
     if (result && result.answer) {
        return {
@@ -61,7 +61,7 @@ export async function askNAIAction( // Renamed
       };
     } else {
       return {
-        message: "NAI could not generate an answer. Please try a different question or check the AI service.", // Renamed
+        message: "NAI could not generate an answer. Please try a different question or check the AI service.", 
         answer: null,
         formData: validatedFields.data,
       };
@@ -69,7 +69,7 @@ export async function askNAIAction( // Renamed
 
   } catch (error)
  {
-    console.error("Error generating answer with NAI:", error); // Renamed
+    console.error("Error generating answer with NAI:", error); 
     let errorMessage = "Failed to get an answer due to an unexpected error. Please try again.";
     if (error instanceof Error) {
         if (error.message.includes('quota')) {
