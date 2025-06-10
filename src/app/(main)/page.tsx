@@ -34,6 +34,37 @@ export default function HomePage() {
     setSelectedProjectForModal(null);
   };
 
+  const aboutMeItems = [
+    {
+      icon: CodeIcon,
+      title: "Frontend Development",
+      descriptionJsx: (
+        <>
+          Crafting responsive user interfaces with key technologies like <strong className="text-primary">React</strong>, <strong className="text-primary">Next.js</strong>, and <strong className="text-primary">TypeScript</strong>, focusing on performance and <strong className="text-primary">modern CSS solutions</strong> to delight users.
+        </>
+      )
+    },
+    {
+      icon: Layers,
+      title: "Backend Architecture",
+      descriptionJsx: (
+        <>
+          Building secure, scalable server-side applications and APIs using <strong className="text-primary">Node.js</strong>, <strong className="text-primary">Python (Django/Flask)</strong>, and <strong className="text-primary">Firebase</strong>, with expertise in databases like <strong className="text-primary">PostgreSQL & MongoDB</strong>.
+        </>
+      )
+    },
+    {
+      icon: Sparkles,
+      title: "AI Integration",
+      descriptionJsx: (
+        <>
+          Exploring the exciting world of AI using <strong className="text-primary">Genkit</strong> and <strong className="text-primary">Python</strong>, integrating intelligent features and <strong className="text-primary">LLMs</strong> to create smarter, more intuitive applications.
+        </>
+      )
+    },
+  ];
+
+
   if (!mounted) {
     return (
       <div className="flex items-center justify-center min-h-screen bg-background">
@@ -84,15 +115,15 @@ export default function HomePage() {
                 </Button>
               </div>
             </div>
-            {/* Commented out triangle SVG and related structure for simplification.
+            {/*
             <div className="hidden md:flex justify-center items-center animate-slideInFromRight delay-200 overflow-hidden">
               <div className="relative w-[280px] h-[280px] sm:w-[320px] sm:h-[320px] md:w-[350px] md:h-[350px] lg:w-[400px] lg:h-[400px]">
                 <div className="relative w-[75%] h-[75%] transform rotate-[35deg]">
                   <svg
                     className="absolute inset-0 w-full h-full z-10"
-                    viewBox="0 0 100 100" // Defines the coordinate system for the polygon
-                    preserveAspectRatio="xMidYMid meet" // Ensures aspect ratio is maintained
-                    fill="none" // Polygon should not be filled by default here, border is via stroke
+                    viewBox="0 0 100 100"
+                    preserveAspectRatio="xMidYMid meet"
+                    fill="none"
                   >
                     <defs>
                       <clipPath id="heroTriangleClip">
@@ -100,20 +131,20 @@ export default function HomePage() {
                       </clipPath>
                     </defs>
                     <polygon
-                      points="50,19 4,96 96,96" // Defines the triangle path slightly inset for border
-                      className="stroke-primary" // Use theme's primary color for the border
-                      strokeWidth="8" // Border thickness
-                      fill="none" // Ensure the border polygon itself has no fill
-                      vectorEffect="non-scaling-stroke" // Keeps stroke width consistent on scaling
+                      points="50,19 4,96 96,96"
+                      className="stroke-primary"
+                      strokeWidth="8"
+                      fill="none"
+                      vectorEffect="non-scaling-stroke"
                     />
                   </svg>
                   <Image
                     src="https://upload.wikimedia.org/wikipedia/en/thumb/8/8e/Spider-Man_%28Miles_Morales%29_character_art.png/250px-Spider-Man_%28Miles_Morales%29_character_art.png"
                     alt="Spider-Man (Miles Morales) character art"
                     width={250} 
-                    height={445} // Original aspect ratio (approx)
-                    className="w-full h-full object-cover object-top" // Fills the container, focuses top
-                    style={{ clipPath: 'url(#heroTriangleClip)' }} // Apply the clip path
+                    height={445} 
+                    className="w-full h-full object-cover object-top"
+                    style={{ clipPath: 'url(#heroTriangleClip)' }} 
                     data-ai-hint="Spider-Man Miles Morales character"
                     priority
                   />
@@ -121,7 +152,7 @@ export default function HomePage() {
               </div>
             </div>
             */}
-            <div className="hidden md:flex justify-center items-center animate-slideInFromRight delay-200 overflow-hidden">
+             <div className="hidden md:flex justify-center items-center animate-slideInFromRight delay-200 overflow-hidden">
                 <div className="relative w-[280px] h-[280px] sm:w-[320px] sm:h-[320px] md:w-[350px] md:h-[350px] lg:w-[400px] lg:h-[400px] rounded-xl overflow-hidden shadow-lg">
                 <Image
                     src="https://upload.wikimedia.org/wikipedia/en/thumb/8/8e/Spider-Man_%28Miles_Morales%29_character_art.png/250px-Spider-Man_%28Miles_Morales%29_character_art.png"
@@ -153,18 +184,14 @@ export default function HomePage() {
             </p>
           </div>
           <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-            {[
-              { icon: CodeIcon, title: "Frontend Development", description: "Crafting responsive user interfaces with key technologies like React, Next.js, and TypeScript, focusing on performance and modern CSS solutions to delight users." },
-              { icon: Layers, title: "Backend Architecture", description: "Building secure, scalable server-side applications and APIs using Node.js, Python (Django/Flask), and Firebase, with expertise in databases like PostgreSQL & MongoDB." },
-              { icon: Sparkles, title: "AI Integration", description: "Exploring the exciting world of AI using Genkit and Python, integrating intelligent features and LLMs to create smarter, more intuitive applications." },
-            ].map((item, index) => (
+            {aboutMeItems.map((item, index) => (
               <Card key={item.title} className="bg-card text-center p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 animate-slideInUp" style={{ animationDelay: `${0.2 + (index * 0.1) + 0.4}s`}}>
                 <CardContent className="p-0">
                   <div className="p-3 inline-block bg-primary/10 rounded-full mb-3">
                      <item.icon className="h-8 w-8 text-primary mx-auto" />
                   </div>
                   <h3 className="text-lg font-semibold text-card-foreground mb-1.5">{item.title}</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">{item.description}</p>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{item.descriptionJsx}</p>
                 </CardContent>
               </Card>
             ))}
