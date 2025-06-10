@@ -4,38 +4,38 @@
 
 @layer base {
   :root {
-    --background: 224 71% 4%; /* #010816 - Very Dark Desaturated Blue */
+    --background: 224 80% 5%; /* #01061A - Very Dark Deep Blue */
     --foreground: 210 40% 98%; /* #F7FAFC - Almost White */
 
-    --card: 223 62% 7%; /* #020C1C - Darker Blue, slightly lighter than bg */
+    --card: 223 70% 8%; /* #020A21 - Darker Blue, slightly more saturated */
     --card-foreground: 210 40% 98%; /* #F7FAFC */
 
-    --popover: 223 62% 7%; /* #020C1C */
+    --popover: 223 70% 8%; /* #020A21 */
     --popover-foreground: 210 40% 98%; /* #F7FAFC */
 
     --primary: 200 100% 50%; /* #00A3FF - Bright Cyan */
     --primary-foreground: 224 71% 4%; /* #010816 - For text on primary */
 
-    --secondary: 210 20% 20%; /* #2D3748 - Dark Grayish Blue */
+    --secondary: 210 30% 25%; /* #334155 - Dark Slate Gray */
     --secondary-foreground: 210 40% 90%; /* #E2E8F0 - Light Gray */
 
-    --muted: 210 20% 15%; /* #1A202C - Very Dark Grayish Blue */
-    --muted-foreground: 210 30% 65%; /* #A0AEC0 - Lighter Gray */
+    --muted: 210 30% 18%; /* #20293A - Very Dark Grayish Blue */
+    --muted-foreground: 210 30% 70%; /* #A0AEC0 -> #B0BCCD - Lighter Gray, slightly boosted */
 
-    --accent: 250 80% 60%; /* #7047EB - Vibrant Purple */
+    --accent: 250 85% 65%; /* #7F52F5 - Vibrant Purple, slightly brighter */
     --accent-foreground: 210 40% 98%; /* #F7FAFC - For text on accent */
 
-    --destructive: 0 63% 51%; /* #DC2626 */
+    --destructive: 0 70% 55%; /* #E53E3E */
     --destructive-foreground: 0 0% 98%; /* #FAFAFA */
 
-    --border: 210 20% 25%; /* #3A475A - Slightly lighter border for dark theme */
-    --input: 210 20% 22%; /* #303A4A */
+    --border: 210 25% 30%; /* #3A4A60 - Slightly lighter, softer border */
+    --input: 210 25% 25%; /* #303E52 - Darker input background */
     --ring: 200 100% 50%; /* Bright Cyan for focus rings */
 
-    --radius: 0.5rem;
+    --radius: 0.75rem; /* Slightly more rounded */
 
     /* Sidebar specific colors (dark theme) */
-    --sidebar-background: 224 71% 3%; /* #00050F - Even darker for sidebar */
+    --sidebar-background: 224 80% 4%; /* #000414 - Even darker for sidebar */
     --sidebar-foreground: 210 40% 90%; /* #E2E8F0 */
     --sidebar-primary: 200 100% 50%; /* #00A3FF */
     --sidebar-primary-foreground: 224 71% 4%; /* #010816 */
@@ -45,38 +45,34 @@
     --sidebar-ring: 200 100% 50%; /* #00A3FF */
 
     --chart-1: 200 100% 50%; /* Bright Cyan */
-    --chart-2: 250 80% 60%; /* Vibrant Purple */
-    --chart-3: 30 100% 50%; /* Orange */
-    --chart-4: 130 70% 45%; /* Green */
-    --chart-5: 330 90% 60%; /* Pink */
+    --chart-2: 250 85% 65%; /* Vibrant Purple */
+    --chart-3: 30 100% 60%; /* Orange, slightly brighter */
+    --chart-4: 130 70% 50%; /* Green, slightly brighter */
+    --chart-5: 330 90% 65%; /* Pink, slightly brighter */
   }
 
   .dark {
-    /* Dark theme is default, so :root applies. 
-       If you had a light theme toggle, you'd define light vars here or under a .light class.
-       For now, keeping it consistent.
-    */
-    --background: 224 71% 4%;
+    --background: 224 80% 5%;
     --foreground: 210 40% 98%;
-    --card: 223 62% 7%;
+    --card: 223 70% 8%;
     --card-foreground: 210 40% 98%;
-    --popover: 223 62% 7%;
+    --popover: 223 70% 8%;
     --popover-foreground: 210 40% 98%;
     --primary: 200 100% 50%;
     --primary-foreground: 224 71% 4%;
-    --secondary: 210 20% 20%;
+    --secondary: 210 30% 25%;
     --secondary-foreground: 210 40% 90%;
-    --muted: 210 20% 15%;
-    --muted-foreground: 210 30% 65%;
-    --accent: 250 80% 60%;
+    --muted: 210 30% 18%;
+    --muted-foreground: 210 30% 70%;
+    --accent: 250 85% 65%;
     --accent-foreground: 210 40% 98%;
-    --destructive: 0 63% 51%;
+    --destructive: 0 70% 55%;
     --destructive-foreground: 0 0% 98%;
-    --border: 210 20% 25%;
-    --input: 210 20% 22%;
+    --border: 210 25% 30%;
+    --input: 210 25% 25%;
     --ring: 200 100% 50%;
 
-    --sidebar-background: 224 71% 3%;
+    --sidebar-background: 224 80% 4%;
     --sidebar-foreground: 210 40% 90%;
     --sidebar-primary: 200 100% 50%;
     --sidebar-primary-foreground: 224 71% 4%;
@@ -86,10 +82,10 @@
     --sidebar-ring: 200 100% 50%;
 
     --chart-1: 200 100% 50%;
-    --chart-2: 250 80% 60%;
-    --chart-3: 30 100% 50%;
-    --chart-4: 130 70% 45%;
-    --chart-5: 330 90% 60%;
+    --chart-2: 250 85% 65%;
+    --chart-3: 30 100% 60%;
+    --chart-4: 130 70% 50%;
+    --chart-5: 330 90% 65%;
   }
 }
 
@@ -99,25 +95,42 @@
   }
   body {
     @apply bg-background text-foreground;
-    /* Add a subtle gradient background for depth */
-    background-image: linear-gradient(to bottom right, hsl(var(--background)), hsl(var(--muted) / 0.5));
+    /* Enhanced gradient background for more depth */
+    background-image: linear-gradient(160deg, hsl(var(--background)) 0%, hsl(var(--muted) / 0.6) 70%, hsl(var(--accent) / 0.1) 100%);
+    background-attachment: fixed; /* Makes the gradient feel more stable */
+  }
+  ::selection {
+    @apply bg-accent text-accent-foreground;
+  }
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-muted/50;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-primary/70 rounded-full;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-primary;
   }
 }
 
-/* Add a subtle animation for page load if desired */
+/* Animation for page load */
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .fade-in-page {
-  animation: fadeIn 0.5s ease-out;
+  animation: fadeIn 0.6s ease-out forwards;
 }
 
 @keyframes slideInUp {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(30px); /* Increased initial offset */
   }
   to {
     opacity: 1;
@@ -126,11 +139,18 @@
 }
 
 .animate-slideInUp {
-  animation: slideInUp 0.5s ease-out forwards;
+  animation: slideInUp 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; /* Smoother easing */
+  opacity: 0; /* Ensure elements are hidden before animation starts */
 }
 
-.delay-100 { animation-delay: 0.1s; }
-.delay-200 { animation-delay: 0.2s; }
-.delay-300 { animation-delay: 0.3s; }
-.delay-500 { animation-delay: 0.5s; }
+/* Delays for staggered animations */
+.delay-100 { animation-delay: 0.1s !important; }
+.delay-200 { animation-delay: 0.2s !important; }
+.delay-300 { animation-delay: 0.3s !important; }
+.delay-400 { animation-delay: 0.4s !important; }
+.delay-500 { animation-delay: 0.5s !important; }
 
+/* Additional shadow utility for depth */
+.shadow-top-md {
+  box-shadow: 0 -4px 6px -1px rgb(0 0 0 / 0.05), 0 -2px 4px -2px rgb(0 0 0 / 0.05);
+}

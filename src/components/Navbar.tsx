@@ -32,13 +32,13 @@ export default function Navbar() {
     <header 
       className={cn(
         "sticky top-0 z-50 transition-all duration-300",
-        isScrolled ? "bg-card/80 backdrop-blur-lg shadow-lg" : "bg-transparent shadow-none"
+        isScrolled ? "bg-card/80 backdrop-blur-xl shadow-2xl border-b border-border/20" : "bg-transparent shadow-none"
       )}
     >
       <div className="container mx-auto px-4 h-20 flex items-center justify-between">
-        <Link href="/" className="text-3xl font-headline font-bold text-primary hover:text-accent transition-colors duration-300 flex items-center">
-          <CodeXml className="mr-2 h-8 w-8 text-accent" />
-          Code<span className="text-foreground">Canvas</span>
+        <Link href="/" className="text-3xl font-headline font-bold text-primary hover:text-accent transition-colors duration-300 flex items-center group">
+          <CodeXml className="mr-2 h-8 w-8 text-accent group-hover:animate-pulse" />
+          Nitin<span className="text-foreground">DevSpace</span>
         </Link>
 
         {/* Desktop Navigation */}
@@ -49,9 +49,9 @@ export default function Navbar() {
               variant="ghost"
               asChild
               className={cn(
-                "font-medium text-base px-4 py-2 rounded-lg",
+                "font-medium text-base px-4 py-2 rounded-lg transition-all duration-200",
                 pathname === item.href 
-                  ? "bg-primary/10 text-primary hover:bg-primary/20" 
+                  ? "bg-primary/10 text-primary hover:bg-primary/20 shadow-md shadow-primary/20" 
                   : "text-foreground/80 hover:text-primary hover:bg-primary/10"
               )}
             >
@@ -77,7 +77,7 @@ export default function Navbar() {
                 <div className="p-5 flex justify-between items-center border-b border-border/30">
                   <Link href="/" className="text-2xl font-headline font-bold text-primary flex items-center" onClick={() => setIsMobileMenuOpen(false)}>
                      <CodeXml className="mr-2 h-7 w-7 text-accent" />
-                     Code<span className="text-foreground">Canvas</span>
+                     Nitin<span className="text-foreground">DevSpace</span>
                   </Link>
                   <SheetClose asChild>
                      <Button variant="ghost" size="icon" className="text-foreground/80 hover:text-primary">

@@ -36,24 +36,24 @@ export default function ProjectFilters({
   onClearFilters,
 }: ProjectFiltersProps) {
   return (
-    <Card className="mb-8 shadow-xl bg-card/70 backdrop-blur-md border-border/40 rounded-xl">
-      <CardHeader className="p-5 border-b border-border/30">
-        <CardTitle className="font-headline text-xl flex items-center text-primary">
-          <Filter className="mr-3 h-5 w-5" />
+    <Card className="mb-10 shadow-xl bg-card/70 backdrop-blur-xl border-border/40 rounded-xl">
+      <CardHeader className="p-5 sm:p-6 border-b border-border/30">
+        <CardTitle className="font-headline text-xl sm:text-2xl flex items-center text-primary">
+          <Filter className="mr-3 h-5 w-5 sm:h-6 sm:w-6" />
           Filter Projects
         </CardTitle>
       </CardHeader>
-      <CardContent className="p-5 space-y-6">
+      <CardContent className="p-5 sm:p-6 space-y-6">
         <div>
           <Label className="text-md font-semibold mb-3 block text-foreground/90">Tech Stack</Label>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-x-4 gap-y-3">
             {techStacks.map((tech) => (
-              <div key={tech} className="flex items-center space-x-2 group">
+              <div key={tech} className="flex items-center space-x-2.5 group">
                 <Checkbox
                   id={`tech-${tech}`}
                   checked={selectedTechStacks.includes(tech)}
                   onCheckedChange={() => onTechStackChange(tech)}
-                  className="border-primary/50 data-[state=checked]:bg-primary data-[state=checked]:border-primary"
+                  className="border-primary/60 data-[state=checked]:bg-primary data-[state=checked]:border-primary data-[state=checked]:text-primary-foreground rounded transition-all duration-200"
                 />
                 <Label 
                   htmlFor={`tech-${tech}`} 
@@ -66,7 +66,7 @@ export default function ProjectFilters({
           </div>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-6 items-end">
+        <div className="grid md:grid-cols-2 gap-6 items-end pt-2">
           <div>
             <Label htmlFor="category-select" className="text-md font-semibold mb-2 block text-foreground/90">Category</Label>
             <Select
@@ -79,13 +79,13 @@ export default function ProjectFilters({
                 }
               }}
             >
-              <SelectTrigger id="category-select" className="w-full bg-input border-border/70 focus:ring-primary focus:border-primary shadow-sm">
+              <SelectTrigger id="category-select" className="w-full bg-input border-border/70 focus:ring-2 focus:ring-primary focus:border-primary shadow-sm rounded-lg py-2.5 text-base">
                 <SelectValue placeholder="Select a category" />
               </SelectTrigger>
-              <SelectContent className="bg-popover border-border/70">
-                <SelectItem value={ALL_CATEGORIES_OPTION_VALUE} className="focus:bg-accent/50">All Categories</SelectItem>
+              <SelectContent className="bg-popover border-border/70 backdrop-blur-md">
+                <SelectItem value={ALL_CATEGORIES_OPTION_VALUE} className="focus:bg-accent/50 hover:bg-accent/30 transition-colors duration-150 py-2">All Categories</SelectItem>
                 {categories.map((category) => (
-                  <SelectItem key={category} value={category} className="focus:bg-accent/50">
+                  <SelectItem key={category} value={category} className="focus:bg-accent/50 hover:bg-accent/30 transition-colors duration-150 py-2">
                     {category}
                   </SelectItem>
                 ))}
@@ -96,7 +96,7 @@ export default function ProjectFilters({
           <Button
             variant="outline"
             onClick={onClearFilters}
-            className="w-full md:w-auto text-sm border-destructive/50 text-destructive hover:bg-destructive hover:text-destructive-foreground transition-colors shadow-sm"
+            className="w-full md:w-auto text-sm border-destructive/60 text-destructive hover:bg-destructive hover:text-destructive-foreground transition-colors duration-200 shadow-sm hover:shadow-destructive/20 rounded-lg py-2.5"
             disabled={selectedTechStacks.length === 0 && selectedCategory === ''}
           >
             <XCircle className="mr-2 h-4 w-4" />
