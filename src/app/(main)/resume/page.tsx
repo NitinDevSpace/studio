@@ -1,5 +1,5 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Briefcase, GraduationCap, Star, Download, Zap, Settings, Brain } from "lucide-react";
+import { Briefcase, GraduationCap, Star, Download, Zap, Settings, Brain, Code } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
