@@ -1,7 +1,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { LayoutDashboard, LogOut, Settings, Users, FileText, Edit, ShieldQuestion } from "lucide-react";
+import { LayoutDashboard, LogOut, Settings, Users, FileText, Edit, ShieldQuestion, AlertTriangle } from "lucide-react";
 import Link from "next/link";
 // For Firebase Auth Logout
 // import { getAuth, signOut } from "firebase/auth";
@@ -22,9 +22,6 @@ export default function AdminDashboardPage() {
   //   }
   // };
 
-  // NOTE: This page is NOT currently protected by actual route guards.
-  // A real app needs middleware or layout checks for authentication and authorization.
-
   return (
     <div className="container mx-auto px-4 py-8">
       <header className="mb-10">
@@ -35,7 +32,15 @@ export default function AdminDashboardPage() {
         <p className="text-muted-foreground mt-1.5 text-md">Welcome, Admin! Manage your website content from here.</p>
       </header>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="mt-8 p-4 bg-yellow-500/10 border border-yellow-500/30 text-yellow-700 dark:text-yellow-400 rounded-md text-sm flex items-start">
+        <AlertTriangle className="h-5 w-5 mr-3 mt-0.5 shrink-0 text-yellow-600 dark:text-yellow-500" />
+        <div>
+          <h3 className="font-semibold mb-1">Development Notice: Route Protection Pending</h3>
+          <p>This admin dashboard is currently accessible directly without login during development. Route protection to secure this area for authenticated users only has not yet been implemented.</p>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
         <Card className="hover:shadow-lg transition-shadow duration-300 rounded-lg">
           <CardHeader>
             <CardTitle className="flex items-center text-xl sm:text-2xl">
@@ -121,10 +126,6 @@ export default function AdminDashboardPage() {
             <LogOut className="mr-2 h-4 w-4" /> Logout (Simulated)
           </Link>
         </Button>
-      </div>
-
-      <div className="mt-10 p-4 bg-destructive/10 border border-destructive/30 text-destructive rounded-md text-sm">
-        <p><strong>Important:</strong> This dashboard and its features are placeholders. Content management is not yet implemented. Authentication via Firebase is active, but admin routes are not yet protected by route guards. Unauthorized access to this dashboard page might be possible in the current state.</p>
       </div>
     </div>
   );
