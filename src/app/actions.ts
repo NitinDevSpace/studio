@@ -4,86 +4,91 @@
 // This allows for rapid prototyping while the Genkit SDK and its Next.js adapter mature.
 // TODO: Revisit and resolve TypeScript errors once Genkit provides more stable type definitions and integration patterns for Next.js Server Actions.
 'use server';
-import { generateProjectDescription, type GenerateProjectDescriptionInput } from '@/ai/flows/generate-project-description';
+
+import { askNitinAI, type AskNitinAIInput } from '@/ai/flows/askNitinAIFlow'; // Updated import
 import { z } from 'zod';
-import { db } from '@/lib/firebase'; // Import Firestore instance
+import { db } from '@/lib/firebase'; 
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 
-const SmartDescriptionSchema = z.object({
-  codeContext: z.string().min(50, "Code context must be at least 50 characters long to provide enough information for a meaningful description.").max(5000, "Code context is too long. Please provide a more concise snippet (max 5000 characters)."),
+// Schema for the new "Ask NitinAI" feature
+const AskNitinAISchema = z.object({
+  question: z.string().min(5, "Question must be at least 5 characters long.").max(500, "Question is too long (max 500 characters)."),
 });
 
-export interface SmartDescriptionFormState {
+export interface AskNitinAIFormState {
   message: string | null;
-  description: string | null;
+  answer: string | null;
   issues?: string[];
   fieldErrors?: {
-    codeContext?: string[];
+    question?: string[];
   };
   formData?: {
-    codeContext?: string;
+    question?: string;
   }
 }
 
-export async function getSmartDescriptionAction(
-  prevState: SmartDescriptionFormState,
+export async function askNitinAIAction(
+  prevState: AskNitinAIFormState,
   formData: FormData
-): Promise<SmartDescriptionFormState> {
+): Promise<AskNitinAIFormState> {
   const rawFormData = {
-    codeContext: formData.get('codeContext'),
+    question: formData.get('question'),
   };
 
-  const validatedFields = SmartDescriptionSchema.safeParse(rawFormData);
+  const validatedFields = AskNitinAISchema.safeParse(rawFormData);
 
   if (!validatedFields.success) {
     return {
-      message: "Invalid form data. Please check the errors below.",
-      description: null,
+      message: "Invalid question. Please check the errors below.",
+      answer: null,
       fieldErrors: validatedFields.error.flatten().fieldErrors,
       formData: {
-        codeContext: typeof rawFormData.codeContext === 'string' ? rawFormData.codeContext : "",
+        question: typeof rawFormData.question === 'string' ? rawFormData.question : "",
       }
     };
   }
 
   try {
-    const input: GenerateProjectDescriptionInput = {
-      codeContext: validatedFields.data.codeContext,
+    const input: AskNitinAIInput = {
+      question: validatedFields.data.question,
     };
-    const result = await generateProjectDescription(input);
+    const result = await askNitinAI(input); // Call the new flow
     
-    if (result && result.projectDescription) {
+    if (result && result.answer) {
        return {
-        message: "Description generated successfully!",
-        description: result.projectDescription,
+        message: "Answer generated successfully!", // This message might not be shown if answer is directly displayed
+        answer: result.answer,
       };
     } else {
       return {
-        message: "AI could not generate a description. Please try a different input or check the AI service.",
-        description: null,
+        message: "NitinAI could not generate an answer. Please try a different question or check the AI service.",
+        answer: null,
         formData: validatedFields.data,
       };
     }
 
-  } catch (error) {
-    console.error("Error generating description with AI:", error);
-    let errorMessage = "Failed to generate description due to an unexpected error. Please try again.";
+  } catch (error)
+ {
+    console.error("Error generating answer with NitinAI:", error);
+    let errorMessage = "Failed to get an answer due to an unexpected error. Please try again.";
     if (error instanceof Error) {
         if (error.message.includes('quota')) {
             errorMessage = "AI service quota exceeded. Please try again later.";
         } else if (error.message.includes('timeout')) {
             errorMessage = "Request to AI service timed out. Please try again.";
+        } else if (error.message.includes('safety') || error.message.includes('blocked')) {
+            errorMessage = "The question or the generated answer was flagged by the safety filter. Please rephrase your question.";
         }
     }
     return {
       message: errorMessage,
-      description: null,
+      answer: null,
       formData: validatedFields.data,
     };
   }
 }
 
-// Contact Form Action
+// Contact Form Action (remains largely the same)
 const ContactFormSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters long."),
   email: z.string().email("Invalid email address."),

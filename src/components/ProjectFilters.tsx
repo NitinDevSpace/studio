@@ -36,10 +36,10 @@ export default function ProjectFilters({
   onClearFilters,
 }: ProjectFiltersProps) {
   return (
-    <Card className="mb-10 shadow-xl bg-card/70 backdrop-blur-xl border-border/40 rounded-xl">
+    <Card className="mb-10 glassmorphism-card">
       <CardHeader className="p-5 sm:p-6 border-b border-border/30">
         <CardTitle className="font-headline text-xl sm:text-2xl flex items-center text-primary">
-          <Filter className="mr-3 h-5 w-5 sm:h-6 sm:w-6" />
+          <Filter className="mr-3 h-5 w-5 sm:h-6 sm:w-6 text-secondary" />
           Filter Projects
         </CardTitle>
       </CardHeader>
@@ -53,11 +53,11 @@ export default function ProjectFilters({
                   id={`tech-${tech}`}
                   checked={selectedTechStacks.includes(tech)}
                   onCheckedChange={() => onTechStackChange(tech)}
-                  className="border-primary/60 data-[state=checked]:bg-primary data-[state=checked]:border-primary data-[state=checked]:text-primary-foreground rounded transition-all duration-200"
+                  className="border-primary/60 data-[state=checked]:bg-primary data-[state=checked]:border-primary data-[state=checked]:text-primary-foreground rounded-sm transition-all duration-200"
                 />
                 <Label 
                   htmlFor={`tech-${tech}`} 
-                  className="font-normal cursor-pointer text-sm text-foreground/80 group-hover:text-primary transition-colors"
+                  className="font-normal cursor-pointer text-sm text-muted-foreground group-hover:text-primary transition-colors"
                 >
                   {tech}
                 </Label>
@@ -79,7 +79,7 @@ export default function ProjectFilters({
                 }
               }}
             >
-              <SelectTrigger id="category-select" className="w-full bg-input border-border/70 focus:ring-2 focus:ring-primary focus:border-primary shadow-sm rounded-lg py-2.5 text-base">
+              <SelectTrigger id="category-select" className="w-full bg-input border-border/70 focus:ring-1 focus:ring-primary focus:border-primary shadow-sm rounded-lg py-2.5 text-base placeholder:text-muted-foreground">
                 <SelectValue placeholder="Select a category" />
               </SelectTrigger>
               <SelectContent className="bg-popover border-border/70 backdrop-blur-md">

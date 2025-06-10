@@ -8,16 +8,20 @@ export default {
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
-    container: { // Added container centering
+    container: {
       center: true,
-      padding: "2rem",
+      padding: "1rem", // Slightly reduced padding for a tighter feel
       screens: {
-        "2xl": "1400px",
+        "sm": "640px",
+        "md": "768px",
+        "lg": "1024px",
+        "xl": "1280px",
+        "2xl": "1440px", // Max width based on Dribbble style
       },
     },
     extend: {
       fontFamily: {
-        body: ['Inter', 'sans-serif'],
+        body: ['Poppins', 'Inter', 'sans-serif'], // Added Poppins
         headline: ['Space Grotesk', 'sans-serif'],
         code: ['monospace'],
       },
@@ -74,9 +78,14 @@ export default {
         },
       },
       borderRadius: {
+        xl: 'calc(var(--radius) + 4px)', // Larger radius
         lg: 'var(--radius)',
         md: 'calc(var(--radius) - 2px)',
         sm: 'calc(var(--radius) - 4px)',
+      },
+      boxShadow: {
+        'neon-primary': '0 0 15px hsl(var(--primary)/0.5), 0 0 30px hsl(var(--primary)/0.3)',
+        'neon-secondary': '0 0 15px hsl(var(--secondary)/0.5), 0 0 30px hsl(var(--secondary)/0.3)',
       },
       keyframes: {
         'accordion-down': {
@@ -95,10 +104,21 @@ export default {
             height: '0',
           },
         },
+        'border-pulse': {
+          '0%, 100%': { borderColor: 'hsl(var(--primary)/0.5)' },
+          '50%': { borderColor: 'hsl(var(--secondary)/0.5)' },
+        },
+        'text-gradient': {
+          'to': {
+            'background-position': '200% center',
+          },
+        },
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
+        'border-pulse': 'border-pulse 4s infinite ease-in-out',
+        'text-gradient': 'text-gradient 2s linear infinite',
       },
     },
   },

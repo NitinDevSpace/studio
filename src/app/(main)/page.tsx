@@ -6,10 +6,11 @@ import ProjectFilters from '@/components/ProjectFilters';
 import { projectsData, allTechStacks, allCategories } from '@/lib/data';
 import type { Project } from '@/lib/types';
 import { Input } from '@/components/ui/input';
-import { Search, ArrowDown, Sparkles, Layers, Code } from 'lucide-react';
+import { Search, ArrowDown, Sparkles, Layers, Code, User, Briefcase, Linkedin, Github, Mail } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function HomePage() {
   const [filteredProjects, setFilteredProjects] = useState<Project[]>(projectsData);
@@ -64,139 +65,184 @@ export default function HomePage() {
   const scrollToProjects = () => {
     document.getElementById('projects-section')?.scrollIntoView({ behavior: 'smooth' });
   };
+  
+  const scrollToAbout = () => {
+    document.getElementById('about-section')?.scrollIntoView({ behavior: 'smooth' });
+  };
+
 
   if (!mounted) {
     return (
-      <div className="space-y-12 py-10">
-        {/* Hero Skeleton */}
-        <div className="text-center px-4">
-          <div className="animate-pulse bg-muted h-12 w-3/4 mx-auto rounded-lg mb-4"></div>
-          <div className="animate-pulse bg-muted h-6 w-1/2 mx-auto rounded-lg mb-8"></div>
-          <div className="animate-pulse bg-primary/50 h-12 w-48 mx-auto rounded-lg"></div>
-        </div>
-        {/* Filters & Projects Skeleton */}
-        <div className="animate-pulse bg-muted h-16 w-1/3 rounded-lg mx-auto my-8"></div>
-        <div className="animate-pulse bg-card h-64 w-full rounded-lg"></div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {[...Array(3)].map((_, i) => (
-            <div key={i} className="animate-pulse bg-card h-96 rounded-lg"></div>
-          ))}
+      <div className="flex items-center justify-center min-h-screen bg-background">
+        <div className="animate-pulse flex flex-col items-center space-y-4">
+          <div className="w-24 h-24 bg-muted rounded-full"></div>
+          <div className="h-8 w-48 bg-muted rounded"></div>
+          <div className="h-6 w-64 bg-muted rounded"></div>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="fade-in-page space-y-16 sm:space-y-24">
+    <div className="fade-in-page overflow-x-hidden">
       {/* Hero Section */}
-      <section className="min-h-[80vh] flex flex-col items-center justify-center text-center relative overflow-hidden py-20 px-4 bg-gradient-to-br from-background via-muted/20 to-background">
-        <div className="absolute inset-0 opacity-[0.03] animate-pulse">
-          {/* Subtle background pattern - e.g. radiating lines or dots */}
+      <section className="min-h-screen flex flex-col items-center justify-center text-center relative overflow-hidden py-20 px-4 glow-effect">
+        <div className="absolute inset-0 opacity-[0.02] animate-pulse">
           <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
             <defs>
-              <pattern id="hero-pattern" patternUnits="userSpaceOnUse" width="50" height="50" patternTransform="scale(2) rotate(45)">
-                <circle cx="10" cy="10" r="1" fill="hsl(var(--primary))" />
+              <pattern id="hero-pattern-dots" patternUnits="userSpaceOnUse" width="70" height="70" patternTransform="scale(1) rotate(0)">
+                <circle cx="5" cy="5" r="0.8" fill="hsl(var(--primary))" />
+                <circle cx="35" cy="35" r="0.8" fill="hsl(var(--secondary))" />
               </pattern>
             </defs>
-            <rect width="100%" height="100%" fill="url(#hero-pattern)" />
+            <rect width="100%" height="100%" fill="url(#hero-pattern-dots)" />
           </svg>
         </div>
-        <div className="relative z-10">
-          <h1 className="text-5xl sm:text-6xl md:text-7xl font-headline font-extrabold mb-6 animate-slideInUp text-transparent bg-clip-text bg-gradient-to-r from-primary via-accent to-primary/70">
-            Nitin Kumar
+        <div className="relative z-10 animate-slideInUp">
+          <h1 className="text-5xl sm:text-7xl md:text-8xl font-headline font-extrabold mb-4">
+            <span className="block animate-text-gradient bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
+              Nitin Kumar
+            </span>
           </h1>
-          <p className="text-2xl sm:text-3xl md:text-4xl font-headline font-medium mb-8 animate-slideInUp delay-100 text-foreground/90">
-            Innovating at the Intersection of Design & Code
+          <p className="text-2xl sm:text-3xl font-medium mb-8 text-foreground/80 animate-slideInUp delay-200">
+            Full Stack Developer & AI Enthusiast
           </p>
-          <p className="text-lg sm:text-xl text-foreground/70 max-w-3xl mx-auto mb-12 animate-slideInUp delay-200">
-            Hi, I&apos;m Nitin Kumar, a passionate Full-Stack Developer transforming ideas into innovative, user-centric web and mobile experiences. Explore my journey through elegant solutions and impactful projects.
+          <p className="text-lg text-foreground/70 max-w-2xl mx-auto mb-12 animate-slideInUp delay-300">
+            Transforming ideas into innovative, user-centric web applications and AI-powered solutions. Passionate about clean code, elegant design, and impactful technology.
           </p>
-          <Button 
-            size="lg" 
-            onClick={scrollToProjects} 
-            className="animate-slideInUp delay-500 group bg-gradient-to-r from-primary to-accent hover:from-accent hover:to-primary text-primary-foreground shadow-xl hover:shadow-primary/40 transition-all duration-300 transform hover:scale-105 px-10 py-6 text-lg"
-          >
-            Explore My Work
-            <ArrowDown className="ml-2.5 h-5 w-5 transition-transform duration-300 group-hover:translate-y-1" />
-          </Button>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center animate-slideInUp delay-400">
+            <Button 
+              size="lg" 
+              onClick={scrollToProjects} 
+              className="bg-gradient-to-r from-primary to-secondary hover:from-secondary hover:to-primary text-primary-foreground shadow-lg hover:shadow-primary/40 transition-all duration-300 transform hover:scale-105 px-8 py-3 text-lg"
+            >
+              View My Work
+              <Briefcase className="ml-2.5 h-5 w-5" />
+            </Button>
+            <Button 
+              variant="outline"
+              size="lg" 
+              onClick={scrollToAbout}
+              className="border-primary/70 text-primary hover:bg-primary/10 hover:text-primary hover:border-primary shadow-sm hover:shadow-primary/20 transition-all duration-300 transform hover:scale-105 px-8 py-3 text-lg"
+            >
+              About Me
+              <User className="ml-2.5 h-5 w-5" />
+            </Button>
+          </div>
+        </div>
+        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce opacity-70 animate-slideInUp delay-500">
+          <ArrowDown className="h-8 w-8 text-primary" />
         </div>
       </section>
 
-      {/* About/Skills Section */}
-      <section className="py-16 px-4">
-        <div className="text-center mb-12 animate-slideInUp delay-100">
-          <h2 className="text-4xl font-headline font-bold text-primary mb-3">What I Do</h2>
-          <p className="text-lg text-foreground/80 max-w-2xl mx-auto">
-            I specialize in building dynamic, responsive, and scalable applications with a keen eye for detail and user experience.
-          </p>
-        </div>
-        <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-          {[
-            { icon: Code, title: "Frontend Development", description: "Crafting beautiful and intuitive user interfaces with React, Next.js, and modern CSS." },
-            { icon: Layers, title: "Backend Solutions", description: "Building robust and scalable server-side applications with Node.js, Python, and Firebase." },
-            { icon: Sparkles, title: "AI Integration", description: "Leveraging Genkit and AI models to create intelligent features and enhance user interactions." },
-          ].map((item, index) => (
-            <Card key={item.title} className="bg-card/70 backdrop-blur-md border-border/40 rounded-xl shadow-lg hover:shadow-primary/20 transition-all duration-300 transform hover:-translate-y-1 animate-slideInUp" style={{ animationDelay: `${0.2 + index * 0.15}s`, opacity: 0 }}>
-              <CardContent className="p-6 text-center">
-                <item.icon className="h-12 w-12 text-accent mx-auto mb-4" />
-                <h3 className="text-xl font-headline font-semibold text-primary-foreground mb-2">{item.title}</h3>
-                <p className="text-sm text-foreground/70">{item.description}</p>
-              </CardContent>
-            </Card>
-          ))}
+      {/* About Me Section (Simplified from Dribbble) */}
+      <section id="about-section" className="section-padding bg-background/30">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12 sm:mb-16 animate-slideInUp">
+            <h2 className="text-4xl sm:text-5xl font-bold mb-4">
+              A Little <span className="text-glow-primary">About Me</span>
+            </h2>
+            <p className="text-lg text-foreground/70 max-w-3xl mx-auto">
+              I&apos;m Nitin Kumar, a dedicated Full-Stack Developer with a knack for building robust and scalable applications. My journey in tech is driven by a passion for solving complex problems and creating seamless user experiences. I thrive in collaborative environments and am always eager to learn and adapt to new technologies.
+            </p>
+          </div>
+          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+            {[
+              { icon: Code, title: "Frontend Wizardry", description: "Crafting pixel-perfect, responsive user interfaces with React, Next.js, and modern CSS that delight users." },
+              { icon: Layers, title: "Backend Architecture", description: "Building secure, scalable server-side applications and APIs using Node.js, Python, and Firebase." },
+              { icon: Sparkles, title: "AI Integration", description: "Exploring the frontier of AI with Genkit, integrating intelligent features to create smarter applications." },
+            ].map((item, index) => (
+              <Card key={item.title} className="glassmorphism-card text-center p-6 animate-slideInUp" style={{ animationDelay: `${0.2 + index * 0.15}s`, opacity: 0 }}>
+                <CardContent className="p-0">
+                  <div className="p-4 inline-block bg-primary/10 rounded-full mb-4">
+                     <item.icon className="h-10 w-10 text-primary mx-auto" />
+                  </div>
+                  <h3 className="text-xl font-semibold text-foreground mb-2">{item.title}</h3>
+                  <p className="text-sm text-foreground/70">{item.description}</p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+           <div className="text-center mt-12 animate-slideInUp delay-500">
+            <Button asChild size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 transition-all transform hover:scale-105 px-8 py-3">
+              <Link href="/resume">
+                Explore My Resume <ArrowDown className="ml-2 h-5 w-5 rotate-[270deg]" />
+              </Link>
+            </Button>
+          </div>
         </div>
       </section>
 
       {/* Projects Section */}
-      <section id="projects-section" className="space-y-10 py-16 bg-muted/20 backdrop-blur-sm">
-        <div className="text-center px-4">
-            <h2 className="text-4xl font-headline font-bold text-primary mb-3 animate-slideInUp delay-100">
-            My Projects
+      <section id="projects-section" className="section-padding bg-card/30">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12 sm:mb-16 animate-slideInUp">
+            <h2 className="text-4xl sm:text-5xl font-bold mb-4">
+              My <span className="text-glow-secondary">Creations</span>
             </h2>
-            <p className="text-lg text-center text-foreground/80 mb-10 max-w-2xl mx-auto animate-slideInUp delay-200">
-            Dive into a collection of my work, showcasing my skills in developing diverse and innovative applications.
+            <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
+              A selection of projects where I've turned ideas into reality, showcasing my skills in development and problem-solving.
             </p>
-        </div>
-        
-
-        <div className="mb-8 px-4 animate-slideInUp delay-300">
-          <div className="relative max-w-xl mx-auto">
-            <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-muted-foreground" />
-            <Input
-              type="text"
-              placeholder="Search projects by name or description..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="pl-12 w-full bg-card border-border/60 focus:ring-primary focus:border-primary shadow-lg rounded-full py-3 text-base"
+          </div>
+          
+          <div className="mb-10 animate-slideInUp delay-200">
+            <div className="relative max-w-xl mx-auto">
+              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+              <Input
+                type="text"
+                placeholder="Search projects..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="pl-12 w-full bg-input border-border/60 focus:ring-1 focus:ring-primary focus:border-primary shadow-lg rounded-full py-3 text-base placeholder:text-muted-foreground"
+              />
+            </div>
+          </div>
+          
+          <div className="animate-slideInUp delay-300">
+            <ProjectFilters
+              techStacks={allTechStacks}
+              categories={allCategories}
+              selectedTechStacks={selectedTechStacks}
+              selectedCategory={selectedCategory}
+              onTechStackChange={handleTechStackChange}
+              onCategoryChange={handleCategoryChange}
+              onClearFilters={handleClearFilters}
             />
           </div>
-        </div>
-        
-        <div className="px-4 animate-slideInUp delay-500">
-          <ProjectFilters
-            techStacks={allTechStacks}
-            categories={allCategories}
-            selectedTechStacks={selectedTechStacks}
-            selectedCategory={selectedCategory}
-            onTechStackChange={handleTechStackChange}
-            onCategoryChange={handleCategoryChange}
-            onClearFilters={handleClearFilters}
-          />
-        </div>
 
-        {filteredProjects.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-4 animate-slideInUp delay-500">
-            {filteredProjects.map((project, index) => (
-              <div key={project.id} className="animate-slideInUp" style={{ animationDelay: `${0.5 + index * 0.1}s`, opacity: 0 }}>
-                <ProjectCard project={project} />
-              </div>
-            ))}
-          </div>
-        ) : (
-          <p className="text-center text-muted-foreground text-lg py-10 animate-slideInUp delay-500">
-            No projects found matching your criteria. Try adjusting your filters.
-          </p>
-        )}
+          {filteredProjects.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 xl:gap-10">
+              {filteredProjects.map((project, index) => (
+                <div key={project.id} className="animate-slideInUp" style={{ animationDelay: `${0.4 + index * 0.1}s`, opacity: 0 }}>
+                  <ProjectCard project={project} />
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p className="text-center text-muted-foreground text-lg py-10 animate-slideInUp delay-400">
+              No projects found matching your criteria. Try adjusting your filters or search.
+            </p>
+          )}
+        </div>
+      </section>
+
+      {/* Call to Action / Contact Teaser */}
+      <section className="section-padding bg-background/50">
+        <div className="container mx-auto px-4 text-center">
+            <div className="max-w-3xl mx-auto animate-slideInUp">
+                <h2 className="text-4xl sm:text-5xl font-bold mb-6">
+                    Ready to <span className="text-glow-primary">Collaborate</span>?
+                </h2>
+                <p className="text-lg text-foreground/70 mb-10">
+                    I'm always excited to discuss new projects, innovative ideas, or potential collaborations. If you have something in mind, or just want to connect, feel free to reach out!
+                </p>
+                <Button asChild size="lg" className="bg-gradient-to-r from-secondary to-primary hover:from-primary hover:to-secondary text-primary-foreground shadow-xl hover:shadow-primary/40 transition-all duration-300 transform hover:scale-105 px-10 py-3.5 text-lg">
+                    <Link href="/contact">
+                        Get In Touch <Mail className="ml-2.5 h-5 w-5" />
+                    </Link>
+                </Button>
+            </div>
+        </div>
       </section>
     </div>
   );
