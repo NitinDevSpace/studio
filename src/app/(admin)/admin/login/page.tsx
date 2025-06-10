@@ -149,14 +149,14 @@ export default function AdminLoginPage() {
        <div className="mt-6 max-w-md w-full">
           <Alert variant="default" className="border-amber-500/50 bg-amber-500/10 text-amber-700 dark:text-amber-400 [&>svg]:text-amber-600 dark:[&>svg]:text-amber-500">
             <ShieldAlert className="h-4 w-4"/>
-            <AlertTitle>Admin Account Setup</AlertTitle>
+            <AlertTitle>Admin User</AlertTitle>
             <AlertDescription>
-              If this is your first time, ensure you have created the admin user in your Firebase Console:
+              Use the admin credentials you set up in Firebase Authentication. For example:
               <ul className="list-disc list-inside text-xs mt-1">
                 <li>Email: <code className="bg-muted px-1 py-0.5 rounded">devspace.admin@example.com</code></li>
                 <li>Password: <code className="bg-muted px-1 py-0.5 rounded">Nitin$Dev@5321</code></li>
               </ul>
-               Enable Email/Password sign-in in Firebase Authentication settings.
+               Ensure Email/Password sign-in is enabled in Firebase Authentication settings.
             </AlertDescription>
           </Alert>
         </div>
