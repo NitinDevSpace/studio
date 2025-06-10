@@ -84,8 +84,8 @@ export default function HomePage() {
                 </Button>
               </div>
             </div>
-            <div className="hidden md:flex justify-center items-center animate-slideInFromRight delay-200">
-              <div className="w-[300px] h-[300px] md:w-[400px] md:h-[400px] flex justify-center items-center">
+            <div className="hidden md:flex justify-center items-center animate-slideInFromRight delay-200 overflow-hidden">
+              <div className="w-[280px] h-[280px] sm:w-[320px] sm:h-[320px] md:w-[350px] md:h-[350px] lg:w-[400px] lg:h-[400px] flex justify-center items-center">
                 <div className="relative w-full h-full transform rotate-[35deg]">
                   <svg
                     className="absolute inset-0 w-full h-full"
@@ -101,8 +101,8 @@ export default function HomePage() {
                     {/* Border polygon */}
                     <polygon
                       points="0,0 100,0 50,100"
-                      className="fill-none stroke-secondary" 
-                      strokeWidth="5" 
+                      className="fill-none stroke-primary" 
+                      strokeWidth="8" 
                       vectorEffect="non-scaling-stroke"
                     />
                   </svg>

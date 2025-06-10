@@ -100,8 +100,8 @@
   }
   body {
     @apply bg-background text-foreground;
-    /* background-attachment: fixed; removed for scrollbar flash investigation */
     overflow-y: auto; /* Ensure vertical scrollbar only if needed */
+    overflow-x: hidden; /* Added to prevent horizontal scroll from body itself */
   }
   html {
     overflow-x: hidden; /* Prevent horizontal scrollbar flashes */
