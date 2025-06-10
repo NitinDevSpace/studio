@@ -111,13 +111,13 @@ export default function HomePage() {
                   </svg>
                   {/* Image, clipped and positioned behind the SVG border */}
                   <Image
-                    src="https://placehold.co/400x500/ff0000/ffffff.png?text=IMAGE" /* Distinct placeholder */
-                    alt="Nitin Kumar - Professional Portrait"
-                    width={450} 
-                    height={450}
+                    src="https://upload.wikimedia.org/wikipedia/en/thumb/8/8e/Spider-Man_%28Miles_Morales%29_character_art.png/250px-Spider-Man_%28Miles_Morales%29_character_art.png"
+                    alt="Spider-Man (Miles Morales) character art"
+                    width={250} 
+                    height={445} // Approximate aspect ratio from original if known, otherwise similar to width
                     className="w-full h-full object-cover"
                     style={{ clipPath: 'url(#heroTriangleClip)' }}
-                    data-ai-hint="Nitin Kumar professional portrait"
+                    data-ai-hint="Spider-Man Miles Morales"
                     priority
                   />
                 </div>
