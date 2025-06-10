@@ -1,25 +1,67 @@
 
 import Image from 'next/image';
-import type { Project } from '@/lib/types';
+import type { Project, ProjectStatus } from '@/lib/types';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Eye, Layers, Github, ExternalLink } from 'lucide-react';
+import { Eye, Layers, Github, ExternalLink, CheckCircle2, Wrench, ClipboardList } from 'lucide-react';
 import Link from 'next/link';
+import { cn } from '@/lib/utils';
 
 interface ProjectCardProps {
   project: Project;
-  onClick: () => void; // To open the modal
+  onClick: () => void;
   className?: string;
 }
+
+const StatusBadge: React.FC<{ status?: ProjectStatus }> = ({ status }) => {
+  if (!status) return null;
+
+  let icon = null;
+  let colorClasses = '';
+
+  switch (status) {
+    case 'Planning':
+      icon = <ClipboardList className="h-3 w-3" />;
+      colorClasses = 'bg-blue-500/20 text-blue-500 border-blue-500/30';
+      break;
+    case 'In Progress':
+      icon = <Wrench className="h-3 w-3" />;
+      colorClasses = 'bg-amber-500/20 text-amber-500 border-amber-500/30';
+      break;
+    case 'Finished':
+      icon = <CheckCircle2 className="h-3 w-3" />;
+      colorClasses = 'bg-green-500/20 text-green-500 border-green-500/30';
+      break;
+    default:
+      return null;
+  }
+
+  return (
+    <Badge
+      className={cn(
+        "absolute top-2 right-2 z-10 text-xs py-0.5 px-2 rounded-full flex items-center gap-1",
+        colorClasses
+      )}
+    >
+      {icon}
+      {status}
+    </Badge>
+  );
+};
+
 
 export default function ProjectCard({ project, onClick, className }: ProjectCardProps) {
   return (
     <Card
-      className={`group w-[320px] sm:w-[380px] md:w-[450px] h-auto flex-shrink-0 bg-card rounded-xl shadow-lg hover:shadow-2xl overflow-hidden transition-all duration-300 ease-in-out cursor-pointer ${className}`}
+      className={cn(
+        "group w-[320px] sm:w-[380px] md:w-[450px] h-auto flex-shrink-0 bg-card rounded-xl shadow-lg hover:shadow-2xl overflow-hidden transition-all duration-300 ease-in-out cursor-pointer relative",
+        className
+      )}
       onClick={onClick}
     >
-      <div className="relative w-full aspect-[16/9] overflow-hidden"> {/* Landscape Aspect Ratio */}
+      <StatusBadge status={project.status} />
+      <div className="relative w-full aspect-[16/9] overflow-hidden">
         <Image
           src={project.imageUrl}
           alt={project.name}
@@ -28,7 +70,7 @@ export default function ProjectCard({ project, onClick, className }: ProjectCard
           className="transform transition-all duration-500 ease-in-out group-hover:scale-110"
           data-ai-hint={project.imageHint || 'project screenshot'}
           sizes="(max-width: 640px) 90vw, (max-width: 768px) 60vw, (max-width: 1024px) 450px, 450px"
-          priority={project.id === '1' || project.id === '2'} // Prioritize first few images
+          priority={project.id === '1' || project.id === '2'}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent opacity-100 group-hover:opacity-60 transition-opacity duration-300"></div>
         <div className="absolute bottom-3 left-3 right-3 p-2">
