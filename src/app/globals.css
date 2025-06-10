@@ -98,13 +98,13 @@
   * {
     @apply border-border;
   }
+  html {
+    overflow-x: hidden; 
+  }
   body {
     @apply bg-background text-foreground;
-    overflow-y: auto; /* Ensure vertical scrollbar only if needed */
-    overflow-x: hidden; /* Added to prevent horizontal scroll from body itself */
-  }
-  html {
-    overflow-x: hidden; /* Prevent horizontal scrollbar flashes */
+    overflow-y: auto; 
+    overflow-x: hidden; 
   }
   ::selection {
     @apply bg-primary text-primary-foreground;
@@ -124,10 +124,10 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-headline; /* text-foreground is inherited */
+    @apply font-headline; 
   }
    p, span, div, li, label, input, textarea, button, a {
-    @apply font-body; /* text-foreground is inherited */
+    @apply font-body; 
   }
 }
 
@@ -143,7 +143,7 @@
 @keyframes slideInUp {
   from {
     opacity: 0;
-    transform: translateY(50px); /* Increased travel distance */
+    transform: translateY(50px); 
   }
   to {
     opacity: 1;
@@ -154,7 +154,7 @@
 @keyframes slideInFromRight {
   from {
     opacity: 0;
-    transform: translateX(60px); /* Increased travel distance */
+    transform: translateX(60px); 
   }
   to {
     opacity: 1;
@@ -195,3 +195,5 @@
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
 }
+
+    

@@ -86,7 +86,7 @@ export default function HomePage() {
             </div>
             <div className="hidden md:flex justify-center items-center animate-slideInFromRight delay-200 overflow-hidden">
               <div className="w-[280px] h-[280px] sm:w-[320px] sm:h-[320px] md:w-[350px] md:h-[350px] lg:w-[400px] lg:h-[400px] flex justify-center items-center">
-                <div className="relative w-full h-full transform rotate-[35deg]">
+                <div className="relative w-[75%] h-[75%] transform rotate-[35deg]">
                   <svg
                     className="absolute inset-0 w-full h-full"
                     viewBox="0 0 100 100"
@@ -98,7 +98,7 @@ export default function HomePage() {
                       </clipPath>
                     </defs>
                     <polygon
-                      points="4,4 96,4 50,96" /* Adjusted points for border */
+                      points="4,4 96,4 50,96" 
                       className="fill-none stroke-primary" 
                       strokeWidth="8" 
                       vectorEffect="non-scaling-stroke"
@@ -208,3 +208,5 @@ export default function HomePage() {
     </div>
   );
 }
+
+    
