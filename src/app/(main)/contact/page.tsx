@@ -8,7 +8,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Mail, Phone, Linkedin, Github, MapPin, Send, Loader2, UserCircle, Instagram, Code, ShieldCheck } from "lucide-react";
 import Link from "next/link";
-import { useFormStatus, useActionState } from 'react'; // Updated import
+import { useFormStatus } from 'react-dom'; // Corrected import
+import { useActionState } from 'react'; // Corrected import
 import { useEffect } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { submitContactFormAction, type ContactFormState } from '@/app/actions';
