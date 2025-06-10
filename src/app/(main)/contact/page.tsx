@@ -1,3 +1,4 @@
+
 'use client';
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -5,25 +6,15 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { Mail, Phone, Linkedin, Github, MapPin, Send, Loader2, UserCircle } from "lucide-react";
+import { Mail, Phone, Linkedin, Github, MapPin, Send, Loader2, UserCircle, Instagram, Code2 } from "lucide-react";
 import Link from "next/link";
 import { useFormStatus, useFormState } from 'react-dom';
 import { useEffect } from "react";
 import { useToast } from "@/hooks/use-toast";
+import { submitContactFormAction, type ContactFormState } from '@/app/actions';
 
 
-async function submitContactForm(prevState: any, formData: FormData) {
-  await new Promise(resolve => setTimeout(resolve, 1500)); // Simulate API call
-  const name = formData.get('name');
-  // Basic validation example
-  if (!name || typeof name !== 'string' || name.trim().length < 2) {
-    return { success: false, message: "Please enter a valid name.", fieldErrors: { name: "Name is too short." } };
-  }
-  console.log("Form submitted:", Object.fromEntries(formData.entries()));
-  return { success: true, message: "Your message has been sent successfully! I'll get back to you soon." };
-}
-
-const initialState = {
+const initialState: ContactFormState = {
   message: null,
   success: false,
   fieldErrors: null,
@@ -44,7 +35,7 @@ function SubmitButton() {
 
 
 export default function ContactPage() {
-  const [state, formAction] = useFormState(submitContactForm, initialState);
+  const [state, formAction] = useFormState(submitContactFormAction, initialState);
   const { toast } = useToast();
 
   useEffect(() => {
@@ -78,29 +69,48 @@ export default function ContactPage() {
           <CardContent className="space-y-5 p-6 sm:p-8 pt-0">
             <div className="flex items-center space-x-3 group">
               <Mail className="h-5 w-5 text-accent transition-transform group-hover:scale-110 group-hover:text-primary" />
-              <Link href="mailto:your.email@example.com" className="text-foreground/90 hover:text-primary transition-colors duration-300">
-                your.email@example.com
+              <Link href="mailto:nitindevspace@gmail.com" className="text-foreground/90 hover:text-primary transition-colors duration-300">
+                nitindevspace@gmail.com
               </Link>
             </div>
             <div className="flex items-center space-x-3 group">
               <Phone className="h-5 w-5 text-accent transition-transform group-hover:scale-110 group-hover:text-primary" />
-              <span className="text-foreground/90">+1 (555) 123-4567</span>
+              <span className="text-foreground/90">+91 74041 85860</span>
             </div>
             <div className="flex items-center space-x-3 group">
               <MapPin className="h-5 w-5 text-accent transition-transform group-hover:scale-110 group-hover:text-primary" />
-              <span className="text-foreground/90">San Francisco, CA (Open to remote)</span>
+              <span className="text-foreground/90">Bawal, Haryana, India (Remote)</span>
             </div>
-            <div className="flex items-center space-x-4 pt-6">
-              <Link href="https://linkedin.com/in/yourprofile" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile">
-                <Button variant="outline" size="icon" className="text-accent border-accent/50 hover:bg-accent hover:text-accent-foreground transition-all duration-300 transform hover:scale-110 rounded-full shadow-md hover:shadow-accent/30">
-                  <Linkedin className="h-5 w-5" />
-                </Button>
-              </Link>
-              <Link href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer" aria-label="GitHub Profile">
-                 <Button variant="outline" size="icon" className="text-accent border-accent/50 hover:bg-accent hover:text-accent-foreground transition-all duration-300 transform hover:scale-110 rounded-full shadow-md hover:shadow-accent/30">
-                  <Github className="h-5 w-5" />
-                </Button>
-              </Link>
+            <div className="pt-6">
+              <h3 className="text-sm font-semibold text-muted-foreground mb-3 uppercase tracking-wider">Find me on</h3>
+              <div className="flex items-center space-x-3">
+                <Link href="https://linkedin.com/in/nitin5kumar02" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile">
+                  <Button variant="outline" size="icon" className="text-accent border-accent/50 hover:bg-accent hover:text-accent-foreground transition-all duration-300 transform hover:scale-110 rounded-full shadow-md hover:shadow-accent/30">
+                    <Linkedin className="h-5 w-5" />
+                  </Button>
+                </Link>
+                <Link href="https://github.com/NitinDevSpace" target="_blank" rel="noopener noreferrer" aria-label="GitHub Profile">
+                   <Button variant="outline" size="icon" className="text-accent border-accent/50 hover:bg-accent hover:text-accent-foreground transition-all duration-300 transform hover:scale-110 rounded-full shadow-md hover:shadow-accent/30">
+                    <Github className="h-5 w-5" />
+                  </Button>
+                </Link>
+                <Link href="https://instagram.com/your_insta_username" target="_blank" rel="noopener noreferrer" aria-label="Instagram Profile">
+                   <Button variant="outline" size="icon" className="text-accent border-accent/50 hover:bg-accent hover:text-accent-foreground transition-all duration-300 transform hover:scale-110 rounded-full shadow-md hover:shadow-accent/30">
+                    <Instagram className="h-5 w-5" />
+                  </Button>
+                </Link>
+                 <Link href="https://www.hackerrank.com/profile/your_hackerrank" target="_blank" rel="noopener noreferrer" aria-label="HackerRank Profile">
+                   <Button variant="outline" size="icon" className="text-accent border-accent/50 hover:bg-accent hover:text-accent-foreground transition-all duration-300 transform hover:scale-110 rounded-full shadow-md hover:shadow-accent/30" title="HackerRank">
+                    <Code2 className="h-5 w-5" /> {/* Using Code2 as a generic coding platform icon */}
+                  </Button>
+                </Link>
+                <Link href="https://leetcode.com/your_leetcode/" target="_blank" rel="noopener noreferrer" aria-label="LeetCode Profile">
+                   <Button variant="outline" size="icon" className="text-accent border-accent/50 hover:bg-accent hover:text-accent-foreground transition-all duration-300 transform hover:scale-110 rounded-full shadow-md hover:shadow-accent/30" title="LeetCode">
+                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/><path d="m9 12 2 2 4-4"/></svg>
+                     {/* LeetCode SVG icon as a simple shield check, can be replaced by text or other generic icon */}
+                  </Button>
+                </Link>
+              </div>
             </div>
           </CardContent>
         </Card>
@@ -118,22 +128,31 @@ export default function ContactPage() {
                 <Label htmlFor="name" className="text-foreground/80 font-medium">Full Name</Label>
                 <Input id="name" name="name" type="text" placeholder="Your Name" required 
                        className="mt-1.5 bg-input border-border/70 focus:ring-2 focus:ring-primary focus:border-primary placeholder:text-muted-foreground/70 rounded-lg py-2.5 text-base" />
-                {state.fieldErrors?.name && <p className="text-xs text-destructive mt-1.5">{state.fieldErrors.name}</p>}
+                {state.fieldErrors?.name && <p className="text-xs text-destructive mt-1.5">{state.fieldErrors.name.join(', ')}</p>}
               </div>
               <div>
                 <Label htmlFor="email" className="text-foreground/80 font-medium">Email Address</Label>
                 <Input id="email" name="email" type="email" placeholder="your.email@example.com" required 
                        className="mt-1.5 bg-input border-border/70 focus:ring-2 focus:ring-primary focus:border-primary placeholder:text-muted-foreground/70 rounded-lg py-2.5 text-base" />
+                {state.fieldErrors?.email && <p className="text-xs text-destructive mt-1.5">{state.fieldErrors.email.join(', ')}</p>}
+              </div>
+              <div>
+                <Label htmlFor="phone" className="text-foreground/80 font-medium">Phone Number (Optional)</Label>
+                <Input id="phone" name="phone" type="tel" placeholder="+1 (555) 123-4567"
+                       className="mt-1.5 bg-input border-border/70 focus:ring-2 focus:ring-primary focus:border-primary placeholder:text-muted-foreground/70 rounded-lg py-2.5 text-base" />
+                {state.fieldErrors?.phone && <p className="text-xs text-destructive mt-1.5">{state.fieldErrors.phone.join(', ')}</p>}
               </div>
               <div>
                 <Label htmlFor="subject" className="text-foreground/80 font-medium">Subject</Label>
                 <Input id="subject" name="subject" type="text" placeholder="Project Inquiry" required 
                        className="mt-1.5 bg-input border-border/70 focus:ring-2 focus:ring-primary focus:border-primary placeholder:text-muted-foreground/70 rounded-lg py-2.5 text-base" />
+                {state.fieldErrors?.subject && <p className="text-xs text-destructive mt-1.5">{state.fieldErrors.subject.join(', ')}</p>}
               </div>
               <div>
                 <Label htmlFor="message" className="text-foreground/80 font-medium">Message</Label>
                 <Textarea id="message" name="message" placeholder="Your message here..." rows={5} required 
                           className="mt-1.5 bg-input border-border/70 focus:ring-2 focus:ring-primary focus:border-primary placeholder:text-muted-foreground/70 rounded-lg text-base" />
+                {state.fieldErrors?.message && <p className="text-xs text-destructive mt-1.5">{state.fieldErrors.message.join(', ')}</p>}
               </div>
               <SubmitButton />
             </form>
