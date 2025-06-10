@@ -85,15 +85,35 @@ export default function HomePage() {
               </div>
             </div>
             <div className="hidden md:flex justify-center items-center animate-slideInFromRight delay-200">
-              <Image
-                src="https://placehold.co/500x500.png"
-                alt="Nitin Kumar - Developer"
-                width={450}
-                height={450}
-                className="rounded-full shadow-2xl object-cover border-4 border-primary/20"
-                data-ai-hint="professional developer portrait abstract purple dark"
-                priority
-              />
+              <div className="relative w-[300px] h-[300px] md:w-[400px] md:h-[400px]">
+                <svg
+                  className="absolute inset-0 w-full h-full"
+                  viewBox="0 0 100 100"
+                  preserveAspectRatio="xMidYMid meet" 
+                >
+                  <defs>
+                    <clipPath id="heroTriangleClip">
+                      <polygon points="0,0 100,0 50,100" />
+                    </clipPath>
+                  </defs>
+                  <polygon
+                    points="0,0 100,0 50,100"
+                    className="fill-none stroke-secondary"
+                    strokeWidth="5" 
+                    vectorEffect="non-scaling-stroke"
+                  />
+                </svg>
+                <Image
+                  src="https://placehold.co/500x500.png"
+                  alt="Nitin Kumar - Developer"
+                  width={450}
+                  height={450}
+                  className="w-full h-full object-cover"
+                  style={{ clipPath: 'url(#heroTriangleClip)' }}
+                  data-ai-hint="professional developer portrait triangle"
+                  priority
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -103,8 +123,8 @@ export default function HomePage() {
       </section>
 
       {/* About Me Section */}
-      <section id="about-section" className="section-padding bg-background/90">
-        <div className="container mx-auto px-4 animate-slideInUp delay-400">
+      <section id="about-section" className="section-padding bg-background/90 animate-slideInUp delay-400">
+        <div className="container mx-auto px-4">
           <div className="text-center mb-12 sm:mb-14">
             <h2 className="text-3xl sm:text-4xl font-bold mb-3 text-foreground">
               A Little <span className="text-primary">About Me</span>
@@ -141,8 +161,8 @@ export default function HomePage() {
       </section>
 
       {/* Projects Section - Replaced with Carousel */}
-      <section id="projects-section" className="section-padding bg-background">
-        <div className="container mx-auto px-4 animate-slideInUp delay-500">
+      <section id="projects-section" className="section-padding bg-background animate-slideInUp delay-500">
+        <div className="container mx-auto px-4">
           <div className="text-center mb-12 sm:mb-14">
             <h2 className="text-3xl sm:text-4xl font-bold mb-3 text-foreground">
               My <span className="text-secondary">Creations</span>
@@ -158,8 +178,8 @@ export default function HomePage() {
       </section>
 
       {/* Call to Action / Contact Teaser */}
-      <section className="section-padding bg-background/90">
-        <div className="container mx-auto px-4 text-center animate-slideInUp delay-600">
+      <section className="section-padding bg-background/90 animate-slideInUp delay-600">
+        <div className="container mx-auto px-4 text-center">
             <div className="max-w-2xl mx-auto">
                 <h2 className="text-3xl sm:text-4xl font-bold mb-5 text-foreground">
                     Ready to <span className="text-primary">Collaborate</span>?
