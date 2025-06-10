@@ -49,7 +49,7 @@ export default function HomePage() {
   return (
     <div className="fade-in-page overflow-x-hidden">
       {/* Hero Section */}
-      <section className="min-h-[calc(100vh-4rem)] flex items-center relative overflow-hidden py-16 sm:py-20 bg-gradient-to-br from-background via-background/95 to-background/80">
+      <section className="w-full min-h-[calc(100vh-4rem)] flex items-center relative overflow-hidden py-16 sm:py-20 bg-gradient-to-br from-background via-background/95 to-background/80">
         <div className="container mx-auto px-4 z-10">
           <div className="grid md:grid-cols-2 gap-8 items-center">
             <div className="animate-slideInUp text-center md:text-left">
@@ -84,17 +84,15 @@ export default function HomePage() {
                 </Button>
               </div>
             </div>
+            {/* Commented out triangle SVG and related structure for simplification.
             <div className="hidden md:flex justify-center items-center animate-slideInFromRight delay-200 overflow-hidden">
-              {/* This div defines the image's display area */}
-              <div className="relative w-[280px] h-[280px] sm:w-[320px] sm:h-[320px] md:w-[350px] md:h-[350px] lg:w-[400px] lg:h-[400px] rounded-xl overflow-hidden shadow-lg">
-                {/*
-                Triangle SVG and related structure commented out for simplification.
+              <div className="relative w-[280px] h-[280px] sm:w-[320px] sm:h-[320px] md:w-[350px] md:h-[350px] lg:w-[400px] lg:h-[400px]">
                 <div className="relative w-[75%] h-[75%] transform rotate-[35deg]">
                   <svg
                     className="absolute inset-0 w-full h-full z-10"
-                    viewBox="0 0 100 100"
-                    preserveAspectRatio="xMidYMid meet" 
-                    fill="none" 
+                    viewBox="0 0 100 100" // Defines the coordinate system for the polygon
+                    preserveAspectRatio="xMidYMid meet" // Ensures aspect ratio is maintained
+                    fill="none" // Polygon should not be filled by default here, border is via stroke
                   >
                     <defs>
                       <clipPath id="heroTriangleClip">
@@ -102,35 +100,39 @@ export default function HomePage() {
                       </clipPath>
                     </defs>
                     <polygon
-                      points="50,19 4,96 96,96"
-                      stroke="currentColor"
-                      className="stroke-primary" 
-                      strokeWidth="8" 
-                      vectorEffect="non-scaling-stroke"
+                      points="50,19 4,96 96,96" // Defines the triangle path slightly inset for border
+                      className="stroke-primary" // Use theme's primary color for the border
+                      strokeWidth="8" // Border thickness
+                      fill="none" // Ensure the border polygon itself has no fill
+                      vectorEffect="non-scaling-stroke" // Keeps stroke width consistent on scaling
                     />
                   </svg>
                   <Image
                     src="https://upload.wikimedia.org/wikipedia/en/thumb/8/8e/Spider-Man_%28Miles_Morales%29_character_art.png/250px-Spider-Man_%28Miles_Morales%29_character_art.png"
-                    alt="Nitin Kumar - Professional Portrait"
+                    alt="Spider-Man (Miles Morales) character art"
                     width={250} 
-                    height={445}
-                    className="w-full h-full object-cover object-top" 
-                    style={{ clipPath: 'url(#heroTriangleClip)' }}
-                    data-ai-hint="Nitin Kumar professional portrait"
+                    height={445} // Original aspect ratio (approx)
+                    className="w-full h-full object-cover object-top" // Fills the container, focuses top
+                    style={{ clipPath: 'url(#heroTriangleClip)' }} // Apply the clip path
+                    data-ai-hint="Spider-Man Miles Morales character"
                     priority
                   />
                 </div>
-                */}
-                <Image
-                  src="https://upload.wikimedia.org/wikipedia/en/thumb/8/8e/Spider-Man_%28Miles_Morales%29_character_art.png/250px-Spider-Man_%28Miles_Morales%29_character_art.png"
-                  alt="Spider-Man (Miles Morales) character art"
-                  fill
-                  sizes="(max-width: 640px) 280px, (max-width: 768px) 320px, (max-width: 1024px) 350px, 400px"
-                  className="object-cover object-top"
-                  data-ai-hint="Spider-Man Miles Morales character"
-                  priority
-                />
               </div>
+            </div>
+            */}
+            <div className="hidden md:flex justify-center items-center animate-slideInFromRight delay-200 overflow-hidden">
+                <div className="relative w-[280px] h-[280px] sm:w-[320px] sm:h-[320px] md:w-[350px] md:h-[350px] lg:w-[400px] lg:h-[400px] rounded-xl overflow-hidden shadow-lg">
+                <Image
+                    src="https://upload.wikimedia.org/wikipedia/en/thumb/8/8e/Spider-Man_%28Miles_Morales%29_character_art.png/250px-Spider-Man_%28Miles_Morales%29_character_art.png"
+                    alt="Spider-Man (Miles Morales) character art"
+                    fill
+                    sizes="(max-width: 640px) 280px, (max-width: 768px) 320px, (max-width: 1024px) 350px, 400px"
+                    className="object-cover object-top"
+                    data-ai-hint="Spider-Man Miles Morales character"
+                    priority
+                />
+                </div>
             </div>
           </div>
         </div>
