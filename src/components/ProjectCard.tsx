@@ -60,7 +60,7 @@ export default function ProjectCard({ project, onClick, className }: ProjectCard
   return (
     <Card
       className={cn(
-        "group w-[300px] sm:w-[360px] md:w-[420px] min-h-[390px] flex flex-col bg-card rounded-xl shadow-lg hover:shadow-2xl overflow-hidden transition-all duration-300 ease-in-out cursor-pointer relative",
+        "group/card w-[300px] sm:w-[360px] md:w-[420px] min-h-[390px] flex flex-col bg-card rounded-xl shadow-lg hover:shadow-2xl overflow-hidden transition-all duration-300 ease-in-out cursor-pointer relative",
         className
       )}
       onClick={onClick}
@@ -72,14 +72,14 @@ export default function ProjectCard({ project, onClick, className }: ProjectCard
           alt={project.name}
           layout="fill"
           objectFit="cover"
-          className="transform transition-all duration-500 ease-in-out group-hover:scale-110"
+          className="transform transition-all duration-500 ease-in-out group-hover/card:scale-110"
           data-ai-hint={project.imageHint || 'project screenshot'}
           sizes="(max-width: 640px) 90vw, (max-width: 768px) 60vw, (max-width: 1024px) 420px, 420px"
           priority={project.id === '1' || project.id === '2'} // Prioritize first few images
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent opacity-100 group-hover:opacity-60 transition-opacity duration-300"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent opacity-100 group-hover/card:opacity-60 transition-opacity duration-300"></div>
         <div className="absolute bottom-3 left-3 right-3 p-2">
-            <h3 className="font-headline text-lg md:text-xl font-semibold text-white truncate group-hover:text-primary transition-colors">
+            <h3 className="font-headline text-lg md:text-xl font-semibold text-white truncate group-hover/card:text-primary transition-colors">
               {project.name}
             </h3>
         </div>
