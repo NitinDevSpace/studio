@@ -100,7 +100,11 @@
   }
   body {
     @apply bg-background text-foreground;
-    background-attachment: fixed;
+    /* background-attachment: fixed; removed for scrollbar flash investigation */
+    overflow-y: auto; /* Ensure vertical scrollbar only if needed */
+  }
+  html {
+    overflow-x: hidden; /* Prevent horizontal scrollbar flashes */
   }
   ::selection {
     @apply bg-primary text-primary-foreground;
@@ -159,7 +163,7 @@
 }
 
 .animate-slideInUp {
-  animation: slideInUp 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; /* Slightly longer duration */
+  animation: slideInUp 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; 
   opacity: 0; 
 }
 .animate-slideInFromRight {
@@ -176,6 +180,8 @@
 .delay-500 { animation-delay: 0.5s !important; }
 .delay-600 { animation-delay: 0.6s !important; }
 .delay-700 { animation-delay: 0.7s !important; }
+.delay-800 { animation-delay: 0.8s !important; }
+
 
 .section-padding {
   @apply py-12 sm:py-16 md:py-20;

@@ -97,14 +97,14 @@ export default function HomePage() {
             </div>
           </div>
         </div>
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce animate-slideInUp delay-500">
-          <ArrowDown className="h-7 w-7 text-primary" />
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-slideInUp delay-500">
+          <ArrowDown className="h-7 w-7 text-primary animate-bounce" />
         </div>
       </section>
 
       {/* About Me Section */}
-      <section id="about-section" className="section-padding bg-background/90 animate-slideInUp delay-400">
-        <div className="container mx-auto px-4">
+      <section id="about-section" className="section-padding bg-background/90">
+        <div className="container mx-auto px-4 animate-slideInUp delay-400">
           <div className="text-center mb-12 sm:mb-14">
             <h2 className="text-3xl sm:text-4xl font-bold mb-3 text-foreground">
               A Little <span className="text-primary">About Me</span>
@@ -141,8 +141,8 @@ export default function HomePage() {
       </section>
 
       {/* Projects Section - Replaced with Carousel */}
-      <section id="projects-section" className="section-padding bg-background animate-slideInUp delay-500">
-        <div className="container mx-auto px-4">
+      <section id="projects-section" className="section-padding bg-background">
+        <div className="container mx-auto px-4 animate-slideInUp delay-500">
           <div className="text-center mb-12 sm:mb-14">
             <h2 className="text-3xl sm:text-4xl font-bold mb-3 text-foreground">
               My <span className="text-secondary">Creations</span>
@@ -152,15 +152,14 @@ export default function HomePage() {
             </p>
           </div>
           
-          {/* The ProjectCarousel component will now be the bordered container */}
           <ProjectCarousel projects={projectsData} onProjectClick={handleOpenProjectModal} />
           
         </div>
       </section>
 
       {/* Call to Action / Contact Teaser */}
-      <section className="section-padding bg-background/90 animate-slideInUp delay-600">
-        <div className="container mx-auto px-4 text-center">
+      <section className="section-padding bg-background/90">
+        <div className="container mx-auto px-4 text-center animate-slideInUp delay-600">
             <div className="max-w-2xl mx-auto">
                 <h2 className="text-3xl sm:text-4xl font-bold mb-5 text-foreground">
                     Ready to <span className="text-primary">Collaborate</span>?

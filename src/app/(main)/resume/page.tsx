@@ -1,6 +1,6 @@
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Briefcase, GraduationCap, Star, Download, Zap, Settings, Code, ExternalLink, Lightbulb, Users, Wrench, Edit3 } from "lucide-react"; // Added Edit3 for video editing
+import { Briefcase, GraduationCap, Star, Download, Zap, Settings, Code, ExternalLink, Lightbulb, Users, Wrench, Edit3, CalendarDays, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
@@ -14,6 +14,29 @@ const skillsData = {
   "Other Skills": ["Video Editing (Adobe Premiere Pro, Final Cut Pro)"],
   "Soft Skills": ["Problem Solving", "Team Collaboration", "Agile Methodologies", "Communication", "Adaptability"],
 };
+
+const experienceData = [
+  {
+    period: "March 2024 - Oct 2024",
+    role: "GET in R&D",
+    company: "YKK India Pvt. Ltd.",
+    location: "Bawal, Haryana",
+    descriptionPoints: [
+      "Led a small development team in designing and prototyping innovative solutions in R&D, ensuring efficient product development under tight deadlines.",
+      "Oversaw end-to-end development of key projects, balancing rapid prototyping with strategic planning to meet business and technical requirements.",
+    ],
+  },
+  {
+    period: "Approx. Early 2021 - Early 2024", // Approx. 3 years prior to March 2024
+    role: "Video Editor (Part-time/Freelance)",
+    company: "Remote",
+    location: "Freelance",
+    descriptionPoints: [
+      "Leveraged 3 years of part-time experience in video editing to produce and edit engaging video content for diverse clients, focusing on promotional materials, tutorials, and social media content.",
+    ],
+  },
+];
+
 
 const projectsOnResume = [
   {
@@ -58,29 +81,36 @@ export default function ResumePage() {
         </Button>
       </header>
 
-      <div className="max-w-4xl mx-auto space-y-8 sm:space-y-10">
-        {/* Experience Section */}
+      <div className="max-w-5xl mx-auto space-y-8 sm:space-y-10">
+        {/* Experience Section - Timeline */}
         <Card className="bg-card/90 backdrop-blur-sm shadow-xl hover:shadow-2xl transition-shadow duration-300 rounded-xl animate-slideInUp delay-300">
           <CardHeader className="p-5 sm:p-6 border-b border-border/50">
             <CardTitle className="font-headline text-xl sm:text-2xl text-primary flex items-center">
               <Briefcase className="mr-2.5 h-6 w-6 text-secondary" /> Professional Experience
             </CardTitle>
           </CardHeader>
-          <CardContent className="space-y-6 p-5 sm:p-6">
-            <div className="animate-slideInUp delay-400">
-              <h3 className="text-lg sm:text-xl font-semibold text-foreground/90">GET in R&D</h3>
-              <p className="text-sm text-muted-foreground mb-1">YKK India Pvt. Ltd. | Bawal, Haryana | March 2024 - Oct 2024</p>
-              <ul className="list-disc list-inside mt-1.5 space-y-1 text-sm text-foreground/80 pl-1">
-                <li>Led a small development team in designing and prototyping innovative solutions in R&D, ensuring efficient product development under tight deadlines.</li>
-                <li>Oversaw end-to-end development of key projects, balancing rapid prototyping with strategic planning to meet business and technical requirements.</li>
-              </ul>
-            </div>
-            <div className="animate-slideInUp delay-500">
-              <h3 className="text-lg sm:text-xl font-semibold text-foreground/90">Video Editor (Part-time/Freelance)</h3>
-              <p className="text-sm text-muted-foreground mb-1">Remote | Approx. 3 years prior to March 2024</p>
-              <ul className="list-disc list-inside mt-1.5 space-y-1 text-sm text-foreground/80 pl-1">
-                <li>Leveraged 3 years of part-time experience in video editing to produce and edit engaging video content for diverse clients, focusing on promotional materials, tutorials, and social media content.</li>
-              </ul>
+          <CardContent className="p-5 sm:p-6">
+            <div className="relative flex overflow-x-auto scrollbar-hide py-4 -my-4"> {/* Horizontal scroll container */}
+              {experienceData.map((exp, index) => (
+                <div 
+                  key={index} 
+                  className="animate-slideInUp flex-shrink-0 w-72 md:w-[330px] bg-muted/30 dark:bg-background/70 p-5 rounded-lg shadow-md mr-4 last:mr-0 relative border border-border/30"
+                  style={{ animationDelay: `${0.4 + index * 0.15}s`}}
+                >
+                  <div className="absolute -top-3 -left-3 bg-primary text-primary-foreground text-xs font-semibold px-2 py-1 rounded-md shadow-lg">
+                    {exp.period}
+                  </div>
+                  <h3 className="text-lg font-semibold text-foreground/90 mt-5">{exp.role}</h3>
+                  <p className="text-sm text-muted-foreground mb-1">
+                    {exp.company} {exp.location && `| ${exp.location}`}
+                  </p>
+                  <ul className="list-disc list-inside mt-2 space-y-1 text-xs text-foreground/80 pl-1 leading-relaxed">
+                    {exp.descriptionPoints.map((point, i) => (
+                      <li key={i}>{point}</li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
             </div>
           </CardContent>
         </Card>
