@@ -5,70 +5,92 @@
 
 @layer base {
   :root {
-    /* New Theme: Light, Professional Blue, Violet Accent */
-    --background: 205 87% 94%; /* #E3F2FD - Light desaturated blue */
-    --foreground: 210 15% 20%; /* #2D3339 - Dark Gray for text */
-
-    --card: 0 0% 100%; /* #FFFFFF - White */
-    --card-foreground: 210 15% 20%; /* #2D3339 */
-
-    --popover: 0 0% 100%; /* #FFFFFF */
-    --popover-foreground: 210 15% 20%; /* #2D3339 */
-
-    /* Primary color: Professional Blue (#2979FF) */
-    --primary: 217 100% 58%; /* hsl(217, 100%, 58%) */
-    --primary-foreground: 0 0% 100%; /* White */
-
-    /* Secondary/Accent color: Vibrant Violet (#7C4DFF) */
-    --secondary: 256 100% 65%; /* hsl(256, 100%, 65%) */
-    --secondary-foreground: 0 0% 100%; /* White */
+    /* Light Theme (Derived from previous "Professional Blue" for contrast) */
+    --background-light: 205 87% 94%; /* #E3F2FD - Light desaturated blue */
+    --foreground-light: 210 15% 20%; /* #2D3339 - Dark Gray for text */
+    --card-light: 0 0% 100%; /* #FFFFFF - White */
+    --card-foreground-light: 210 15% 20%; /* #2D3339 */
+    --popover-light: 0 0% 100%; /* #FFFFFF */
+    --popover-foreground-light: 210 15% 20%; /* #2D3339 */
+    --primary-light: 217 100% 58%; /* Professional Blue #2979FF */
+    --primary-foreground-light: 0 0% 100%; /* White */
+    --secondary-light: 180 50% 70%; /* Light Cyan for light theme secondary (was Accent 1) #A8DADC */
+    --secondary-foreground-light: 210 15% 20%; /* Dark text on light cyan */
+    --accent-light: 350 100% 80%; /* Soft Pink for light theme accent (was Accent 2) #FFC1CC */
+    --accent-foreground-light: 210 15% 20%; /* Dark text on soft pink */
+    --muted-light: 210 30% 88%; /* #D9E1E8 */
+    --muted-foreground-light: 210 10% 45%; /* #656E77 */
+    --border-light: 210 20% 80%; /* #BEC8D1 */
+    --input-light: 0 0% 100%; /* White */
+    --ring-light: 217 100% 58%; /* Primary Blue */
+    --destructive-light: 0 75% 55%; /* #F22B2B */
+    --destructive-foreground-light: 0 0% 100%; /* White */
     
-    --muted: 210 30% 88%; /* #D9E1E8 - Light gray for muted elements */
-    --muted-foreground: 210 10% 45%; /* #656E77 - Medium gray for muted text */
+    /* Dark Theme (User Provided Palette) */
+    --background-dark: 200 0% 17%; /* #2C2C2C slate gray */
+    --foreground-dark: 0 0% 89%; /* #E4E4E4 light gray */
+    --card-dark: 200 0% 22%; /* Slightly lighter than bg, e.g., #383838 */
+    --card-foreground-dark: 0 0% 89%; /* #E4E4E4 */
+    --popover-dark: 200 0% 15%; /* Darker than card */
+    --popover-foreground-dark: 0 0% 89%; /* #E4E4E4 */
+    --primary-dark: 260 42% 71%; /* #B39CD0 lavender (Button/CTA) */
+    --primary-foreground-dark: 200 0% 10%; /* Darker text for lavender button */
+    --secondary-dark: 181 43% 76%; /* #A8DADC light cyan (Accent 1) */
+    --secondary-foreground-dark: 200 0% 10%; /* Dark text on light cyan */
+    --accent-dark: 350 100% 80%; /* #FFC1CC soft pink (Accent 2) */
+    --accent-foreground-dark: 200 0% 10%; /* Dark text on soft pink */
+    --muted-dark: 200 0% 25%; /* #404040 */
+    --muted-foreground-dark: 0 0% 60%; /* #999999 */
+    --border-dark: 200 0% 30%; /* #4D4D4D */
+    --input-dark: 200 0% 20%; /* #333333 */
+    --ring-dark: 260 42% 71%; /* Lavender for focus rings */
+    --destructive-dark: 0 75% 55%; /* #F22B2B */
+    --destructive-foreground-dark: 0 0% 100%; /* White */
 
-    /* Accent can reuse Secondary or be different if needed */
-    --accent: 256 100% 65%; /* Using Violet as general accent */
-    --accent-foreground: 0 0% 100%; /* White */
+    --radius: 0.5rem;
 
-    --destructive: 0 75% 55%; /* #F22B2B - Consistent Red */
-    --destructive-foreground: 0 0% 100%; /* White */
-
-    --border: 210 20% 80%; /* #BEC8D1 - Softer border for light theme */
-    --input: 0 0% 100%; /* White background for inputs */
-    --ring: 217 100% 58%; /* Primary blue for focus rings */
-
-    --radius: 0.5rem; /* Standardized radius */
-
-    /* Chart colors - can be adjusted if charts are used extensively */
-    --chart-1: 217 100% 58%; /* Primary Blue */
-    --chart-2: 256 100% 65%; /* Accent Violet */
-    --chart-3: 170 80% 45%;  /* A Teal/Green for variety */
-    --chart-4: 30 100% 60%;  /* Orange */
-    --chart-5: 320 70% 55%;  /* Pink */
+    /* Default to dark theme variables initially */
+    --background: var(--background-dark);
+    --foreground: var(--foreground-dark);
+    --card: var(--card-dark);
+    --card-foreground: var(--card-foreground-dark);
+    --popover: var(--popover-dark);
+    --popover-foreground: var(--popover-foreground-dark);
+    --primary: var(--primary-dark);
+    --primary-foreground: var(--primary-foreground-dark);
+    --secondary: var(--secondary-dark);
+    --secondary-foreground: var(--secondary-foreground-dark);
+    --muted: var(--muted-dark);
+    --muted-foreground: var(--muted-foreground-dark);
+    --accent: var(--accent-dark);
+    --accent-foreground: var(--accent-foreground-dark);
+    --destructive: var(--destructive-dark);
+    --destructive-foreground: var(--destructive-foreground-dark);
+    --border: var(--border-dark);
+    --input: var(--input-dark);
+    --ring: var(--ring-dark);
   }
 
-  .dark {
-    /* For consistency, if a dark mode toggle were added later, it would go here.
-       For now, the root styles define the light theme as default. */
-    --background: 205 87% 94%;
-    --foreground: 210 15% 20%;
-    --card: 0 0% 100%;
-    --card-foreground: 210 15% 20%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 210 15% 20%;
-    --primary: 217 100% 58%;
-    --primary-foreground: 0 0% 100%;
-    --secondary: 256 100% 65%;
-    --secondary-foreground: 0 0% 100%;
-    --muted: 210 30% 88%;
-    --muted-foreground: 210 10% 45%;
-    --accent: 256 100% 65%;
-    --accent-foreground: 0 0% 100%;
-    --destructive: 0 75% 55%;
-    --destructive-foreground: 0 0% 100%;
-    --border: 210 20% 80%;
-    --input: 0 0% 100%;
-    --ring: 217 100% 58%;
+  .light {
+    --background: var(--background-light);
+    --foreground: var(--foreground-light);
+    --card: var(--card-light);
+    --card-foreground: var(--card-foreground-light);
+    --popover: var(--popover-light);
+    --popover-foreground: var(--popover-foreground-light);
+    --primary: var(--primary-light);
+    --primary-foreground: var(--primary-foreground-light);
+    --secondary: var(--secondary-light);
+    --secondary-foreground: var(--secondary-foreground-light);
+    --muted: var(--muted-light);
+    --muted-foreground: var(--muted-foreground-light);
+    --accent: var(--accent-light);
+    --accent-foreground: var(--accent-foreground-light);
+    --destructive: var(--destructive-light);
+    --destructive-foreground: var(--destructive-foreground-light);
+    --border: var(--border-light);
+    --input: var(--input-light);
+    --ring: var(--ring-light);
   }
 }
 
@@ -78,8 +100,6 @@
   }
   body {
     @apply bg-background text-foreground;
-    /* Optional: Subtle gradient or texture for background if desired */
-    /* background-image: linear-gradient(180deg, hsl(var(--background)) 0%, hsl(var(--background) / 0.95) 100%); */
     background-attachment: fixed;
   }
   ::selection {
@@ -100,10 +120,10 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-headline text-foreground;
+    @apply font-headline; /* text-foreground is inherited */
   }
-  p, span, div, li, label, input, textarea, button, a {
-    @apply font-body text-foreground; /* Ensures body font is applied widely */
+   p, span, div, li, label, input, textarea, button, a {
+    @apply font-body; /* text-foreground is inherited */
   }
 }
 
@@ -140,33 +160,7 @@
 .delay-500 { animation-delay: 0.5s !important; }
 
 .section-padding {
-  @apply py-12 sm:py-20; /* Adjusted padding for new theme */
-}
-
-/* Text glow for primary color - more subtle for light theme */
-.text-glow-primary {
-  color: hsl(var(--primary));
-  /* text-shadow: 0 0 8px hsl(var(--primary) / 0.5); Removed for cleaner light theme */
-}
-.text-glow-secondary {
-  color: hsl(var(--secondary));
- /* text-shadow: 0 0 8px hsl(var(--secondary) / 0.5); Removed for cleaner light theme */
-}
-
-/* Glassmorphism card for light theme - more subtle */
-.glassmorphism-card {
-  @apply bg-card/80 backdrop-blur-sm border border-border/50 shadow-lg rounded-xl;
-  /* shadow-2xl might be too heavy for light theme, using shadow-lg */
-}
-
-/* Marquee animation for project carousel */
-@keyframes marquee {
-  0% { transform: translateX(0%); }
-  100% { transform: translateX(-100%); }
-}
-
-.animate-marquee {
-  animation: marquee 30s linear infinite; /* Adjust duration as needed */
+  @apply py-12 sm:py-16 md:py-20;
 }
 
 /* For project carousel track lines */
@@ -176,13 +170,22 @@
   position: absolute;
   left: 0;
   right: 0;
-  height: 1px;
-  background-color: hsl(var(--border) / 0.5);
+  height: 2px; /* Thicker lines */
+  background-color: hsl(var(--border) / 0.7); /* More visible border */
+  z-index: 0; /* Behind cards */
 }
 .carousel-track-lines::before {
-  top: 0;
+  top: 10px; /* Position them slightly inset */
 }
 .carousel-track-lines::after {
-  bottom: 0;
+  bottom: 10px; /* Position them slightly inset */
 }
 
+/* Ensure scrollbar-hide is defined, Tailwind might not have it by default */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
