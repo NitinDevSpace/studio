@@ -98,13 +98,13 @@
   * {
     @apply border-border;
   }
-  html {
+  html, body {
     overflow-x: hidden; 
   }
   body {
     @apply bg-background text-foreground;
     overflow-y: auto; 
-    overflow-x: hidden; 
+    position: relative; /* Helps contain positioned children */
   }
   ::selection {
     @apply bg-primary text-primary-foreground;

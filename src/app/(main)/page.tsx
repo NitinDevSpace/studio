@@ -105,13 +105,13 @@ export default function HomePage() {
                     />
                   </svg>
                   <Image
-                    src="https://placehold.co/500x500.png"
-                    alt="Nitin Kumar - Developer"
+                    src="https://placehold.co/400x500.png" 
+                    alt="Nitin Kumar - Professional Portrait"
                     width={450}
                     height={450}
                     className="w-full h-full object-cover"
                     style={{ clipPath: 'url(#heroTriangleClip)' }}
-                    data-ai-hint="professional developer portrait tilted triangle"
+                    data-ai-hint="Nitin Kumar professional portrait"
                     priority
                   />
                 </div>
