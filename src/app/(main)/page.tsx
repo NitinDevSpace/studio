@@ -87,8 +87,9 @@ export default function HomePage() {
             <div className="hidden md:flex justify-center items-center animate-slideInFromRight delay-200 overflow-hidden">
               <div className="w-[280px] h-[280px] sm:w-[320px] sm:h-[320px] md:w-[350px] md:h-[350px] lg:w-[400px] lg:h-[400px] flex justify-center items-center">
                 <div className="relative w-[75%] h-[75%] transform rotate-[35deg]">
+                  {/* SVG for border, positioned on top */}
                   <svg
-                    className="absolute inset-0 w-full h-full"
+                    className="absolute inset-0 w-full h-full z-10" 
                     viewBox="0 0 100 100"
                     preserveAspectRatio="xMidYMid meet" 
                   >
@@ -101,15 +102,18 @@ export default function HomePage() {
                     {/* Border for upright triangle, inset to account for strokeWidth */}
                     <polygon
                       points="50,4 4,96 96,96" 
-                      className="fill-none stroke-primary" 
+                      fill="none" /* Explicit fill none */
+                      stroke="currentColor" /* Stroke color controlled by Tailwind class */
+                      className="stroke-primary" 
                       strokeWidth="8" 
                       vectorEffect="non-scaling-stroke"
                     />
                   </svg>
+                  {/* Image, clipped and positioned behind the SVG border */}
                   <Image
-                    src="https://placehold.co/400x500.png" 
+                    src="https://placehold.co/400x500/ff0000/ffffff.png?text=IMAGE" /* Distinct placeholder */
                     alt="Nitin Kumar - Professional Portrait"
-                    width={450}
+                    width={450} 
                     height={450}
                     className="w-full h-full object-cover"
                     style={{ clipPath: 'url(#heroTriangleClip)' }}
