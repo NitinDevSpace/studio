@@ -15,3 +15,10 @@ export interface Project {
 }
 
 export type FilterType = 'techStack' | 'category';
+
+export interface ChatMessage {
+  id: string;
+  type: 'user' | 'bot' | 'error';
+  content: string;
+  timestamp: Date;
+}
