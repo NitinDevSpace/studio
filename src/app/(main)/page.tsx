@@ -85,42 +85,51 @@ export default function HomePage() {
               </div>
             </div>
             <div className="hidden md:flex justify-center items-center animate-slideInFromRight delay-200 overflow-hidden">
-              <div className="w-[280px] h-[280px] sm:w-[320px] sm:h-[320px] md:w-[350px] md:h-[350px] lg:w-[400px] lg:h-[400px] flex justify-center items-center">
+              {/* This div defines the image's display area */}
+              <div className="relative w-[280px] h-[280px] sm:w-[320px] sm:h-[320px] md:w-[350px] md:h-[350px] lg:w-[400px] lg:h-[400px] rounded-xl overflow-hidden shadow-lg">
+                {/*
+                Triangle SVG and related structure commented out for simplification.
                 <div className="relative w-[75%] h-[75%] transform rotate-[35deg]">
-                  {/* SVG for border, positioned on top */}
                   <svg
-                    className="absolute inset-0 w-full h-full z-10" 
+                    className="absolute inset-0 w-full h-full z-10"
                     viewBox="0 0 100 100"
                     preserveAspectRatio="xMidYMid meet" 
+                    fill="none" 
                   >
                     <defs>
                       <clipPath id="heroTriangleClip">
-                        {/* Upright triangle, apex starting lower to allow image overflow from top */}
                         <polygon points="50,15 0,100 100,100" />
                       </clipPath>
                     </defs>
-                    {/* Border for upright triangle, inset to account for strokeWidth, apex also lower */}
                     <polygon
-                      points="50,19 4,96 96,96" 
-                      fill="none"
+                      points="50,19 4,96 96,96"
                       stroke="currentColor"
                       className="stroke-primary" 
                       strokeWidth="8" 
                       vectorEffect="non-scaling-stroke"
                     />
                   </svg>
-                  {/* Image, clipped and positioned behind the SVG border */}
                   <Image
                     src="https://upload.wikimedia.org/wikipedia/en/thumb/8/8e/Spider-Man_%28Miles_Morales%29_character_art.png/250px-Spider-Man_%28Miles_Morales%29_character_art.png"
-                    alt="Spider-Man (Miles Morales) character art"
+                    alt="Nitin Kumar - Professional Portrait"
                     width={250} 
                     height={445}
                     className="w-full h-full object-cover object-top" 
                     style={{ clipPath: 'url(#heroTriangleClip)' }}
-                    data-ai-hint="Spider-Man Miles Morales character"
+                    data-ai-hint="Nitin Kumar professional portrait"
                     priority
                   />
                 </div>
+                */}
+                <Image
+                  src="https://upload.wikimedia.org/wikipedia/en/thumb/8/8e/Spider-Man_%28Miles_Morales%29_character_art.png/250px-Spider-Man_%28Miles_Morales%29_character_art.png"
+                  alt="Spider-Man (Miles Morales) character art"
+                  fill
+                  sizes="(max-width: 640px) 280px, (max-width: 768px) 320px, (max-width: 1024px) 350px, 400px"
+                  className="object-cover object-top"
+                  data-ai-hint="Spider-Man Miles Morales character"
+                  priority
+                />
               </div>
             </div>
           </div>
@@ -214,5 +223,3 @@ export default function HomePage() {
     </div>
   );
 }
-
-    
