@@ -28,6 +28,7 @@ export default function AskNAIForm({ isEmbedded = false }: AskNAIFormProps) {
   const [actionState, formAction, isActionPending] = useActionState(askNAIAction, initialActionState);
   const { toast } = useToast();
   const formRef = useRef<HTMLFormElement>(null);
+  const textareaRef = useRef<HTMLTextAreaElement>(null); // Ref for the Textarea
   const [currentQuestion, setCurrentQuestion] = useState('');
   const [chatMessages, setChatMessages] = useState<ChatMessage[]>([]);
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -62,33 +63,36 @@ export default function AskNAIForm({ isEmbedded = false }: AskNAIFormProps) {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
-  // Handle AI response or error
+  // Handle AI response or error, and refocus input
   useEffect(() => {
-    if (actionState.message && actionState.answer === null && !isActionPending) { // Error case
-      setChatMessages(prev => [...prev, {
-        id: crypto.randomUUID(),
-        type: 'error',
-        content: actionState.message || "An unexpected error occurred.",
-        timestamp: new Date(),
-      }]);
-      toast({
-        title: "NAI Error",
-        description: actionState.message,
-        variant: "destructive",
-      });
-    } else if (actionState.answer && !isActionPending) { // Success case
-      setChatMessages(prev => {
-        // Only add bot response if it's not already the last message to prevent duplicates on re-renders
-        if (prev.length > 0 && prev[prev.length -1].type === 'user') {
-          return [...prev, {
-            id: crypto.randomUUID(),
-            type: 'bot',
-            content: actionState.answer,
-            timestamp: new Date(),
-          }];
-        }
-        return prev;
-      });
+    if (!isActionPending) { // Action has completed
+      if (actionState.message && actionState.answer === null) { // Error case from AI
+        setChatMessages(prev => [...prev, {
+          id: crypto.randomUUID(),
+          type: 'error',
+          content: actionState.message || "An unexpected error occurred.",
+          timestamp: new Date(),
+        }]);
+        toast({
+          title: "NAI Error",
+          description: actionState.message,
+          variant: "destructive",
+        });
+        textareaRef.current?.focus(); // Refocus on error
+      } else if (actionState.answer) { // Success case
+        setChatMessages(prev => {
+          if (prev.length > 0 && prev[prev.length -1].type === 'user') {
+            return [...prev, {
+              id: crypto.randomUUID(),
+              type: 'bot',
+              content: actionState.answer,
+              timestamp: new Date(),
+            }];
+          }
+          return prev;
+        });
+        textareaRef.current?.focus(); // Refocus on success
+      }
     }
   }, [actionState, toast, isActionPending]);
 
@@ -117,6 +121,7 @@ export default function AskNAIForm({ isEmbedded = false }: AskNAIFormProps) {
     // Reset form only after action is complete and successful
     if (!isActionPending && actionState.answer) {
         formRef.current?.reset();
+        // setCurrentQuestion(''); // Already handled by handleSubmit
     }
   }, [isActionPending, actionState.answer]);
 
@@ -125,6 +130,7 @@ export default function AskNAIForm({ isEmbedded = false }: AskNAIFormProps) {
     setChatMessages([]);
     setCurrentQuestion('');
     sessionStorage.removeItem(SESSION_STORAGE_KEY);
+    textareaRef.current?.focus();
   };
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
@@ -204,6 +210,7 @@ export default function AskNAIForm({ isEmbedded = false }: AskNAIFormProps) {
         className="flex items-center gap-2 p-2 sm:p-3 border-t bg-background"
       >
         <Textarea
+          ref={textareaRef} // Assign ref to Textarea
           value={currentQuestion}
           onChange={(e) => setCurrentQuestion(e.target.value)}
           placeholder="Ask NAI anything..."
