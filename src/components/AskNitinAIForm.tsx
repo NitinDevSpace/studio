@@ -105,10 +105,13 @@ export default function AskNAIForm({ isEmbedded = false }: AskNAIFormProps) {
 
     const formData = new FormData();
     formData.append('question', currentQuestion.trim());
-    formAction(formData);
+    
+    React.startTransition(() => {
+      formAction(formData);
+    });
+    
     setCurrentQuestion('');
-    // formRef.current?.reset(); // Resetting here can cause issues if isActionPending becomes true fast
-  }, [currentQuestion, isActionPending, formAction]);
+  }, [currentQuestion, isActionPending, formAction, setChatMessages]);
 
   useEffect(() => {
     // Reset form only after action is complete and successful
