@@ -10,7 +10,13 @@ import { Card, CardContent } from '@/components/ui/card';
 import Link from 'next/link';
 import Image from 'next/image';
 import ProjectCarousel from '@/components/ProjectCarousel';
-import ProjectDetailModal from '@/components/ProjectDetailModal';
+import dynamic from 'next/dynamic';
+
+const ProjectDetailModal = dynamic(() => import('@/components/ProjectDetailModal'), {
+  // ssr: false, // Modal is client-side interactive, SSR might not be necessary
+  loading: () => <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50"><p className="text-white p-4 bg-background rounded-md shadow-lg">Loading project details...</p></div>,
+});
+
 
 export default function HomePage() {
   const [mounted, setMounted] = useState(false);
@@ -115,48 +121,12 @@ export default function HomePage() {
                 </Button>
               </div>
             </div>
-            {/*
+            
             <div className="hidden md:flex justify-center items-center animate-slideInFromRight delay-200 overflow-hidden">
-              <div className="relative w-[280px] h-[280px] sm:w-[320px] sm:h-[320px] md:w-[350px] md:h-[350px] lg:w-[400px] lg:h-[400px]">
-                <div className="relative w-[75%] h-[75%] transform rotate-[35deg]">
-                  <svg
-                    className="absolute inset-0 w-full h-full z-10"
-                    viewBox="0 0 100 100"
-                    preserveAspectRatio="xMidYMid meet"
-                    fill="none"
-                  >
-                    <defs>
-                      <clipPath id="heroTriangleClip">
-                        <polygon points="50,15 0,100 100,100" />
-                      </clipPath>
-                    </defs>
-                    <polygon
-                      points="50,19 4,96 96,96"
-                      className="stroke-primary"
-                      strokeWidth="8"
-                      fill="none"
-                      vectorEffect="non-scaling-stroke"
-                    />
-                  </svg>
-                  <Image
-                    src="https://upload.wikimedia.org/wikipedia/en/thumb/8/8e/Spider-Man_%28Miles_Morales%29_character_art.png/250px-Spider-Man_%28Miles_Morales%29_character_art.png"
-                    alt="Spider-Man (Miles Morales) character art"
-                    width={250} 
-                    height={445} 
-                    className="w-full h-full object-cover object-top"
-                    style={{ clipPath: 'url(#heroTriangleClip)' }} 
-                    data-ai-hint="Spider-Man Miles Morales character"
-                    priority
-                  />
-                </div>
-              </div>
-            </div>
-            */}
-             <div className="hidden md:flex justify-center items-center animate-slideInFromRight delay-200 overflow-hidden">
                 <div className="relative w-[280px] h-[280px] sm:w-[320px] sm:h-[320px] md:w-[350px] md:h-[350px] lg:w-[400px] lg:h-[400px] rounded-xl overflow-hidden shadow-lg">
                 <Image
                     src="https://upload.wikimedia.org/wikipedia/en/thumb/8/8e/Spider-Man_%28Miles_Morales%29_character_art.png/250px-Spider-Man_%28Miles_Morales%29_character_art.png"
-                    alt="Spider-Man (Miles Morales) character art"
+                    alt="Spider-Man (Miles Morales) character art for hero section"
                     fill
                     sizes="(max-width: 640px) 280px, (max-width: 768px) 320px, (max-width: 1024px) 350px, 400px"
                     className="object-cover object-top"

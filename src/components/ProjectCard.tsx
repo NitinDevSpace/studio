@@ -12,6 +12,7 @@ interface ProjectCardProps {
   project: Project;
   onClick: () => void;
   className?: string;
+  isCarouselPriority?: boolean; // New prop for carousel optimization
 }
 
 const StatusBadge: React.FC<{ status?: ProjectStatus }> = ({ status }) => {
@@ -56,7 +57,7 @@ const StatusBadge: React.FC<{ status?: ProjectStatus }> = ({ status }) => {
 };
 
 
-export default function ProjectCard({ project, onClick, className }: ProjectCardProps) {
+export default function ProjectCard({ project, onClick, className, isCarouselPriority }: ProjectCardProps) {
   return (
     <Card
       className={cn(
@@ -75,7 +76,7 @@ export default function ProjectCard({ project, onClick, className }: ProjectCard
           className="transform transition-all duration-500 ease-in-out group-hover/card:scale-110"
           data-ai-hint={project.imageHint || 'project screenshot'}
           sizes="(max-width: 640px) 90vw, (max-width: 768px) 60vw, (max-width: 1024px) 420px, 420px"
-          priority={project.id === '1' || project.id === '2'} // Prioritize first few images
+          priority={project.id === '1' || project.id === '2' || isCarouselPriority} // Updated priority logic
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent opacity-100 group-hover/card:opacity-60 transition-opacity duration-300"></div>
         <div className="absolute bottom-3 left-3 right-3 p-2">

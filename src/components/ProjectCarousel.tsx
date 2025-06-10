@@ -114,6 +114,7 @@ const ProjectCarousel: React.FC<ProjectCarouselProps> = ({ projects, onProjectCl
               project={project}
               onClick={() => onProjectClick(project)}
               className="transform"
+              isCarouselPriority={index < 3} // Prioritize first 3 images in the duplicated set
             />
           </div>
         ))}
