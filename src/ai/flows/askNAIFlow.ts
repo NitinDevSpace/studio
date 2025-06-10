@@ -1,7 +1,7 @@
 
 'use server';
 /**
- * @fileOverview A Genkit flow for answering questions about Nitin Kumar, his portfolio, and projects.
+ * @fileOverview A Genkit flow for answering questions about Nitin Kumar, his portfolio, and projects, and engaging in general conversation.
  *
  * - askNAI -  A function that takes a question as input and returns an AI-generated answer.
  * - AskNAIInput - The input type for the askNAI function.
@@ -50,8 +50,8 @@ const projectContext = projectsData.map(p => {
 
 const AskNAIInputSchema = z.object({
   question: z
-    .string().min(5, "Please ask a more specific question (at least 5 characters).")
-    .describe("The user's question about Nitin Kumar, his portfolio, or his projects."),
+    .string().min(1, "Please ask a question.") 
+    .describe("The user's question about Nitin Kumar, his portfolio, his projects, or a general conversational query."),
 });
 export type AskNAIInput = z.infer<typeof AskNAIInputSchema>;
 
@@ -73,8 +73,11 @@ const askNAIPrompt = ai.definePrompt({
   input: {schema: AskNAIInputSchema},
   output: {schema: AskNAIOutputSchema},
   prompt: `You are NAI, a helpful and friendly AI assistant for Nitin Kumar's portfolio (NitinDevSpace).
-Your goal is to answer questions about Nitin Kumar, his professional background, his projects, or this portfolio website based *only* on the information provided below.
-Be concise and informative. If the information is not available in the context, politely state that you don't have that specific detail. Do not make up information.
+Your primary goal is to answer questions about Nitin Kumar, his professional background, his projects, or this portfolio website based *only* on the information provided below.
+Be concise and informative. If the information is not available in the context for specific questions about Nitin, politely state that you don't have that specific detail. Do not make up information about Nitin.
+
+You can also engage in simple, friendly conversation. For example, if greeted with "hi" or asked "how are you?", respond naturally and politely (e.g., "Hello! How can I help you today?" or "I'm doing well, thank you for asking! How can I assist you?").
+If the user's question is conversational and not related to Nitin, you can answer it generally.
 
 === Context about Nitin Kumar ===
 ${nitinResumeContext}
@@ -85,7 +88,7 @@ ${projectContext}
 
 User's Question: {{{question}}}
 
-Based *only* on the provided context, answer the user's question.
+Based on the instructions above and *only* the provided context for questions about Nitin, answer the user's question.
 Answer:`,
 });
 
@@ -104,3 +107,5 @@ const askNAIFlow = ai.defineFlow(
     return output!;
   }
 );
+
+    

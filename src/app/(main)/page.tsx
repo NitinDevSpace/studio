@@ -95,15 +95,15 @@ export default function HomePage() {
                   >
                     <defs>
                       <clipPath id="heroTriangleClip">
-                        {/* Upright triangle: apex at top-center, base at bottom */}
-                        <polygon points="50,0 0,100 100,100" />
+                        {/* Upright triangle, apex starting lower to allow image overflow from top */}
+                        <polygon points="50,15 0,100 100,100" />
                       </clipPath>
                     </defs>
-                    {/* Border for upright triangle, inset to account for strokeWidth */}
+                    {/* Border for upright triangle, inset to account for strokeWidth, apex also lower */}
                     <polygon
-                      points="50,4 4,96 96,96" 
-                      fill="none" /* Explicit fill none */
-                      stroke="currentColor" /* Stroke color controlled by Tailwind class */
+                      points="50,19 4,96 96,96" 
+                      fill="none"
+                      stroke="currentColor"
                       className="stroke-primary" 
                       strokeWidth="8" 
                       vectorEffect="non-scaling-stroke"
@@ -114,10 +114,10 @@ export default function HomePage() {
                     src="https://upload.wikimedia.org/wikipedia/en/thumb/8/8e/Spider-Man_%28Miles_Morales%29_character_art.png/250px-Spider-Man_%28Miles_Morales%29_character_art.png"
                     alt="Spider-Man (Miles Morales) character art"
                     width={250} 
-                    height={445} // Approximate aspect ratio from original if known, otherwise similar to width
-                    className="w-full h-full object-cover"
+                    height={445}
+                    className="w-full h-full object-cover object-top" 
                     style={{ clipPath: 'url(#heroTriangleClip)' }}
-                    data-ai-hint="Spider-Man Miles Morales"
+                    data-ai-hint="Spider-Man Miles Morales character"
                     priority
                   />
                 </div>
@@ -214,3 +214,5 @@ export default function HomePage() {
     </div>
   );
 }
+
+    
