@@ -56,8 +56,10 @@ export default function HomePage() {
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-headline font-bold mb-5 text-foreground">
                 Hi, I&apos;m <span className="text-primary">Nitin Kumar</span>
               </h1>
-              <p className="text-xl sm:text-2xl font-medium mb-6 text-foreground/80 animate-slideInUp delay-100">
-                Full Stack Developer & AI Enthusiast
+              <p className="text-lg sm:text-xl font-medium mb-6 text-foreground/80 animate-slideInUp delay-100">
+                Software Engineer <span className="text-accent mx-1 sm:mx-1.5"> // </span> 
+                Full Stack Developer <span className="text-accent mx-1 sm:mx-1.5"> // </span> 
+                AI Enthusiast
               </p>
               <p className="text-base text-muted-foreground max-w-lg mx-auto md:mx-0 mb-10 leading-relaxed animate-slideInUp delay-200">
                 I craft innovative and user-centric web applications, bringing ideas to life with clean code and elegant design. Currently exploring the exciting possibilities of AI integration.
@@ -101,9 +103,9 @@ export default function HomePage() {
       </section>
 
       {/* About Me Section */}
-      <section id="about-section" className="section-padding bg-background/90">
+      <section id="about-section" className="section-padding bg-background/90 animate-slideInUp delay-400">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12 sm:mb-14 animate-slideInUp">
+          <div className="text-center mb-12 sm:mb-14">
             <h2 className="text-3xl sm:text-4xl font-bold mb-3 text-foreground">
               A Little <span className="text-primary">About Me</span>
             </h2>
@@ -117,7 +119,7 @@ export default function HomePage() {
               { icon: Layers, title: "Backend Architecture", description: "Building secure, scalable server-side applications and APIs using Node.js, Python, and Firebase." },
               { icon: Sparkles, title: "AI Integration", description: "Exploring AI with Genkit, integrating intelligent features to create smarter applications." },
             ].map((item, index) => (
-              <Card key={item.title} className="bg-card text-center p-6 animate-slideInUp shadow-lg hover:shadow-xl transition-shadow duration-300" style={{ animationDelay: `${0.2 + index * 0.1}s`}}>
+              <Card key={item.title} className="bg-card text-center p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 animate-slideInUp" style={{ animationDelay: `${0.2 + (index * 0.1) + 0.4}s`}}>
                 <CardContent className="p-0">
                   <div className="p-3 inline-block bg-primary/10 rounded-full mb-3">
                      <item.icon className="h-8 w-8 text-primary mx-auto" />
@@ -128,7 +130,7 @@ export default function HomePage() {
               </Card>
             ))}
           </div>
-           <div className="text-center mt-10 animate-slideInUp delay-500">
+           <div className="text-center mt-10 animate-slideInUp delay-700">
             <Button asChild size="lg" variant="outline" className="border-primary/60 text-primary hover:bg-primary/10 hover:border-primary transition-all transform hover:scale-105 px-7 py-3">
               <Link href="/resume">
                 Explore My Resume <ArrowDown className="ml-2 h-4 w-4 rotate-[270deg]" />
@@ -139,9 +141,9 @@ export default function HomePage() {
       </section>
 
       {/* Projects Section - Replaced with Carousel */}
-      <section id="projects-section" className="section-padding bg-background">
+      <section id="projects-section" className="section-padding bg-background animate-slideInUp delay-500">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12 sm:mb-14 animate-slideInUp">
+          <div className="text-center mb-12 sm:mb-14">
             <h2 className="text-3xl sm:text-4xl font-bold mb-3 text-foreground">
               My <span className="text-secondary">Creations</span>
             </h2>
@@ -149,17 +151,17 @@ export default function HomePage() {
               A selection of projects where I've turned ideas into reality, showcasing my skills in development and problem-solving.
             </p>
           </div>
-
-          <div className="animate-slideInUp delay-200 p-4 md:p-6 border border-border/50 rounded-xl relative overflow-hidden carousel-track-lines">
-            <ProjectCarousel projects={projectsData} onProjectClick={handleOpenProjectModal} />
-          </div>
+          
+          {/* The ProjectCarousel component will now be the bordered container */}
+          <ProjectCarousel projects={projectsData} onProjectClick={handleOpenProjectModal} />
+          
         </div>
       </section>
 
       {/* Call to Action / Contact Teaser */}
-      <section className="section-padding bg-background/90">
+      <section className="section-padding bg-background/90 animate-slideInUp delay-600">
         <div className="container mx-auto px-4 text-center">
-            <div className="max-w-2xl mx-auto animate-slideInUp">
+            <div className="max-w-2xl mx-auto">
                 <h2 className="text-3xl sm:text-4xl font-bold mb-5 text-foreground">
                     Ready to <span className="text-primary">Collaborate</span>?
                 </h2>

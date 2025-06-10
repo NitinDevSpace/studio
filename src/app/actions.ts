@@ -5,17 +5,17 @@
 // TODO: Revisit and resolve TypeScript errors once Genkit provides more stable type definitions and integration patterns for Next.js Server Actions.
 'use server';
 
-import { askNitinAI, type AskNitinAIInput } from '@/ai/flows/askNitinAIFlow'; // Updated import
+import { askNAI, type AskNAIInput } from '@/ai/flows/askNAIFlow'; // Updated import
 import { z } from 'zod';
 import { db } from '@/lib/firebase'; 
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 
-// Schema for the new "Ask NitinAI" feature
-const AskNitinAISchema = z.object({
+// Schema for the new "Ask NAI" feature
+const AskNAISchema = z.object({ // Renamed
   question: z.string().min(5, "Question must be at least 5 characters long.").max(500, "Question is too long (max 500 characters)."),
 });
 
-export interface AskNitinAIFormState {
+export interface AskNAIFormState { // Renamed
   message: string | null;
   answer: string | null;
   issues?: string[];
@@ -27,15 +27,15 @@ export interface AskNitinAIFormState {
   }
 }
 
-export async function askNitinAIAction(
-  prevState: AskNitinAIFormState,
+export async function askNAIAction( // Renamed
+  prevState: AskNAIFormState, // Renamed
   formData: FormData
-): Promise<AskNitinAIFormState> {
+): Promise<AskNAIFormState> { // Renamed
   const rawFormData = {
     question: formData.get('question'),
   };
 
-  const validatedFields = AskNitinAISchema.safeParse(rawFormData);
+  const validatedFields = AskNAISchema.safeParse(rawFormData); // Renamed
 
   if (!validatedFields.success) {
     return {
@@ -49,19 +49,19 @@ export async function askNitinAIAction(
   }
 
   try {
-    const input: AskNitinAIInput = {
+    const input: AskNAIInput = { // Renamed
       question: validatedFields.data.question,
     };
-    const result = await askNitinAI(input); // Call the new flow
+    const result = await askNAI(input); // Call the new flow - Renamed
     
     if (result && result.answer) {
        return {
-        message: "Answer generated successfully!", // This message might not be shown if answer is directly displayed
+        message: "Answer generated successfully!", 
         answer: result.answer,
       };
     } else {
       return {
-        message: "NitinAI could not generate an answer. Please try a different question or check the AI service.",
+        message: "NAI could not generate an answer. Please try a different question or check the AI service.", // Renamed
         answer: null,
         formData: validatedFields.data,
       };
@@ -69,7 +69,7 @@ export async function askNitinAIAction(
 
   } catch (error)
  {
-    console.error("Error generating answer with NitinAI:", error);
+    console.error("Error generating answer with NAI:", error); // Renamed
     let errorMessage = "Failed to get an answer due to an unexpected error. Please try again.";
     if (error instanceof Error) {
         if (error.message.includes('quota')) {
@@ -88,7 +88,7 @@ export async function askNitinAIAction(
   }
 }
 
-// Contact Form Action (remains largely the same)
+// Contact Form Action
 const ContactFormSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters long."),
   email: z.string().email("Invalid email address."),

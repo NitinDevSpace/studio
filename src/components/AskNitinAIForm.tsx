@@ -3,7 +3,7 @@
 
 import React, { useEffect, useRef, useActionState } from 'react';
 import { useFormStatus } from 'react-dom';
-import { askNitinAIAction, type AskNitinAIFormState } from '@/app/actions';
+import { askNAIAction, type AskNAIFormState } from '@/app/actions'; // Renamed action and state
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
@@ -13,7 +13,7 @@ import { Brain, AlertCircle, Loader2, Sparkles, MessageSquare } from 'lucide-rea
 import { useToast } from "@/hooks/use-toast";
 import { cn } from '@/lib/utils';
 
-const initialState: AskNitinAIFormState = {
+const initialState: AskNAIFormState = { // Renamed state
   message: null,
   answer: null,
 };
@@ -30,19 +30,19 @@ function SubmitButton() {
       ) : (
         <>
           <Sparkles className="mr-2 h-4 w-4" />
-          Ask NitinAI
+          Ask NAI 
         </>
       )}
     </Button>
   );
 }
 
-interface AskNitinAIFormProps {
+interface AskNAIFormProps { // Renamed
   isEmbedded?: boolean; 
 }
 
-export default function AskNitinAIForm({ isEmbedded = false }: AskNitinAIFormProps) {
-  const [state, formAction] = useActionState(askNitinAIAction, initialState);
+export default function AskNAIForm({ isEmbedded = false }: AskNAIFormProps) { // Renamed component
+  const [state, formAction] = useActionState(askNAIAction, initialState); // Renamed action and state
   const { toast } = useToast();
   const formRef = useRef<HTMLFormElement>(null);
 
@@ -103,7 +103,7 @@ export default function AskNitinAIForm({ isEmbedded = false }: AskNitinAIFormPro
         <div className={cn("p-6 border-t border-border/50", isEmbedded && "p-0 pt-3 mt-3")}>
           <Alert variant="default" className="mt-0 bg-primary/5 border-primary/20 text-sm">
              <Brain className="h-5 w-5 text-primary shrink-0" />
-            <AlertTitle className="text-primary font-semibold text-md">NitinAI Says:</AlertTitle>
+            <AlertTitle className="text-primary font-semibold text-md">NAI Says:</AlertTitle> 
             <AlertDescription className="text-foreground/80 whitespace-pre-wrap py-1.5 leading-relaxed max-h-48 overflow-y-auto">
               {state.answer}
             </AlertDescription>

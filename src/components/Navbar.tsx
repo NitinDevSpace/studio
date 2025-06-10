@@ -14,7 +14,7 @@ const navItems = [
   { href: '/', label: 'Home', icon: Home },
   { href: '/resume', label: 'Resume', icon: UserCircle },
   { href: '/contact', label: 'Contact', icon: MessageSquare },
-  { href: '/ask-nitin-ai', label: 'Ask NitinAI', icon: Brain },
+  { href: '/ask-nitin-ai', label: 'Ask NAI', icon: Brain }, // Renamed to Ask NAI
 ];
 
 export default function Navbar() {

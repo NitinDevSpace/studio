@@ -8,8 +8,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Mail, Phone, Linkedin, Github, MapPin, Send, Loader2, UserCircle, Instagram, Code, ShieldCheck } from "lucide-react";
 import Link from "next/link";
-import { useFormStatus } from 'react-dom';
-import { useEffect, useActionState } from "react";
+import { useFormStatus, useActionState } from 'react'; // Updated import
+import { useEffect } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { submitContactFormAction, type ContactFormState } from '@/app/actions';
 
@@ -51,17 +51,17 @@ export default function ContactPage() {
 
   return (
     <div className="section-padding fade-in-page container mx-auto px-4 bg-gradient-to-br from-background via-sky-50/5 dark:via-sky-900/10 to-indigo-100/5 dark:to-indigo-900/10 min-h-[calc(100vh-10rem)]">
-      <header className="text-center mb-12 sm:mb-16">
-        <h1 className="text-3xl sm:text-4xl md:text-5xl font-headline font-bold mb-3 text-foreground animate-slideInUp">
+      <header className="text-center mb-12 sm:mb-16 animate-slideInUp">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-headline font-bold mb-3 text-foreground">
           Get In <span className="text-primary">Touch</span>
         </h1>
-        <p className="text-md text-muted-foreground max-w-xl mx-auto animate-slideInUp delay-200 leading-relaxed">
+        <p className="text-md text-muted-foreground max-w-xl mx-auto leading-relaxed animate-slideInUp delay-200">
           Have a project in mind, a question, or just want to connect? I&apos;m here to listen. Drop me a line!
         </p>
       </header>
 
       <div className="grid md:grid-cols-2 gap-8 md:gap-10 items-start max-w-5xl mx-auto">
-        <Card className="bg-card/90 backdrop-blur-sm p-1 animate-slideInUp delay-300 shadow-xl hover:shadow-2xl transition-shadow duration-300 rounded-xl">
+        <Card className="bg-card/90 backdrop-blur-sm p-1 shadow-xl hover:shadow-2xl transition-shadow duration-300 rounded-xl animate-slideInUp delay-300">
           <CardHeader className="p-6 sm:p-7">
             <CardTitle className="font-headline text-xl text-primary flex items-center">
               <UserCircle className="mr-2.5 h-6 w-6 text-secondary"/> Contact Information
@@ -104,7 +104,7 @@ export default function ContactPage() {
           </CardContent>
         </Card>
 
-        <Card className="bg-card/90 backdrop-blur-sm p-1 animate-slideInUp delay-400 shadow-xl hover:shadow-2xl transition-shadow duration-300 rounded-xl">
+        <Card className="bg-card/90 backdrop-blur-sm p-1 shadow-xl hover:shadow-2xl transition-shadow duration-300 rounded-xl animate-slideInUp delay-400">
           <CardHeader className="p-6 sm:p-7">
             <CardTitle className="font-headline text-xl text-primary flex items-center">
              <Send className="mr-2.5 h-6 w-6 text-secondary"/> Send a Message

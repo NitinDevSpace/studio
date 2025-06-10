@@ -3,8 +3,8 @@
 
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { MessageCircle, X, Send, Bot } from 'lucide-react';
-import AskNitinAIForm from '@/components/AskNitinAIForm';
+import { MessageCircle, X, Bot } from 'lucide-react'; // Removed Send icon as it's not used
+import AskNitinAIForm from '@/components/AskNitinAIForm'; // Will be AskNAIForm conceptually
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { AnimatePresence, motion } from 'framer-motion';
 
@@ -37,20 +37,14 @@ export default function ChatbotOverlay() {
             <Card className="shadow-2xl border-border/80 bg-card/95 backdrop-blur-md">
               <CardHeader className="flex flex-row items-center justify-between p-4 border-b">
                 <CardTitle className="text-lg font-headline text-primary flex items-center">
-                  <Bot className="mr-2 h-5 w-5" /> NitinAI Assistant
+                  <Bot className="mr-2 h-5 w-5" /> NAI Assistant 
                 </CardTitle>
                 <Button variant="ghost" size="icon" onClick={toggleChatbot} className="h-7 w-7 text-muted-foreground hover:text-primary">
                   <X className="h-5 w-5" />
                 </Button>
               </CardHeader>
               <CardContent className="p-4 max-h-[50vh] overflow-y-auto">
-                {/* 
-                  AskNitinAIForm is designed to be a full card. 
-                  For a chatbox, we might want to embed its core logic or restyle it.
-                  For now, we'll embed it as-is, which might result in a card-within-a-card look.
-                  A better approach would be to refactor AskNitinAIForm to be more composable.
-                */}
-                <AskNitinAIForm /> 
+                <AskNitinAIForm isEmbedded={true} /> 
               </CardContent>
             </Card>
           </motion.div>

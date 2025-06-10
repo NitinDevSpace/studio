@@ -1,6 +1,6 @@
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Briefcase, GraduationCap, Star, Download, Zap, Settings, Code, ExternalLink, Lightbulb, Users, Wrench } from "lucide-react";
+import { Briefcase, GraduationCap, Star, Download, Zap, Settings, Code, ExternalLink, Lightbulb, Users, Wrench, Edit3 } from "lucide-react"; // Added Edit3 for video editing
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
@@ -11,6 +11,7 @@ const skillsData = {
   "Backend Frameworks": ["Node.js", "Express.js", "Django (Python)", "Firebase"],
   "Databases": ["MongoDB", "PostgreSQL", "MySQL", "Firebase", "Microsoft SQL Server"],
   "Development Tools": ["Git", "GitHub", "Docker", "VS Code", "IntelliJ IDEA", "Xcode", "Genkit"],
+  "Other Skills": ["Video Editing (Adobe Premiere Pro, Final Cut Pro)"],
   "Soft Skills": ["Problem Solving", "Team Collaboration", "Agile Methodologies", "Communication", "Adaptability"],
 };
 
@@ -42,11 +43,11 @@ const projectsOnResume = [
 export default function ResumePage() {
   return (
     <div className="section-padding fade-in-page container mx-auto px-4 bg-gradient-to-br from-background via-sky-50/5 dark:via-sky-900/10 to-indigo-100/5 dark:to-indigo-900/10 min-h-[calc(100vh-10rem)]">
-      <header className="text-center mb-12 sm:mb-16">
-        <h1 className="text-3xl sm:text-4xl md:text-5xl font-headline font-bold mb-3 text-foreground animate-slideInUp">
+      <header className="text-center mb-12 sm:mb-16 animate-slideInUp">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-headline font-bold mb-3 text-foreground">
           My <span className="text-primary">Professional Journey</span>
         </h1>
-        <p className="text-md text-muted-foreground max-w-xl mx-auto animate-slideInUp delay-200 leading-relaxed">
+        <p className="text-md text-muted-foreground max-w-xl mx-auto leading-relaxed animate-slideInUp delay-200">
           A detailed overview of my experience, skills, and educational background. Committed to building innovative software and continuously learning.
         </p>
         <Button asChild className="mt-6 bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg hover:shadow-primary/30 transition-all duration-300 transform hover:scale-105 px-7 py-3 text-base animate-slideInUp delay-400">
@@ -59,7 +60,7 @@ export default function ResumePage() {
 
       <div className="max-w-4xl mx-auto space-y-8 sm:space-y-10">
         {/* Experience Section */}
-        <Card className="bg-card/90 backdrop-blur-sm animate-slideInUp delay-300 shadow-xl hover:shadow-2xl transition-shadow duration-300 rounded-xl">
+        <Card className="bg-card/90 backdrop-blur-sm shadow-xl hover:shadow-2xl transition-shadow duration-300 rounded-xl animate-slideInUp delay-300">
           <CardHeader className="p-5 sm:p-6 border-b border-border/50">
             <CardTitle className="font-headline text-xl sm:text-2xl text-primary flex items-center">
               <Briefcase className="mr-2.5 h-6 w-6 text-secondary" /> Professional Experience
@@ -74,11 +75,18 @@ export default function ResumePage() {
                 <li>Oversaw end-to-end development of key projects, balancing rapid prototyping with strategic planning to meet business and technical requirements.</li>
               </ul>
             </div>
+            <div className="animate-slideInUp delay-500">
+              <h3 className="text-lg sm:text-xl font-semibold text-foreground/90">Video Editor (Part-time/Freelance)</h3>
+              <p className="text-sm text-muted-foreground mb-1">Remote | Approx. 3 years prior to March 2024</p>
+              <ul className="list-disc list-inside mt-1.5 space-y-1 text-sm text-foreground/80 pl-1">
+                <li>Leveraged 3 years of part-time experience in video editing to produce and edit engaging video content for diverse clients, focusing on promotional materials, tutorials, and social media content.</li>
+              </ul>
+            </div>
           </CardContent>
         </Card>
 
         {/* Technical Proficiency Section */}
-        <Card className="bg-card/90 backdrop-blur-sm animate-slideInUp delay-400 shadow-xl hover:shadow-2xl transition-shadow duration-300 rounded-xl">
+        <Card className="bg-card/90 backdrop-blur-sm shadow-xl hover:shadow-2xl transition-shadow duration-300 rounded-xl animate-slideInUp delay-400">
           <CardHeader className="p-5 sm:p-6 border-b border-border/50">
             <CardTitle className="font-headline text-xl sm:text-2xl text-primary flex items-center">
               <Star className="mr-2.5 h-6 w-6 text-secondary" /> Technical Proficiency
@@ -93,6 +101,7 @@ export default function ResumePage() {
                   {category === "Backend Frameworks" && <Settings className="mr-2 h-5 w-5 text-accent" />}
                   {category === "Databases" && <Briefcase className="mr-2 h-5 w-5 text-accent" />}
                   {category === "Development Tools" && <Wrench className="mr-2 h-5 w-5 text-accent" />}
+                  {category === "Other Skills" && <Edit3 className="mr-2 h-5 w-5 text-accent" />}
                   {category === "Soft Skills" && <Users className="mr-2 h-5 w-5 text-accent" />}
                   {category}
                 </h4>
@@ -112,7 +121,7 @@ export default function ResumePage() {
         </Card>
         
         {/* Projects from Resume Section */}
-        <Card className="bg-card/90 backdrop-blur-sm animate-slideInUp delay-500 shadow-xl hover:shadow-2xl transition-shadow duration-300 rounded-xl">
+        <Card className="bg-card/90 backdrop-blur-sm shadow-xl hover:shadow-2xl transition-shadow duration-300 rounded-xl animate-slideInUp delay-500">
           <CardHeader className="p-5 sm:p-6 border-b border-border/50">
             <CardTitle className="font-headline text-xl sm:text-2xl text-primary flex items-center">
               <Lightbulb className="mr-2.5 h-6 w-6 text-secondary" /> Key Projects
@@ -151,7 +160,7 @@ export default function ResumePage() {
         </Card>
 
         {/* Education Section */}
-        <Card className="bg-card/90 backdrop-blur-sm animate-slideInUp delay-600 shadow-xl hover:shadow-2xl transition-shadow duration-300 rounded-xl">
+        <Card className="bg-card/90 backdrop-blur-sm shadow-xl hover:shadow-2xl transition-shadow duration-300 rounded-xl animate-slideInUp delay-600">
           <CardHeader className="p-5 sm:p-6 border-b border-border/50">
             <CardTitle className="font-headline text-xl sm:text-2xl text-primary flex items-center">
               <GraduationCap className="mr-2.5 h-6 w-6 text-secondary" /> Education
@@ -159,14 +168,24 @@ export default function ResumePage() {
           </CardHeader>
           <CardContent className="space-y-5 p-5 sm:p-6">
             <div className="animate-slideInUp delay-500">
+              <h3 className="text-lg sm:text-xl font-semibold text-foreground/90">Software Development</h3>
+              <p className="text-sm text-muted-foreground mb-0.5">Scaler Academy | Sept 2024 - Oct 2025 (Expected)</p>
+              <p className="text-sm text-foreground/80">Relevant Coursework: Computer Architecture, DSA, Full Stack Development, RDBMS, Java, Projects, Low Level Design, High Level Design.</p>
+            </div>
+            <div className="animate-slideInUp delay-600">
               <h3 className="text-lg sm:text-xl font-semibold text-foreground/90">B.Tech. in Mechanical Engineering</h3>
               <p className="text-sm text-muted-foreground mb-0.5">Maharshi Dayanand University | Sept 2019 - May 2023</p>
               <p className="text-sm text-foreground/80">Percentage: 70%</p>
             </div>
-            <div className="animate-slideInUp delay-600">
-              <h3 className="text-lg sm:text-xl font-semibold text-foreground/90">Software Development</h3>
-              <p className="text-sm text-muted-foreground mb-0.5">Scaler Academy | Sept 2024 - Oct 2025</p>
-              <p className="text-sm text-foreground/80">Relevant Coursework: Computer Architecture, DSA, Full Stack Development, RDBMS, Java, Projects, Low Level Design, High Level Design.</p>
+             <div className="animate-slideInUp delay-700">
+              <h3 className="text-lg sm:text-xl font-semibold text-foreground/90">Higher Secondary Certificate (HSC/12th Grade)</h3>
+              <p className="text-sm text-muted-foreground mb-0.5">Example Sr. Sec. School, Example City | CBSE | 2019</p>
+              <p className="text-sm text-foreground/80">Percentage: 85% (Example)</p>
+            </div>
+            <div className="animate-slideInUp delay-800">
+              <h3 className="text-lg sm:text-xl font-semibold text-foreground/90">Secondary School Certificate (SSC/10th Grade)</h3>
+              <p className="text-sm text-muted-foreground mb-0.5">Example High School, Example City | CBSE | 2017</p>
+              <p className="text-sm text-foreground/80">CGPA: 9.2 (Example)</p>
             </div>
           </CardContent>
         </Card>

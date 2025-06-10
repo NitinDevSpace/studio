@@ -2,29 +2,29 @@
 import AskNitinAIForm from '@/components/AskNitinAIForm';
 import { Brain, CheckSquare, Lightbulb, MessageCircle } from 'lucide-react';
 
-export default function AskNitinAIPage() {
+export default function AskNAIPage() { // Renamed NitinAI to NAI
   return (
     <div className="section-padding fade-in-page container mx-auto px-4 bg-gradient-to-br from-background via-sky-50/5 dark:via-sky-900/10 to-indigo-100/5 dark:to-indigo-900/10 min-h-[calc(100vh-10rem)]">
-      <header className="text-center mb-12 sm:mb-16">
-        <h1 className="text-3xl sm:text-4xl md:text-5xl font-headline font-bold mb-3 text-foreground animate-slideInUp">
-          Ask <span className="text-primary">NitinAI</span>
+      <header className="text-center mb-12 sm:mb-16 animate-slideInUp">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-headline font-bold mb-3 text-foreground">
+          Ask <span className="text-primary">NAI</span> 
         </h1>
-        <p className="text-md text-muted-foreground max-w-xl mx-auto animate-slideInUp delay-200 leading-relaxed">
+        <p className="text-md text-muted-foreground max-w-xl mx-auto leading-relaxed animate-slideInUp delay-200">
           Have questions about me, my projects, or this portfolio? Ask away! 
           My AI assistant is here to provide you with quick and informative answers.
         </p>
       </header>
       
-      <div className="animate-slideInUp delay-300 max-w-2xl mx-auto">
+      <div className="max-w-2xl mx-auto animate-slideInUp delay-300">
         <AskNitinAIForm />
       </div>
 
       <section className="mt-12 sm:mt-16 p-6 sm:p-8 bg-card/80 backdrop-blur-sm shadow-xl rounded-xl animate-slideInUp delay-500 max-w-3xl mx-auto">
         <h2 className="text-xl sm:text-2xl font-headline font-semibold text-primary mb-5 flex items-center">
-          <Brain className="mr-2.5 h-6 w-6 text-secondary" /> How NitinAI Works
+          <Brain className="mr-2.5 h-6 w-6 text-secondary" /> How NAI Works 
         </h2>
         <p className="text-foreground/80 text-sm mb-3 leading-relaxed">
-          NitinAI uses a sophisticated language model, powered by Genkit, to understand and respond to your questions. It has been provided with context about:
+          NAI uses a sophisticated language model, powered by Genkit, to understand and respond to your questions. It has been provided with context about:
         </p>
         <ul className="space-y-2.5 text-sm text-foreground/70">
           <li className="flex items-start">
@@ -41,7 +41,7 @@ export default function AskNitinAIPage() {
           </li>
         </ul>
         <p className="text-foreground/80 text-sm mt-4 leading-relaxed">
-          Simply type your question, and NitinAI will do its best to provide a relevant and helpful answer based on its knowledge.
+          Simply type your question, and NAI will do its best to provide a relevant and helpful answer based on its knowledge.
         </p>
       </section>
     </div>

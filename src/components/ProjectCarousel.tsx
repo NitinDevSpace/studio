@@ -5,7 +5,7 @@ import React, { useRef, useState, useEffect, useCallback } from 'react';
 import type { Project } from '@/lib/types';
 import ProjectCard from './ProjectCard';
 import { Button } from '@/components/ui/button';
-import { ChevronLeft, ChevronRight, Pause, Play } from 'lucide-react';
+import { ChevronLeft, ChevronRight } from 'lucide-react'; // Removed Pause, Play
 import { cn } from '@/lib/utils';
 
 interface ProjectCarouselProps {
@@ -17,21 +17,21 @@ const ProjectCarousel: React.FC<ProjectCarouselProps> = ({ projects, onProjectCl
   const carouselRef = useRef<HTMLDivElement>(null);
   const animationFrameRef = useRef<number>();
   const [isHovering, setIsHovering] = useState(false);
-  const [isPaused, setIsPaused] = useState(false);
+  // Removed isPaused state
   const scrollSpeed = 0.4;
 
   const baseProjects = projects.length < 5 ? [...projects, ...projects, ...projects] : projects;
   const duplicatedProjects = [...baseProjects, ...baseProjects];
 
   const scrollContent = useCallback(() => {
-    if (carouselRef.current && !isHovering && !isPaused) {
+    if (carouselRef.current && !isHovering) { // Removed !isPaused
       carouselRef.current.scrollLeft += scrollSpeed;
       if (carouselRef.current.scrollLeft >= carouselRef.current.scrollWidth / 2) {
         carouselRef.current.scrollLeft = carouselRef.current.scrollLeft - (carouselRef.current.scrollWidth / 2);
       }
     }
     animationFrameRef.current = requestAnimationFrame(scrollContent);
-  }, [isHovering, isPaused, scrollSpeed]);
+  }, [isHovering, scrollSpeed]); // Removed isPaused dependency
 
   useEffect(() => {
     if (projects.length > 0) {
@@ -55,9 +55,7 @@ const ProjectCarousel: React.FC<ProjectCarouselProps> = ({ projects, onProjectCl
     }
   };
 
-  const togglePause = () => {
-    setIsPaused(prev => !prev);
-  }
+  // Removed togglePause function
 
   if (projects.length === 0) {
     return <p className="text-center text-muted-foreground">No projects to display.</p>;
@@ -65,20 +63,20 @@ const ProjectCarousel: React.FC<ProjectCarouselProps> = ({ projects, onProjectCl
 
   return (
     <div
-      className="relative w-full group py-6" // Added padding for buttons not to overlap content below
+      className="relative w-full group p-4 md:p-6 border border-border/50 rounded-xl overflow-hidden" // Moved border and padding here
       onMouseEnter={() => setIsHovering(true)}
       onMouseLeave={() => setIsHovering(false)}
     >
-      {/* Navigation Buttons */}
+      {/* Navigation Buttons - Adjusted Styling */}
       <Button
         variant="ghost"
         size="icon"
         onClick={() => handleManualScroll('left')}
         className={cn(
-          "absolute left-0 top-1/2 -translate-y-1/2 z-30",
-          "h-full w-16 bg-gradient-to-r from-background/70 via-background/40 to-transparent",
-          "text-foreground/70 hover:text-primary hover:from-background/80 hover:via-background/60",
-          "opacity-0 group-hover:opacity-100 transition-all duration-300 ease-in-out rounded-none"
+          "absolute left-2 top-1/2 -translate-y-1/2 z-30", // Positioned closer to edge
+          "h-12 w-12", // Larger buttons
+          "text-foreground/60 hover:text-primary hover:bg-transparent", // Transparent background
+          "opacity-0 group-hover:opacity-100 transition-all duration-300 ease-in-out rounded-full"
         )}
         aria-label="Scroll left"
       >
@@ -89,30 +87,21 @@ const ProjectCarousel: React.FC<ProjectCarouselProps> = ({ projects, onProjectCl
         size="icon"
         onClick={() => handleManualScroll('right')}
         className={cn(
-          "absolute right-0 top-1/2 -translate-y-1/2 z-30",
-          "h-full w-16 bg-gradient-to-l from-background/70 via-background/40 to-transparent",
-          "text-foreground/70 hover:text-primary hover:from-background/80 hover:via-background/60",
-          "opacity-0 group-hover:opacity-100 transition-all duration-300 ease-in-out rounded-none"
+          "absolute right-2 top-1/2 -translate-y-1/2 z-30", // Positioned closer to edge
+          "h-12 w-12", // Larger buttons
+          "text-foreground/60 hover:text-primary hover:bg-transparent", // Transparent background
+          "opacity-0 group-hover:opacity-100 transition-all duration-300 ease-in-out rounded-full"
         )}
         aria-label="Scroll right"
       >
         <ChevronRight className="h-8 w-8" />
       </Button>
 
-      {/* Pause/Play Button - Top Right of Carousel Container */}
-       <Button
-            variant="outline"
-            size="icon"
-            onClick={togglePause}
-            className="absolute top-[-40px] right-0 z-20 bg-card/80 hover:bg-card border-border/70 shadow-md rounded-full text-primary hover:text-primary w-10 h-10"
-            aria-label={isPaused ? "Play scroll" : "Pause scroll"}
-          >
-            {isPaused ? <Play className="h-5 w-5" /> : <Pause className="h-5 w-5" />}
-        </Button>
+      {/* Pause/Play Button - Removed */}
 
       <div
         ref={carouselRef}
-        className="flex overflow-x-auto py-4 scrollbar-hide" // py-4 to give cards space from edges if needed
+        className="flex overflow-x-auto py-4 scrollbar-hide" 
         style={{ WebkitOverflowScrolling: 'touch' }}
       >
         {duplicatedProjects.map((project, index) => (
@@ -123,7 +112,7 @@ const ProjectCarousel: React.FC<ProjectCarouselProps> = ({ projects, onProjectCl
             <ProjectCard
               project={project}
               onClick={() => onProjectClick(project)}
-              className="transform"
+              className="transform" // Keep existing transform for pop-out
             />
           </div>
         ))}

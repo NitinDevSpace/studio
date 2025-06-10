@@ -5,7 +5,7 @@
  *
  * - askNAI -  A function that takes a question as input and returns an AI-generated answer.
  * - AskNAIInput - The input type for the askNAI function.
- * - AskNAIOutput - The return type for the askNAI function.
+ * - AskNAIOutput - The output type for the askNAI function.
  */
 
 import {ai} from '@/ai/genkit';
@@ -96,9 +96,6 @@ const askNAIFlow = ai.defineFlow(
     outputSchema: AskNAIOutputSchema,
   },
   async (input) => {
-    // In a more advanced scenario, we might use tools here to fetch dynamic data
-    // or decide which parts of the context are most relevant.
-    // For now, the full context is passed via the prompt template.
     const {output} = await askNAIPrompt(input);
     
     if (!output?.answer) {
@@ -107,6 +104,3 @@ const askNAIFlow = ai.defineFlow(
     return output!;
   }
 );
-
-// Ensure file is named askNAIFlow.ts
-// Old content related to generate-project-description has been removed.
