@@ -1,6 +1,26 @@
 
-import AskNAIForm from '@/components/AskNitinAIForm'; // Renamed from AskNitinAIForm
-import { Brain, CheckSquare, Lightbulb, MessageCircle } from 'lucide-react';
+'use client';
+
+import { Brain, CheckSquare, Lightbulb, MessageCircle, Loader2 } from 'lucide-react';
+import dynamic from 'next/dynamic';
+import { Skeleton } from '@/components/ui/skeleton';
+
+const AskNAIForm = dynamic(() => import('@/components/AskNitinAIForm'), {
+  loading: () => (
+    <div className="space-y-4">
+      <div className="flex items-center space-x-2">
+        <Skeleton className="h-10 w-10 rounded-full" />
+        <Skeleton className="h-6 w-32 rounded-md" />
+      </div>
+      <Skeleton className="h-40 w-full rounded-md" />
+      <Skeleton className="h-10 w-full rounded-md" />
+      <div className="flex justify-end">
+        <Skeleton className="h-10 w-24 rounded-md" />
+      </div>
+    </div>
+  ),
+  ssr: false, // The form is interactive and client-side heavy
+});
 
 export default function AskNAIPage() {
   return (
