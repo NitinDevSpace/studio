@@ -35,13 +35,12 @@ let db: Firestore;
 if (
   !firebaseConfigString ||
   firebaseConfigString.trim() === '' ||
-  firebaseConfigString.includes("your-new-project-id") || // Catches the placeholder value
   firebaseConfigString.trim() === '""' || // Catches an empty JSON object string literal "{}".
   firebaseConfigString.trim() === "''" || // Catches an empty JSON object string literal '{}'.
   firebaseConfigString.trim() === '{}' // Catches an empty JSON object string literal {}.
 ) {
   console.error(
-    "CRITICAL: Firebase configuration (`NEXT_PUBLIC_FIREBASE_CONFIG_JSON`) is missing, a placeholder, effectively empty, or not a valid JSON object string. " +
+    "CRITICAL: Firebase configuration (`NEXT_PUBLIC_FIREBASE_CONFIG_JSON`) is missing, effectively empty, or not a valid JSON object string. " +
     "Firebase services (Authentication, Firestore) will NOT work. " +
     "Please ensure `NEXT_PUBLIC_FIREBASE_CONFIG_JSON` is correctly set in your " +
     ".env.local file (for local development) or in your hosting environment variables (for deployment) " +
